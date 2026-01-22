@@ -149,6 +149,21 @@
             align-items: center;
             position: relative;
             background: var(--white);
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            right: -10%;
+            top: 10%;
+            width: 400px;
+            height: 400px;
+            background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80') center/cover;
+            filter: grayscale(100%) opacity(0.03);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
         }
 
         .hero-grid {
@@ -538,6 +553,36 @@
         .services-section {
             padding: 8rem 4rem;
             background: var(--gray-50);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services-section::before {
+            content: '';
+            position: absolute;
+            left: -5%;
+            bottom: 10%;
+            width: 350px;
+            height: 350px;
+            background: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80') center/cover;
+            filter: grayscale(100%) opacity(0.04);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .services-section::after {
+            content: '';
+            position: absolute;
+            right: -3%;
+            top: 15%;
+            width: 300px;
+            height: 300px;
+            background: url('https://images.unsplash.com/photo-1491841573634-28140fc7ced7?w=800&q=80') center/cover;
+            filter: grayscale(100%) opacity(0.04);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
         }
 
         .services-grid {
@@ -546,6 +591,8 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
+            position: relative;
+            z-index: 1;
         }
 
         .service-item {
@@ -605,6 +652,22 @@
         .process-section {
             padding: 8rem 4rem;
             background: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .process-section::before {
+            content: '';
+            position: absolute;
+            right: -8%;
+            top: 20%;
+            width: 450px;
+            height: 450px;
+            background: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80') center/cover;
+            filter: grayscale(100%) opacity(0.03);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
         }
 
         .process-timeline {
@@ -613,6 +676,8 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 3rem;
+            position: relative;
+            z-index: 1;
         }
 
         .process-step {
@@ -677,6 +742,22 @@
         .testimonials-section {
             padding: 8rem 4rem;
             background: var(--gray-50);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials-section::before {
+            content: '';
+            position: absolute;
+            left: -6%;
+            top: 25%;
+            width: 380px;
+            height: 380px;
+            background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80') center/cover;
+            filter: grayscale(100%) opacity(0.04);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
         }
 
         .testimonials-grid {
@@ -685,6 +766,8 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         .testimonial-box {
@@ -772,6 +855,22 @@
             padding: 8rem 4rem;
             text-align: center;
             position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: url('https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=800&q=80') center/cover;
+            filter: grayscale(100%) opacity(0.05);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
         }
 
         .cta-content h2 {
@@ -779,6 +878,8 @@
             font-weight: 800;
             margin-bottom: 1.5rem;
             letter-spacing: -1.5px;
+            position: relative;
+            z-index: 1;
         }
 
         .cta-content p {
@@ -788,6 +889,8 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            position: relative;
+            z-index: 1;
         }
 
         .cta-form {
@@ -795,6 +898,8 @@
             gap: 1rem;
             max-width: 550px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .cta-input {
@@ -1117,7 +1222,7 @@
         <div class="hero-grid">
             <div class="hero-content">
                 <div class="hero-badge">15,000+ Success Stories</div>
-                <h1>Your <span class="highlight">Global</span> Education Journey</h1>
+                <h1>Your Gateway to <span class="highlight">World-Class</span> Education</h1>
                 <p class="hero-tagline">Expert guidance to world-class universities. We handle everything from applications to visa success across 50+ countries.</p>
                 
                 <div class="hero-stats">
