@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduGlobal - Study Abroad Consultants</title>
+    <title>Study Republic - Global Education Consultants</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -12,37 +14,45 @@
         }
 
         :root {
-            --black: #0a0a0a;
+            --black: #000000;
             --white: #ffffff;
-            --gray-light: #f8f8f8;
-            --gray-mid: #e0e0e0;
-            --gray-dark: #666666;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --accent: #ff1744;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--white);
             color: var(--black);
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Header Navigation */
+        /* Navigation */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
+            background: var(--white);
             z-index: 1000;
-            border-bottom: 1px solid var(--gray-mid);
+            border-bottom: 1px solid var(--gray-200);
         }
 
         .nav-container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 1.2rem 2rem;
+            padding: 1.2rem 4rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -54,30 +64,22 @@
             gap: 12px;
         }
 
-        .logo-mark {
-            width: 48px;
-            height: 48px;
-            background: var(--black);
+        .logo-icon {
+            width: 40px;
+            height: 40px;
             position: relative;
-            overflow: hidden;
         }
 
-        .logo-mark::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 24px;
-            height: 24px;
-            border: 3px solid var(--white);
-            border-radius: 50%;
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
         }
 
         .logo-text {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 800;
             letter-spacing: -0.5px;
+            color: var(--black);
         }
 
         .main-nav {
@@ -87,96 +89,152 @@
         }
 
         .main-nav a {
-            color: var(--black);
+            color: var(--gray-700);
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
+            font-weight: 500;
+            font-size: 0.875rem;
             position: relative;
-            transition: opacity 0.3s;
+            transition: color 0.3s;
         }
 
         .main-nav a:hover {
-            opacity: 0.6;
+            color: var(--black);
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
         }
 
         .cta-nav {
             background: var(--black);
             color: var(--white);
-            padding: 0.7rem 1.5rem;
+            padding: 0.7rem 1.8rem;
             border: none;
-            font-weight: 700;
-            font-size: 0.85rem;
+            font-weight: 600;
+            font-size: 0.875rem;
             cursor: pointer;
-            letter-spacing: 0.5px;
             transition: all 0.3s;
+            border-radius: 4px;
         }
 
         .cta-nav:hover {
-            background: var(--gray-dark);
+            background: var(--gray-900);
+            transform: translateY(-1px);
         }
 
         .menu-toggle {
             display: none;
             background: none;
             border: none;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             cursor: pointer;
         }
 
         /* Hero Section */
         .hero-section {
             margin-top: 80px;
-            min-height: 90vh;
+            min-height: 85vh;
             display: flex;
             align-items: center;
             position: relative;
-            overflow: hidden;
+            background: var(--white);
         }
 
         .hero-grid {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: 5rem 4rem;
             display: grid;
             grid-template-columns: 1.2fr 1fr;
-            gap: 4rem;
+            gap: 8rem;
             align-items: center;
         }
 
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.5rem 1.2rem;
+            background: var(--gray-100);
+            color: var(--black);
+            margin-bottom: 2rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 50px;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
         .hero-content h1 {
-            font-size: clamp(2.5rem, 6vw, 5.5rem);
-            font-weight: 900;
+            font-size: clamp(2.8rem, 6vw, 5.5rem);
+            font-weight: 800;
             line-height: 1.1;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
             letter-spacing: -2px;
         }
 
+        .hero-content h1 .highlight {
+            position: relative;
+            font-style: italic;
+        }
+
         .hero-tagline {
-            font-size: 1.25rem;
-            color: var(--gray-dark);
+            font-size: 1.15rem;
+            color: var(--gray-600);
             margin-bottom: 2.5rem;
-            line-height: 1.6;
+            line-height: 1.7;
             max-width: 600px;
+            font-weight: 400;
         }
 
         .hero-stats {
-            display: flex;
-            gap: 3rem;
-            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+            padding: 2rem 0;
+            border-top: 1px solid var(--gray-200);
+            border-bottom: 1px solid var(--gray-200);
         }
 
         .stat-box h3 {
             font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 0.3rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.5rem;
         }
 
         .stat-box p {
-            font-size: 0.9rem;
-            color: var(--gray-dark);
+            font-size: 0.8rem;
+            color: var(--gray-600);
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: 500;
         }
 
         .hero-actions {
@@ -185,60 +243,69 @@
             flex-wrap: wrap;
         }
 
-        .btn-hero-primary {
+        .btn-primary {
             background: var(--black);
             color: var(--white);
             padding: 1.1rem 2.5rem;
             border: none;
-            font-weight: 700;
-            font-size: 0.95rem;
+            font-weight: 600;
+            font-size: 0.9rem;
             cursor: pointer;
-            letter-spacing: 0.5px;
             transition: all 0.3s;
             text-decoration: none;
             display: inline-block;
+            border-radius: 4px;
         }
 
-        .btn-hero-primary:hover {
-            background: var(--gray-dark);
+        .btn-primary:hover {
+            background: var(--gray-900);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
-        .btn-hero-secondary {
+        .btn-secondary {
             background: transparent;
             color: var(--black);
             padding: 1.1rem 2.5rem;
-            border: 2px solid var(--black);
-            font-weight: 700;
-            font-size: 0.95rem;
+            border: 1px solid var(--gray-300);
+            font-weight: 600;
+            font-size: 0.9rem;
             cursor: pointer;
-            letter-spacing: 0.5px;
             transition: all 0.3s;
             text-decoration: none;
             display: inline-block;
+            border-radius: 4px;
         }
 
-        .btn-hero-secondary:hover {
-            background: var(--black);
-            color: var(--white);
+        .btn-secondary:hover {
+            border-color: var(--black);
+            background: var(--gray-50);
         }
 
         .hero-visual {
             position: relative;
-            height: 600px;
+            height: 550px;
         }
 
         .visual-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            gap: 1.5rem;
             height: 100%;
         }
 
         .visual-card {
-            background: var(--gray-light);
-            position: relative;
+            background: var(--gray-100);
+            border-radius: 8px;
             overflow: hidden;
-            border: 1px solid var(--gray-mid);
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.4s;
+        }
+
+        .visual-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
         }
 
         .visual-card img {
@@ -246,32 +313,43 @@
             height: 100%;
             object-fit: cover;
             filter: grayscale(100%);
-            opacity: 0.8;
+            transition: transform 0.6s;
+        }
+
+        .visual-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .visual-card:nth-child(1) {
+            grid-row: 1 / 3;
         }
 
         .visual-label {
             position: absolute;
-            bottom: 1.5rem;
-            left: 1.5rem;
-            right: 1.5rem;
-            background: var(--white);
-            padding: 1rem;
-            font-weight: 700;
-            font-size: 0.9rem;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: var(--white);
+            padding: 2rem 1.5rem 1.5rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
         }
 
-        /* Marquee Section */
+        /* Marquee */
         .marquee-section {
-            background: var(--black);
-            color: var(--white);
-            padding: 2rem 0;
+            background: var(--gray-100);
+            padding: 1.5rem 0;
             overflow: hidden;
+            border-top: 1px solid var(--gray-200);
+            border-bottom: 1px solid var(--gray-200);
         }
 
         .marquee-content {
             display: flex;
             gap: 4rem;
-            animation: marquee 30s linear infinite;
+            animation: scroll 35s linear infinite;
             white-space: nowrap;
         }
 
@@ -279,52 +357,62 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            font-weight: 700;
-            font-size: 1.1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
             letter-spacing: 1px;
+            color: var(--gray-700);
         }
 
-        @keyframes marquee {
+        .marquee-item::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        @keyframes scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
 
         /* Destinations Section */
         .destinations-section {
-            padding: 8rem 2rem;
-            background: var(--gray-light);
+            padding: 8rem 4rem;
+            background: var(--white);
         }
 
-        .section-header-main {
-            max-width: 1400px;
-            margin: 0 auto 4rem;
+        .section-header {
             text-align: center;
+            margin-bottom: 5rem;
         }
 
         .section-label {
-            font-size: 0.85rem;
-            font-weight: 700;
+            font-size: 0.75rem;
+            font-weight: 600;
             letter-spacing: 2px;
             margin-bottom: 1rem;
-            color: var(--gray-dark);
+            color: var(--gray-500);
+            text-transform: uppercase;
         }
 
-        .section-title-main {
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            font-weight: 900;
+        .section-title {
+            font-size: clamp(2.2rem, 4vw, 3.8rem);
+            font-weight: 800;
             margin-bottom: 1rem;
-            letter-spacing: -1px;
+            letter-spacing: -1.5px;
         }
 
         .section-desc {
-            font-size: 1.15rem;
-            color: var(--gray-dark);
-            max-width: 700px;
+            font-size: 1.05rem;
+            color: var(--gray-600);
+            max-width: 650px;
             margin: 0 auto;
+            line-height: 1.7;
         }
 
         .destinations-grid {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -333,20 +421,40 @@
 
         .dest-card {
             background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
             overflow: hidden;
             position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
-            transition: all 0.4s;
-            border: 1px solid var(--gray-mid);
+        }
+
+        .dest-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,23,68,0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: 1;
+            border-radius: 12px;
+        }
+
+        .dest-card:hover::before {
+            opacity: 1;
         }
 
         .dest-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            transform: translateY(-12px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+            border-color: var(--gray-300);
         }
 
         .dest-image {
-            height: 300px;
+            height: 280px;
             overflow: hidden;
             position: relative;
         }
@@ -356,11 +464,12 @@
             height: 100%;
             object-fit: cover;
             filter: grayscale(100%);
-            transition: transform 0.6s;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .dest-card:hover .dest-image img {
             transform: scale(1.08);
+            filter: grayscale(80%);
         }
 
         .dest-flag {
@@ -369,148 +478,209 @@
             right: 1.5rem;
             width: 60px;
             height: 60px;
-            background: var(--white);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            border: 1px solid var(--gray-mid);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            z-index: 2;
         }
 
         .dest-info {
             padding: 2rem;
+            position: relative;
+            z-index: 2;
         }
 
         .dest-info h3 {
-            font-size: 1.8rem;
-            font-weight: 900;
+            font-size: 1.6rem;
+            font-weight: 700;
             margin-bottom: 0.8rem;
+            letter-spacing: -0.5px;
         }
 
         .dest-info p {
-            color: var(--gray-dark);
+            color: var(--gray-600);
             line-height: 1.7;
             margin-bottom: 1.5rem;
+            font-size: 0.95rem;
         }
 
         .dest-link {
             color: var(--black);
-            font-weight: 700;
+            font-weight: 600;
             text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            transition: gap 0.3s;
         }
 
-        /* Services Grid */
+        .dest-link::after {
+            content: '→';
+            transition: transform 0.3s;
+        }
+
+        .dest-link:hover {
+            gap: 0.8rem;
+        }
+
+        .dest-link:hover::after {
+            transform: translateX(4px);
+        }
+
+        /* Services Section */
         .services-section {
-            padding: 8rem 2rem;
-            background: var(--white);
+            padding: 8rem 4rem;
+            background: var(--gray-50);
         }
 
         .services-grid {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 0;
-            border: 1px solid var(--black);
+            gap: 1.5rem;
         }
 
         .service-item {
-            padding: 3rem 2rem;
-            border-right: 1px solid var(--black);
-            border-bottom: 1px solid var(--black);
-            text-align: center;
-            transition: all 0.3s;
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .service-item:nth-child(4n) {
-            border-right: none;
+        .service-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+
+        .service-item:hover::before {
+            transform: scaleX(1);
         }
 
         .service-item:hover {
-            background: var(--black);
-            color: var(--white);
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+            border-color: var(--gray-300);
         }
 
-        .service-icon-text {
-            font-size: 3rem;
+        .service-icon {
+            font-size: 2.5rem;
             display: block;
             margin-bottom: 1.5rem;
+            opacity: 0.9;
         }
 
         .service-item h3 {
-            font-size: 1.2rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.3px;
         }
 
         .service-item p {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.6;
-            color: var(--gray-dark);
-        }
-
-        .service-item:hover p {
-            color: rgba(255,255,255,0.8);
+            color: var(--gray-600);
         }
 
         /* Process Section */
         .process-section {
-            padding: 8rem 2rem;
-            background: var(--black);
-            color: var(--white);
+            padding: 8rem 4rem;
+            background: var(--white);
         }
 
-        .process-grid {
-            max-width: 1200px;
+        .process-timeline {
+            max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            gap: 0;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
         }
 
         .process-step {
-            display: grid;
-            grid-template-columns: 120px 1fr;
-            gap: 3rem;
-            padding: 3rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
+            background: var(--white);
+            padding: 3rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            position: relative;
+            transition: all 0.4s;
         }
 
-        .process-step:last-child {
-            border-bottom: none;
+        .process-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.4s;
+            border-radius: 12px 0 0 12px;
+        }
+
+        .process-step:hover::before {
+            opacity: 1;
+        }
+
+        .process-step:hover {
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
         }
 
         .step-number {
-            font-size: 5rem;
-            font-weight: 900;
-            opacity: 0.3;
-            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--black);
+            color: var(--white);
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
         }
 
-        .step-content h3 {
-            font-size: 2rem;
-            font-weight: 900;
+        .process-step h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
             margin-bottom: 1rem;
+            letter-spacing: -0.5px;
         }
 
-        .step-content p {
-            font-size: 1.1rem;
+        .process-step p {
+            color: var(--gray-600);
             line-height: 1.7;
-            opacity: 0.8;
+            font-size: 0.95rem;
         }
 
         /* Testimonials */
         .testimonials-section {
-            padding: 8rem 2rem;
-            background: var(--gray-light);
+            padding: 8rem 4rem;
+            background: var(--gray-50);
         }
 
         .testimonials-grid {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -520,169 +690,209 @@
         .testimonial-box {
             background: var(--white);
             padding: 3rem;
-            border: 1px solid var(--gray-mid);
-            transition: all 0.3s;
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .testimonial-box::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .testimonial-box:hover::after {
+            transform: scaleX(1);
         }
 
         .testimonial-box:hover {
-            border-color: var(--black);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
         }
 
-        .quote-mark {
-            font-size: 4rem;
-            line-height: 1;
-            margin-bottom: 1rem;
-            opacity: 0.2;
+        .stars {
+            color: var(--black);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
         }
 
         .testimonial-text {
-            font-size: 1.1rem;
+            font-size: 1rem;
             line-height: 1.8;
             margin-bottom: 2rem;
-            font-style: italic;
+            color: var(--gray-700);
         }
 
         .testimonial-author {
             display: flex;
             align-items: center;
             gap: 1rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-200);
         }
 
-        .author-image {
-            width: 60px;
-            height: 60px;
+        .author-avatar {
+            width: 50px;
+            height: 50px;
             background: var(--black);
             color: var(--white);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 900;
-            font-size: 1.3rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 8px;
         }
 
         .author-info h4 {
-            font-weight: 800;
-            margin-bottom: 0.3rem;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
         }
 
         .author-info p {
+            color: var(--gray-600);
             font-size: 0.85rem;
-            color: var(--gray-dark);
         }
 
         /* CTA Section */
         .cta-section {
             background: var(--black);
             color: var(--white);
-            padding: 8rem 2rem;
+            padding: 8rem 4rem;
             text-align: center;
-        }
-
-        .cta-content {
-            max-width: 800px;
-            margin: 0 auto;
+            position: relative;
         }
 
         .cta-content h2 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
+            font-size: clamp(2.2rem, 4vw, 3.8rem);
+            font-weight: 800;
             margin-bottom: 1.5rem;
-            letter-spacing: -1px;
+            letter-spacing: -1.5px;
         }
 
         .cta-content p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 3rem;
-            opacity: 0.8;
+            color: var(--gray-400);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .cta-form {
             display: flex;
             gap: 1rem;
-            max-width: 600px;
+            max-width: 550px;
             margin: 0 auto;
         }
 
         .cta-input {
             flex: 1;
             padding: 1.2rem 1.5rem;
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid var(--gray-700);
             background: transparent;
             color: var(--white);
-            font-size: 1rem;
-        }
-
-        .cta-input::placeholder {
-            color: rgba(255,255,255,0.5);
-        }
-
-        .cta-button {
-            background: var(--white);
-            color: var(--black);
-            padding: 1.2rem 2.5rem;
-            border: none;
-            font-weight: 700;
-            cursor: pointer;
+            font-size: 0.95rem;
+            border-radius: 4px;
             transition: all 0.3s;
         }
 
-        .cta-button:hover {
-            background: var(--gray-mid);
+        .cta-input:focus {
+            outline: none;
+            border-color: var(--gray-500);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .cta-input::placeholder {
+            color: var(--gray-600);
+        }
+
+        .cta-submit {
+            background: var(--accent);
+            color: var(--white);
+            padding: 1.2rem 2.5rem;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .cta-submit:hover {
+            background: #e8154a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255,23,68,0.3);
         }
 
         /* Footer */
         .footer {
             background: var(--white);
-            border-top: 1px solid var(--gray-mid);
-            padding: 5rem 2rem 2rem;
+            border-top: 1px solid var(--gray-200);
+            padding: 5rem 4rem 2rem;
         }
 
         .footer-grid {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 4rem;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
         }
 
         .footer-brand h3 {
-            font-size: 1.5rem;
-            font-weight: 900;
+            font-size: 1.3rem;
+            font-weight: 800;
             margin-bottom: 1rem;
         }
 
         .footer-brand p {
-            color: var(--gray-dark);
+            color: var(--gray-600);
             line-height: 1.7;
             margin-bottom: 2rem;
+            font-size: 0.95rem;
         }
 
         .social-links {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
         }
 
         .social-link {
-            width: 45px;
-            height: 45px;
-            background: var(--black);
-            color: var(--white);
+            width: 40px;
+            height: 40px;
+            background: var(--gray-100);
+            color: var(--black);
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
+            font-weight: 600;
+            border-radius: 6px;
             transition: all 0.3s;
         }
 
         .social-link:hover {
-            background: var(--gray-dark);
+            background: var(--black);
+            color: var(--white);
         }
 
         .footer-column h4 {
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
         }
 
         .footer-links {
@@ -690,13 +900,14 @@
         }
 
         .footer-links li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.7rem;
         }
 
         .footer-links a {
-            color: var(--gray-dark);
+            color: var(--gray-600);
             text-decoration: none;
             transition: color 0.3s;
+            font-size: 0.9rem;
         }
 
         .footer-links a:hover {
@@ -704,13 +915,13 @@
         }
 
         .footer-bottom {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             padding-top: 2rem;
-            border-top: 1px solid var(--gray-mid);
+            border-top: 1px solid var(--gray-200);
             text-align: center;
-            color: var(--gray-dark);
-            font-size: 0.9rem;
+            color: var(--gray-600);
+            font-size: 0.85rem;
         }
 
         /* Mobile Menu */
@@ -736,6 +947,7 @@
             font-size: 2.5rem;
             cursor: pointer;
             float: right;
+            font-weight: 300;
         }
 
         .mobile-nav {
@@ -751,11 +963,15 @@
             color: var(--black);
             text-decoration: none;
             font-size: 1.5rem;
-            font-weight: 800;
+            font-weight: 700;
         }
 
         /* Responsive */
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
+            .nav-container {
+                padding: 1.2rem 2rem;
+            }
+
             .main-nav {
                 display: none;
             }
@@ -770,6 +986,8 @@
 
             .hero-grid {
                 grid-template-columns: 1fr;
+                padding: 4rem 2rem;
+                gap: 4rem;
             }
 
             .hero-visual {
@@ -784,29 +1002,38 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .service-item:nth-child(2n) {
-                border-right: none;
+            .process-timeline {
+                grid-template-columns: 1fr;
             }
 
             .testimonials-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .footer-grid {
                 grid-template-columns: 1fr 1fr;
             }
-
-            .process-step {
-                grid-template-columns: 80px 1fr;
-                gap: 2rem;
-            }
-
-            .step-number {
-                font-size: 3.5rem;
-            }
         }
 
         @media (max-width: 768px) {
+            .destinations-section,
+            .services-section,
+            .process-section,
+            .testimonials-section,
+            .cta-section,
+            .footer {
+                padding: 5rem 1.5rem;
+            }
+
+            .hero-grid {
+                padding: 3rem 1.5rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
             .destinations-grid {
                 grid-template-columns: 1fr;
             }
@@ -815,22 +1042,35 @@
                 grid-template-columns: 1fr;
             }
 
-            .service-item {
-                border-right: none;
+            .testimonials-grid {
+                grid-template-columns: 1fr;
             }
 
             .footer-grid {
                 grid-template-columns: 1fr;
-                gap: 3rem;
+                gap: 2.5rem;
             }
 
             .cta-form {
                 flex-direction: column;
             }
 
-            .hero-stats {
+            .visual-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .visual-card:nth-child(1) {
+                grid-row: auto;
+            }
+
+            .hero-actions {
                 flex-direction: column;
-                gap: 1.5rem;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                text-align: center;
             }
         }
     </style>
@@ -852,18 +1092,22 @@
     <header class="header">
         <div class="nav-container">
             <div class="logo-area">
-                <div class="logo-mark"></div>
-                <div class="logo-text">EduGlobal</div>
+                <div class="logo-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="50,15 60,40 86,40 66,55 72,80 50,65 28,80 34,55 14,40 40,40" fill="#ff1744"/>
+                    </svg>
+                </div>
+                <div class="logo-text">STUDY REPUBLIC</div>
             </div>
             <nav>
                 <ul class="main-nav">
-                    <li><a href="#destinations">DESTINATIONS</a></li>
-                    <li><a href="#services">SERVICES</a></li>
-                    <li><a href="#process">PROCESS</a></li>
-                    <li><a href="#testimonials">TESTIMONIALS</a></li>
+                    <li><a href="#destinations">Destinations</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
                 </ul>
             </nav>
-            <button class="cta-nav">GET STARTED</button>
+            <button class="cta-nav" onclick="location.href='#contact'">Get Started</button>
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
         </div>
     </header>
@@ -872,16 +1116,17 @@
     <section class="hero-section" id="home">
         <div class="hero-grid">
             <div class="hero-content">
-                <h1>Your Gateway to World-Class Education</h1>
-                <p class="hero-tagline">We transform ambitious students into global scholars. Expert guidance for studying at top universities across 50+ countries.</p>
+                <div class="hero-badge">15,000+ Success Stories</div>
+                <h1>Your <span class="highlight">Global</span> Education Journey</h1>
+                <p class="hero-tagline">Expert guidance to world-class universities. We handle everything from applications to visa success across 50+ countries.</p>
                 
                 <div class="hero-stats">
                     <div class="stat-box">
-                        <h3>10K+</h3>
+                        <h3>15K+</h3>
                         <p>Students Placed</p>
                     </div>
                     <div class="stat-box">
-                        <h3>98%</h3>
+                        <h3>99%</h3>
                         <p>Visa Success</p>
                     </div>
                     <div class="stat-box">
@@ -891,20 +1136,24 @@
                 </div>
 
                 <div class="hero-actions">
-                    <a href="#contact" class="btn-hero-primary">START YOUR JOURNEY</a>
-                    <a href="#destinations" class="btn-hero-secondary">EXPLORE COUNTRIES</a>
+                    <a href="#contact" class="btn-primary">Start Your Journey</a>
+                    <a href="#destinations" class="btn-secondary">Explore Destinations</a>
                 </div>
             </div>
 
             <div class="hero-visual">
                 <div class="visual-grid">
                     <div class="visual-card">
-                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600" alt="Students">
-                        <div class="visual-label">GLOBAL NETWORK</div>
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80" alt="Students">
+                        <div class="visual-label">Global Network</div>
                     </div>
-                    <div class="visual-card" style="margin-top: 3rem;">
-                        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600" alt="Education">
-                        <div class="visual-label">TOP UNIVERSITIES</div>
+                    <div class="visual-card">
+                        <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=600&q=80" alt="Education">
+                        <div class="visual-label">Top Universities</div>
+                    </div>
+                    <div class="visual-card">
+                        <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=600&q=80" alt="Success">
+                        <div class="visual-label">Success Stories</div>
                     </div>
                 </div>
             </div>
@@ -914,97 +1163,97 @@
     <!-- Marquee -->
     <div class="marquee-section">
         <div class="marquee-content">
-            <div class="marquee-item">★ CANADA</div>
-            <div class="marquee-item">★ UK</div>
-            <div class="marquee-item">★ USA</div>
-            <div class="marquee-item">★ AUSTRALIA</div>
-            <div class="marquee-item">★ GERMANY</div>
-            <div class="marquee-item">★ NEW ZEALAND</div>
-            <div class="marquee-item">★ CANADA</div>
-            <div class="marquee-item">★ UK</div>
-            <div class="marquee-item">★ USA</div>
-            <div class="marquee-item">★ AUSTRALIA</div>
+            <div class="marquee-item">Canada</div>
+            <div class="marquee-item">United Kingdom</div>
+            <div class="marquee-item">USA</div>
+            <div class="marquee-item">Australia</div>
+            <div class="marquee-item">Germany</div>
+            <div class="marquee-item">New Zealand</div>
+            <div class="marquee-item">Canada</div>
+            <div class="marquee-item">United Kingdom</div>
+            <div class="marquee-item">USA</div>
+            <div class="marquee-item">Australia</div>
         </div>
     </div>
 
     <!-- Destinations -->
     <section class="destinations-section" id="destinations">
-        <div class="section-header-main">
-            <div class="section-label">STUDY DESTINATIONS</div>
-            <h2 class="section-title-main">Choose Your Dream Country</h2>
-            <p class="section-desc">Explore world-class education systems, diverse cultures, and career opportunities across the globe's most prestigious study destinations.</p>
+        <div class="section-header">
+            <div class="section-label">Study Destinations</div>
+            <h2 class="section-title">Choose Your Dream Country</h2>
+            <p class="section-desc">Explore exceptional education opportunities in the world's most sought-after study destinations</p>
         </div>
 
         <div class="destinations-grid">
             <div class="dest-card">
                 <div class="dest-image">
-                    <img src="https://images.unsplash.com/photo-1517935706615-2717063c2225?w=800" alt="Canada">
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80" alt="Canada">
                     <div class="dest-flag">🇨🇦</div>
                 </div>
                 <div class="dest-info">
                     <h3>Canada</h3>
-                    <p>Immigration-friendly policies, work permits, and world-renowned institutions make Canada a top choice for international students.</p>
-                    <a href="#" class="dest-link">EXPLORE PROGRAMS →</a>
+                    <p>Immigration-friendly policies, world-class universities, and post-study work permits make Canada a top choice.</p>
+                    <a href="#" class="dest-link">Explore Programs</a>
                 </div>
             </div>
 
             <div class="dest-card">
                 <div class="dest-image">
-                    <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800" alt="UK">
+                    <img src="https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?w=800&q=80" alt="UK">
                     <div class="dest-flag">🇬🇧</div>
                 </div>
                 <div class="dest-info">
                     <h3>United Kingdom</h3>
-                    <p>Home to Oxford, Cambridge, and prestigious Russell Group universities with globally recognized qualifications.</p>
-                    <a href="#" class="dest-link">EXPLORE PROGRAMS →</a>
+                    <p>Home to Oxford, Cambridge, and Russell Group universities with globally recognized qualifications.</p>
+                    <a href="#" class="dest-link">Explore Programs</a>
                 </div>
             </div>
 
             <div class="dest-card">
                 <div class="dest-image">
-                    <img src="https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=800" alt="Australia">
+                    <img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800&q=80" alt="Australia">
                     <div class="dest-flag">🇦🇺</div>
                 </div>
                 <div class="dest-info">
                     <h3>Australia</h3>
-                    <p>High quality of life, excellent research opportunities, and post-study work visas in a vibrant multicultural environment.</p>
-                    <a href="#" class="dest-link">EXPLORE PROGRAMS →</a>
+                    <p>World-class education system, vibrant multicultural environment, and excellent work opportunities.</p>
+                    <a href="#" class="dest-link">Explore Programs</a>
                 </div>
             </div>
 
             <div class="dest-card">
                 <div class="dest-image">
-                    <img src="https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=800" alt="USA">
+                    <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80" alt="USA">
                     <div class="dest-flag">🇺🇸</div>
                 </div>
                 <div class="dest-info">
                     <h3>United States</h3>
-                    <p>Access to Ivy League institutions, cutting-edge research facilities, and the world's largest economy.</p>
-                    <a href="#" class="dest-link">EXPLORE PROGRAMS →</a>
+                    <p>Access to Ivy League institutions, cutting-edge research facilities, and innovative economy.</p>
+                    <a href="#" class="dest-link">Explore Programs</a>
                 </div>
             </div>
 
             <div class="dest-card">
                 <div class="dest-image">
-                    <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800" alt="Germany">
+                    <img src="https://images.unsplash.com/photo-1515488764276-beab7607c1e6?w=800&q=80" alt="Germany">
                     <div class="dest-flag">🇩🇪</div>
                 </div>
                 <div class="dest-info">
                     <h3>Germany</h3>
-                    <p>Low tuition fees, strong engineering programs, and excellent opportunities in Europe's largest economy.</p>
-                    <a href="#" class="dest-link">EXPLORE PROGRAMS →</a>
+                    <p>Low tuition fees, strong engineering programs, and excellent opportunities in Europe's powerhouse.</p>
+                    <a href="#" class="dest-link">Explore Programs</a>
                 </div>
             </div>
 
             <div class="dest-card">
                 <div class="dest-image">
-                    <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?w=800" alt="New Zealand">
+                    <img src="https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=800&q=80" alt="New Zealand">
                     <div class="dest-flag">🇳🇿</div>
                 </div>
                 <div class="dest-info">
                     <h3>New Zealand</h3>
-                    <p>Affordable education, stunning natural beauty, and a welcoming environment for international students seeking quality education.</p>
-                    <a href="#" class="dest-link">EXPLORE PROGRAMS →</a>
+                    <p>Affordable education, stunning landscapes, and a welcoming environment for international students.</p>
+                    <a href="#" class="dest-link">Explore Programs</a>
                 </div>
             </div>
         </div>
@@ -1012,110 +1261,102 @@
 
     <!-- Services -->
     <section class="services-section" id="services">
-        <div class="section-header-main">
-            <div class="section-label">COMPREHENSIVE SERVICES</div>
-            <h2 class="section-title-main">End-to-End Support</h2>
-            <p class="section-desc">From initial consultation to landing in your destination, we're with you every step of the way.</p>
+        <div class="section-header">
+            <div class="section-label">Our Services</div>
+            <h2 class="section-title">Complete Study Abroad Solutions</h2>
+            <p class="section-desc">Comprehensive support at every step of your international education journey</p>
         </div>
 
         <div class="services-grid">
             <div class="service-item">
-                <span class="service-icon-text">🎯</span>
+                <span class="service-icon">🎯</span>
                 <h3>Career Counseling</h3>
-                <p>Expert guidance to choose the right course and university aligned with your goals.</p>
+                <p>Expert guidance to choose the perfect course and university aligned with your career goals.</p>
             </div>
             <div class="service-item">
-                <span class="service-icon-text">📝</span>
+                <span class="service-icon">📝</span>
                 <h3>Application Support</h3>
-                <p>Complete assistance with applications and documentation for multiple universities.</p>
+                <p>End-to-end assistance with university applications and documentation processes.</p>
             </div>
             <div class="service-item">
-                <span class="service-icon-text">✍️</span>
+                <span class="service-icon">✍️</span>
                 <h3>SOP & Essays</h3>
-                <p>Professional writing support for compelling statements and application essays.</p>
+                <p>Professional writing support for compelling statements of purpose and essays.</p>
             </div>
             <div class="service-item">
-                <span class="service-icon-text">✈️</span>
+                <span class="service-icon">✈️</span>
                 <h3>Visa Assistance</h3>
                 <p>98% success rate with comprehensive visa guidance and interview preparation.</p>
             </div>
             <div class="service-item">
-                <span class="service-icon-text">💰</span>
-                <h3>Scholarships</h3>
-                <p>Identify and apply for scholarships worth millions in financial aid annually.</p>
+                <span class="service-icon">💰</span>
+                <h3>Scholarship Help</h3>
+                <p>Identify and apply for scholarships worth millions in financial aid opportunities.</p>
             </div>
             <div class="service-item">
-                <span class="service-icon-text">📚</span>
-                <h3>Test Prep</h3>
+                <span class="service-icon">📚</span>
+                <h3>Test Preparation</h3>
                 <p>Expert coaching for IELTS, TOEFL, GRE, GMAT, and other standardized tests.</p>
             </div>
             <div class="service-item">
-                <span class="service-icon-text">🏠</span>
+                <span class="service-icon">🏠</span>
                 <h3>Accommodation</h3>
-                <p>Help finding safe and comfortable housing near your campus.</p>
+                <p>Assistance in finding safe and comfortable housing near your university campus.</p>
             </div>
             <div class="service-item">
-                <span class="service-icon-text">🌟</span>
+                <span class="service-icon">🌟</span>
                 <h3>Pre-Departure</h3>
-                <p>Orientation sessions covering culture, banking, and settling in your new country.</p>
+                <p>Comprehensive orientation covering culture, banking, and settling in your new country.</p>
             </div>
         </div>
     </section>
 
     <!-- Process -->
     <section class="process-section" id="process">
-        <div class="section-header-main" style="color: white;">
-            <div class="section-label" style="color: rgba(255,255,255,0.6);">HOW IT WORKS</div>
-            <h2 class="section-title-main" style="color: white;">Your Journey Simplified</h2>
-            <p class="section-desc" style="color: rgba(255,255,255,0.7);">A proven step-by-step process that has helped thousands of students achieve their dreams.</p>
+        <div class="section-header">
+            <div class="section-label">How It Works</div>
+            <h2 class="section-title">Simple 4-Step Process</h2>
+            <p class="section-desc">A proven methodology that has helped thousands achieve their study abroad dreams</p>
         </div>
 
-        <div class="process-grid">
+        <div class="process-timeline">
             <div class="process-step">
                 <div class="step-number">01</div>
-                <div class="step-content">
-                    <h3>Initial Consultation</h3>
-                    <p>We start with a comprehensive assessment of your academic background, career goals, budget, and preferences to create a personalized roadmap.</p>
-                </div>
+                <h3>Free Consultation</h3>
+                <p>Comprehensive assessment of your academic background, career goals, budget, and preferences to create a personalized roadmap.</p>
             </div>
             <div class="process-step">
                 <div class="step-number">02</div>
-                <div class="step-content">
-                    <h3>University Selection</h3>
-                    <p>Based on your profile, we shortlist the best-fit universities and programs, considering rankings, specializations, and scholarship opportunities.</p>
-                </div>
+                <h3>University Selection</h3>
+                <p>Shortlist the best-fit universities and programs based on your profile, considering rankings and scholarship opportunities.</p>
             </div>
             <div class="process-step">
                 <div class="step-number">03</div>
-                <div class="step-content">
-                    <h3>Application Process</h3>
-                    <p>Our team handles all application paperwork, essays, recommendation letters, and ensures everything is submitted before deadlines.</p>
-                </div>
+                <h3>Application & Admission</h3>
+                <p>Complete application support including essays, recommendations, and documentation to secure offers from top universities.</p>
             </div>
             <div class="process-step">
                 <div class="step-number">04</div>
-                <div class="step-content">
-                    <h3>Visa & Departure</h3>
-                    <p>Complete visa assistance, interview preparation, and pre-departure orientation to ensure you're fully prepared for your journey.</p>
-                </div>
+                <h3>Visa & Departure</h3>
+                <p>Comprehensive visa assistance, interview preparation, and pre-departure orientation to ensure you're fully prepared.</p>
             </div>
         </div>
     </section>
 
     <!-- Testimonials -->
     <section class="testimonials-section" id="testimonials">
-        <div class="section-header-main">
-            <div class="section-label">SUCCESS STORIES</div>
-            <h2 class="section-title-main">Hear From Our Students</h2>
-            <p class="section-desc">Real experiences from students who transformed their futures with our guidance.</p>
+        <div class="section-header">
+            <div class="section-label">Success Stories</div>
+            <h2 class="section-title">What Our Students Say</h2>
+            <p class="section-desc">Real experiences from students who transformed their futures with our guidance</p>
         </div>
 
         <div class="testimonials-grid">
             <div class="testimonial-box">
-                <div class="quote-mark">"</div>
-                <p class="testimonial-text">EduGlobal's guidance was instrumental in getting me into Oxford. Their expertise in crafting my SOP and preparing me for the interview made all the difference.</p>
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Study Republic's expertise was instrumental in getting me into Oxford. Their guidance on my SOP and interview preparation made all the difference."</p>
                 <div class="testimonial-author">
-                    <div class="author-image">PR</div>
+                    <div class="author-avatar">PR</div>
                     <div class="author-info">
                         <h4>Priya Reddy</h4>
                         <p>Oxford University, UK</p>
@@ -1124,10 +1365,10 @@
             </div>
 
             <div class="testimonial-box">
-                <div class="quote-mark">"</div>
-                <p class="testimonial-text">I secured a 75% scholarship thanks to their scholarship assistance program. The team's dedication and expertise exceeded my expectations at every step.</p>
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"I secured a 75% scholarship thanks to their assistance program. The team's dedication exceeded my expectations at every single step."</p>
                 <div class="testimonial-author">
-                    <div class="author-image">AK</div>
+                    <div class="author-avatar">AK</div>
                     <div class="author-info">
                         <h4>Arjun Kumar</h4>
                         <p>University of Toronto, Canada</p>
@@ -1136,10 +1377,10 @@
             </div>
 
             <div class="testimonial-box">
-                <div class="quote-mark">"</div>
-                <p class="testimonial-text">From visa application to finding accommodation, everything was handled professionally. My transition to studying in Australia was seamless.</p>
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"From visa application to finding accommodation, everything was handled professionally. My transition to studying in Australia was seamless."</p>
                 <div class="testimonial-author">
-                    <div class="author-image">SM</div>
+                    <div class="author-avatar">SM</div>
                     <div class="author-info">
                         <h4>Sarah Mehta</h4>
                         <p>University of Melbourne, Australia</p>
@@ -1149,14 +1390,14 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
+    <!-- CTA -->
     <section class="cta-section" id="contact">
         <div class="cta-content">
-            <h2>Ready to Begin Your Journey?</h2>
-            <p>Join thousands of students who have transformed their futures. Get started with a free consultation today.</p>
-            <form class="cta-form" onsubmit="handleSubmit(event)">
+            <h2>Ready to Start Your Journey?</h2>
+            <p>Join 15,000+ students who transformed their futures. Get your free consultation today.</p>
+            <form class="cta-form" onsubmit="handleForm(event)">
                 <input type="email" class="cta-input" placeholder="Enter your email address" required>
-                <button type="submit" class="cta-button">GET STARTED</button>
+                <button type="submit" class="cta-submit">Get Started</button>
             </form>
         </div>
     </section>
@@ -1165,8 +1406,8 @@
     <footer class="footer">
         <div class="footer-grid">
             <div class="footer-brand">
-                <h3>EduGlobal</h3>
-                <p>Your trusted partner for international education. We've helped over 10,000 students achieve their dreams of studying abroad.</p>
+                <h3>STUDY REPUBLIC</h3>
+                <p>Your trusted partner for international education. We've helped over 15,000 students achieve their dreams of studying at world's top universities.</p>
                 <div class="social-links">
                     <a href="#" class="social-link">f</a>
                     <a href="#" class="social-link">in</a>
@@ -1180,20 +1421,21 @@
                 <ul class="footer-links">
                     <li><a href="#destinations">Destinations</a></li>
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#process">Process</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#process">Our Process</a></li>
+                    <li><a href="#testimonials">Success Stories</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
                 </ul>
             </div>
 
             <div class="footer-column">
                 <h4>Study Abroad</h4>
                 <ul class="footer-links">
-                    <li><a href="ind1.html">Canada</a></li>
+                    <li><a href="#">Canada</a></li>
                     <li><a href="#">United Kingdom</a></li>
                     <li><a href="#">Australia</a></li>
                     <li><a href="#">United States</a></li>
                     <li><a href="#">Germany</a></li>
+                    <li><a href="#">New Zealand</a></li>
                 </ul>
             </div>
 
@@ -1201,7 +1443,7 @@
                 <h4>Contact</h4>
                 <ul class="footer-links">
                     <li><a href="tel:+442012345678">+44 20 1234 5678</a></li>
-                    <li><a href="mailto:info@eduglobal.com">info@eduglobal.com</a></li>
+                    <li><a href="mailto:info@studyrepublic.com">info@studyrepublic.com</a></li>
                     <li><a href="#">123 Education Street</a></li>
                     <li><a href="#">London, UK</a></li>
                 </ul>
@@ -1209,7 +1451,7 @@
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2026 EduGlobal. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <p>&copy; 2026 Study Republic. All rights reserved. | Privacy Policy | Terms of Service</p>
         </div>
     </footer>
 
@@ -1218,13 +1460,13 @@
             document.getElementById('mobileMenu').classList.toggle('active');
         }
 
-        function handleSubmit(e) {
+        function handleForm(e) {
             e.preventDefault();
             alert('Thank you! Our team will contact you shortly.');
             e.target.reset();
         }
 
-        // Smooth scroll
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1239,20 +1481,30 @@
         });
 
         // Header scroll effect
-        let lastScroll = 0;
         window.addEventListener('scroll', () => {
             const header = document.querySelector('.header');
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            if (window.pageYOffset > 50) {
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)';
             } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
                 header.style.boxShadow = 'none';
             }
-            
-            lastScroll = currentScroll;
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.dest-card, .service-item, .testimonial-box, .process-step').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+            observer.observe(el);
         });
     </script>
 </body>
