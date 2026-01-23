@@ -7,191 +7,308 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap');
         *{margin:0;padding:0;box-sizing:border-box}
-        :root{--bg:#f5f5f0;--white:#ffffff;--navy:#1e2a4a;--navy-light:#2d3a5c;--red:#e63956;--red-light:#ff4d6a;--red-dark:#d42e4a;--text:#4a4a4a;--text-light:#7a7a7a;--mint:#e8f5e9;--peach:#fff3e0;--lavender:#ede7f6;--sky:#e3f2fd;--rose:#fce4ec;--border:#e5e5e0;--shadow:0 20px 60px rgba(0,0,0,.06);--shadow-lg:0 30px 80px rgba(0,0,0,.1)}
+        :root{--bg:#f8f9fa;--white:#ffffff;--navy:#0f172a;--navy-light:#1e293b;--red:#e63956;--red-light:#ff4d6a;--red-dark:#d42e4a;--text:#334155;--text-light:#64748b;--mint:#dcfce7;--peach:#ffedd5;--lavender:#e0e7ff;--sky:#e0f2fe;--rose:#ffe4e6;--border:#e2e8f0;--shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);--shadow-lg:0 25px 50px -12px rgba(0,0,0,.15);--shadow-xl:0 35px 60px -15px rgba(0,0,0,.2);--gradient:linear-gradient(135deg,#e63956 0%,#ff6b6b 50%,#ee5a24 100%)}
         html{scroll-behavior:smooth}
         body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--navy);line-height:1.6;overflow-x:hidden}
-        .header{position:fixed;top:20px;left:50%;transform:translateX(-50%);width:calc(100% - 40px);max-width:1200px;z-index:1000;background:rgba(255,255,255,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:100px;padding:.6rem 1.5rem;box-shadow:0 4px 30px rgba(0,0,0,.08);transition:all .3s;border:1px solid rgba(255,255,255,.8)}
-        .header.scrolled{box-shadow:0 8px 40px rgba(0,0,0,.12)}
+        
+        /* Animated Background */
+        .bg-pattern{position:fixed;inset:0;z-index:-1;opacity:.4;background-image:radial-gradient(#e63956 1px,transparent 1px);background-size:50px 50px}
+        
+        /* Header */
+        .header{position:fixed;top:20px;left:50%;transform:translateX(-50%);width:calc(100% - 40px);max-width:1200px;z-index:1000;background:rgba(255,255,255,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:100px;padding:.6rem 1.5rem;box-shadow:0 4px 30px rgba(0,0,0,.08);transition:all .4s cubic-bezier(.4,0,.2,1);border:1px solid rgba(255,255,255,.8)}
+        .header.scrolled{background:rgba(255,255,255,.95);box-shadow:0 8px 40px rgba(0,0,0,.12);padding:.5rem 1.5rem}
         .nav{display:flex;justify-content:space-between;align-items:center}
         .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
         .logo-icon{position:relative;width:42px;height:38px}
-        .logo-star{position:absolute;top:-2px;left:12px;width:22px;height:22px}
+        .logo-star{position:absolute;top:-2px;left:12px;width:22px;height:22px;animation:spin 20s linear infinite}
+        @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
         .logo-swoosh{position:absolute;bottom:5px;left:0;width:42px;height:16px}
         .logo-text{display:flex;flex-direction:column;line-height:1}
-        .logo-text-main{font-family:'Poppins',sans-serif;font-size:1.15rem;font-weight:800;color:var(--navy);letter-spacing:-.5px}
+        .logo-text-main{font-family:'Poppins',sans-serif;font-size:1.15rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.5px}
         .logo-text-sub{font-family:'Poppins',sans-serif;font-size:.7rem;font-weight:700;color:var(--navy);letter-spacing:2px;margin-top:-2px}
-        .nav-links{display:flex;gap:2rem;list-style:none}
-        .nav-links a{color:var(--text);text-decoration:none;font-size:.9rem;font-weight:500;padding:.5rem 1rem;border-radius:50px;transition:all .3s;position:relative}
-        .nav-links a::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--red);border-radius:2px;transition:width .3s}
-        .nav-links a:hover{color:var(--navy)}
-        .nav-links a:hover::after{width:20px}
-        .nav-cta{background:var(--red);color:var(--white);padding:.75rem 1.8rem;border:none;border-radius:50px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .3s;box-shadow:0 4px 15px rgba(230,57,86,.3)}
-        .nav-cta:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 6px 20px rgba(230,57,86,.4)}
+        .nav-links{display:flex;gap:.5rem;list-style:none}
+        .nav-links a{color:var(--text);text-decoration:none;font-size:.9rem;font-weight:500;padding:.6rem 1.2rem;border-radius:50px;transition:all .3s;position:relative;overflow:hidden}
+        .nav-links a::before{content:'';position:absolute;inset:0;background:var(--gradient);opacity:0;transition:opacity .3s;border-radius:50px}
+        .nav-links a:hover{color:var(--white)}
+        .nav-links a:hover::before{opacity:1}
+        .nav-links a span{position:relative;z-index:1}
+        .nav-cta{background:var(--gradient);color:var(--white);padding:.75rem 1.8rem;border:none;border-radius:50px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .3s;box-shadow:0 4px 15px rgba(230,57,86,.4);position:relative;overflow:hidden}
+        .nav-cta::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#ff6b6b 0%,#e63956 100%);opacity:0;transition:opacity .3s}
+        .nav-cta:hover::before{opacity:1}
+        .nav-cta span{position:relative;z-index:1}
+        .nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(230,57,86,.5)}
         .menu-btn{display:none;background:var(--bg);border:none;cursor:pointer;width:44px;height:44px;border-radius:12px;font-size:1.2rem;transition:all .3s}
-        .menu-btn:hover{background:var(--white)}
-        .hero{min-height:100vh;padding:130px 20px 80px;position:relative;overflow:hidden}
-        .blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5;pointer-events:none;transition:all .5s}
-        .hero .blob-1{width:450px;height:450px;background:var(--mint);top:5%;right:5%}
-        .hero .blob-2{width:350px;height:350px;background:var(--rose);bottom:15%;left:0}
-        .hero .blob-3{width:280px;height:280px;background:var(--lavender);top:45%;left:25%}
+        
+        /* Hero */
+        .hero{min-height:100vh;padding:140px 20px 100px;position:relative;overflow:hidden}
+        .blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.6;pointer-events:none;animation:blobFloat 20s ease-in-out infinite}
+        @keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(20px,-30px) scale(1.05)}50%{transform:translate(-20px,20px) scale(.95)}75%{transform:translate(30px,30px) scale(1.02)}}
+        .hero .blob-1{width:500px;height:500px;background:linear-gradient(135deg,var(--mint),var(--sky));top:0;right:0;animation-delay:0s}
+        .hero .blob-2{width:400px;height:400px;background:linear-gradient(135deg,var(--rose),var(--peach));bottom:10%;left:-5%;animation-delay:-5s}
+        .hero .blob-3{width:300px;height:300px;background:linear-gradient(135deg,var(--lavender),var(--sky));top:40%;left:20%;animation-delay:-10s}
         .hero-container{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
-        .hero-tag{display:inline-flex;align-items:center;gap:10px;background:var(--white);padding:.7rem 1.4rem;border-radius:50px;font-size:.8rem;font-weight:600;color:var(--navy);margin-bottom:1.5rem;box-shadow:var(--shadow);border:1px solid var(--border)}
+        .hero-tag{display:inline-flex;align-items:center;gap:10px;background:var(--white);padding:.75rem 1.5rem;border-radius:50px;font-size:.8rem;font-weight:600;color:var(--navy);margin-bottom:1.5rem;box-shadow:var(--shadow);border:1px solid var(--border);animation:fadeInUp .8s ease}
         .hero-tag-dot{width:10px;height:10px;background:var(--red);border-radius:50%;animation:pulse 2s infinite;box-shadow:0 0 0 0 rgba(230,57,86,.4)}
-        @keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(230,57,86,.4)}50%{transform:scale(1.1);box-shadow:0 0 0 8px rgba(230,57,86,0)}}
-        .hero h1{font-family:'Poppins',sans-serif;font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:800;line-height:1.12;margin-bottom:1.5rem;color:var(--navy)}
-        .hero h1 span{background:linear-gradient(135deg,var(--rose) 0%,var(--sky) 100%);padding:2px 14px;border-radius:8px;display:inline-block}
-        .hero-desc{font-size:1.05rem;color:var(--text);line-height:1.85;margin-bottom:2rem;max-width:500px}
-        .hero-stats{display:flex;gap:1.2rem;margin-bottom:2rem}
-        .hero-stat{background:var(--white);padding:1.2rem 1.8rem;border-radius:20px;text-align:center;min-width:110px;box-shadow:var(--shadow);border-left:4px solid var(--red);transition:all .3s}
-        .hero-stat:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
-        .hero-stat-num{font-family:'Poppins',sans-serif;font-size:1.9rem;font-weight:700;color:var(--navy);line-height:1}
-        .hero-stat-label{font-size:.7rem;color:var(--text-light);margin-top:.4rem;text-transform:uppercase;letter-spacing:.5px;font-weight:500}
-        .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
-        .btn-main{background:var(--red);color:var(--white);padding:1rem 2.2rem;border-radius:50px;font-size:.9rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .3s;box-shadow:0 8px 25px rgba(230,57,86,.35)}
-        .btn-main:hover{background:var(--red-dark);transform:translateY(-3px);box-shadow:0 12px 35px rgba(230,57,86,.45)}
-        .btn-soft{background:var(--white);color:var(--navy);padding:1rem 2.2rem;border-radius:50px;font-size:.9rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .3s;box-shadow:var(--shadow);border:1px solid var(--border)}
-        .btn-soft:hover{background:var(--navy);color:var(--white);border-color:var(--navy)}
-        .hero-visual{position:relative;height:500px}
-        .hero-cards{display:grid;grid-template-columns:1.2fr 1fr;grid-template-rows:1fr 1fr;gap:1rem;height:100%;transform:rotate(-2deg)}
-        .hero-card{background:var(--white);border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);transition:all .4s;position:relative}
-        .hero-card:hover{transform:translateY(-10px) rotate(1deg);box-shadow:0 40px 80px rgba(0,0,0,.15)}
-        .hero-card img{width:100%;height:100%;object-fit:cover}
-        .hero-card-content{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(30,42,74,.95));padding:1.5rem}
-        .hero-card-title{font-family:'Poppins',sans-serif;font-weight:700;font-size:.95rem;color:var(--white);margin-bottom:.2rem}
-        .hero-card-sub{font-size:.75rem;color:rgba(255,255,255,.7)}
+        @keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(230,57,86,.4)}50%{transform:scale(1.2);box-shadow:0 0 0 10px rgba(230,57,86,0)}}
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        .hero h1{font-family:'Poppins',sans-serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.1;margin-bottom:1.5rem;color:var(--navy);animation:fadeInUp .8s ease .1s both}
+        .hero h1 span{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative}
+        .hero h1 span::after{content:'';position:absolute;bottom:5px;left:0;right:0;height:12px;background:var(--gradient);opacity:.2;border-radius:4px;z-index:-1}
+        .hero-desc{font-size:1.1rem;color:var(--text);line-height:1.9;margin-bottom:2.5rem;max-width:520px;animation:fadeInUp .8s ease .2s both}
+        .hero-stats{display:flex;gap:1rem;margin-bottom:2.5rem;animation:fadeInUp .8s ease .3s both}
+        .hero-stat{background:var(--white);padding:1.5rem 2rem;border-radius:20px;text-align:center;min-width:120px;box-shadow:var(--shadow);border:1px solid var(--border);position:relative;overflow:hidden;transition:all .4s}
+        .hero-stat::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--gradient)}
+        .hero-stat:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg)}
+        .hero-stat-num{font-family:'Poppins',sans-serif;font-size:2.2rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+        .hero-stat-label{font-size:.75rem;color:var(--text-light);margin-top:.5rem;text-transform:uppercase;letter-spacing:1px;font-weight:600}
+        .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeInUp .8s ease .4s both}
+        .btn-main{background:var(--gradient);color:var(--white);padding:1.1rem 2.5rem;border-radius:50px;font-size:.95rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .4s;box-shadow:0 8px 30px rgba(230,57,86,.4);position:relative;overflow:hidden}
+        .btn-main::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#ff6b6b 0%,#e63956 100%);opacity:0;transition:opacity .3s}
+        .btn-main:hover::before{opacity:1}
+        .btn-main span{position:relative;z-index:1;display:flex;align-items:center;gap:10px}
+        .btn-main:hover{transform:translateY(-4px);box-shadow:0 15px 40px rgba(230,57,86,.5)}
+        .btn-soft{background:var(--white);color:var(--navy);padding:1.1rem 2.5rem;border-radius:50px;font-size:.95rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .4s;box-shadow:var(--shadow);border:2px solid var(--border)}
+        .btn-soft:hover{background:var(--navy);color:var(--white);border-color:var(--navy);transform:translateY(-4px)}
+        
+        /* Hero Visual */
+        .hero-visual{position:relative;height:520px;animation:fadeInUp .8s ease .3s both}
+        .hero-cards{display:grid;grid-template-columns:1.2fr 1fr;grid-template-rows:1fr 1fr;gap:1rem;height:100%;transform:rotate(-3deg)}
+        .hero-card{background:var(--white);border-radius:24px;overflow:hidden;box-shadow:var(--shadow-xl);transition:all .5s cubic-bezier(.4,0,.2,1);position:relative}
+        .hero-card::before{content:'';position:absolute;inset:0;background:var(--gradient);opacity:0;z-index:2;transition:opacity .3s}
+        .hero-card:hover{transform:translateY(-15px) rotate(2deg);box-shadow:0 40px 80px rgba(0,0,0,.2)}
+        .hero-card:hover::before{opacity:.1}
+        .hero-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+        .hero-card:hover img{transform:scale(1.1)}
+        .hero-card-content{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(15,23,42,.95));padding:1.8rem;z-index:3}
+        .hero-card-title{font-family:'Poppins',sans-serif;font-weight:700;font-size:1rem;color:var(--white);margin-bottom:.3rem}
+        .hero-card-sub{font-size:.8rem;color:rgba(255,255,255,.7)}
         .hero-card:first-child{grid-row:1/3}
         .hero-card:nth-child(2){grid-column:2;grid-row:1}
         .hero-card:nth-child(3){grid-column:2;grid-row:2}
-        .hero-float{position:absolute;background:var(--white);padding:1rem 1.4rem;border-radius:18px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:12px;z-index:10;border:1px solid var(--border)}
-        .hero-float-1{top:20px;right:-15px;animation:float 4s ease-in-out infinite}
-        .hero-float-2{bottom:60px;left:-25px;animation:float 4s ease-in-out infinite 1s}
-        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-        .hero-float-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
-        .hero-float-icon.green{background:var(--mint);color:#2e7d32}
+        .hero-float{position:absolute;background:var(--white);padding:1rem 1.5rem;border-radius:20px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:14px;z-index:10;border:1px solid var(--border)}
+        .hero-float-1{top:10px;right:-20px;animation:float 4s ease-in-out infinite}
+        .hero-float-2{bottom:80px;left:-30px;animation:float 4s ease-in-out infinite 1s}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+        .hero-float-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+        .hero-float-icon.green{background:var(--mint);color:#16a34a}
         .hero-float-icon.red{background:var(--rose);color:var(--red)}
-        .hero-float-text{font-size:.85rem;font-weight:600;color:var(--navy)}
-        .hero-float-text span{display:block;font-size:.65rem;color:var(--text-light);font-weight:400;margin-top:1px}
-        .uni-marquee{padding:2rem 0;background:var(--white);overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-        .uni-marquee-title{text-align:center;font-family:'Poppins',sans-serif;font-size:.75rem;font-weight:600;color:var(--text-light);text-transform:uppercase;letter-spacing:2px;margin-bottom:1.5rem}
-        .uni-marquee-track{display:flex;animation:scroll 35s linear infinite;width:max-content}
-        .uni-marquee:hover .uni-marquee-track{animation-play-state:paused}
-        @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-        .uni-logo{height:45px;margin:0 2.5rem;opacity:.5;transition:all .3s;filter:grayscale(100%)}
-        .uni-logo:hover{opacity:1;filter:grayscale(0);transform:scale(1.1)}
-        .section{padding:100px 20px}
-        .section-header{text-align:center;margin-bottom:4rem}
-        .section-tag{display:inline-flex;align-items:center;gap:8px;background:var(--white);padding:.6rem 1.4rem;border-radius:50px;font-size:.75rem;font-weight:600;color:var(--red);margin-bottom:1.2rem;box-shadow:var(--shadow);border:1px solid var(--border)}
-        .section-title{font-family:'Poppins',sans-serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;margin-bottom:.8rem;color:var(--navy)}
-        .section-desc{font-size:1rem;color:var(--text-light);max-width:520px;margin:0 auto;line-height:1.8}
-        .region-tabs{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-bottom:3rem;max-width:900px;margin-left:auto;margin-right:auto}
-        .region-tab{background:var(--white);border:2px solid var(--border);padding:.7rem 1.5rem;border-radius:50px;font-size:.85rem;font-weight:600;color:var(--text);cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:8px}
-        .region-tab:hover{border-color:var(--red);color:var(--red)}
-        .region-tab.active{background:var(--red);border-color:var(--red);color:var(--white);box-shadow:0 4px 15px rgba(230,57,86,.3)}
-        .region-tab span{font-size:1rem}
-        .dest-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-        .dest-card{background:var(--white);border-radius:24px;overflow:hidden;transition:all .4s;box-shadow:var(--shadow);border:1px solid var(--border)}
-        .dest-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-lg);border-color:transparent}
+        .hero-float-text{font-size:.9rem;font-weight:600;color:var(--navy)}
+        .hero-float-text span{display:block;font-size:.7rem;color:var(--text-light);font-weight:500;margin-top:2px}
+        
+        /* Marquee */
+        .marquee{background:var(--navy);padding:1rem 0;overflow:hidden;position:relative}
+        .marquee-content{display:flex;animation:marquee 30s linear infinite}
+        @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+        .marquee-item{display:flex;align-items:center;gap:12px;padding:0 3rem;color:var(--white);font-weight:600;font-size:.9rem;white-space:nowrap}
+        .marquee-item span{color:var(--red)}
+        
+        /* Section */
+        .section{padding:120px 20px}
+        .section-header{text-align:center;margin-bottom:2.5rem}
+        .section-tag{display:inline-flex;align-items:center;gap:8px;background:var(--white);padding:.7rem 1.5rem;border-radius:50px;font-size:.8rem;font-weight:600;color:var(--red);margin-bottom:1.2rem;box-shadow:var(--shadow);border:1px solid var(--border)}
+        .section-title{font-family:'Poppins',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:1rem;color:var(--navy)}
+        .section-title span{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .section-desc{font-size:1.05rem;color:var(--text-light);max-width:600px;margin:0 auto;line-height:1.8}
+        
+        /* Region Tabs */
+        .region-tabs{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-bottom:3.5rem;max-width:1000px;margin-left:auto;margin-right:auto}
+        .region-tab{background:var(--white);border:2px solid var(--border);padding:.8rem 1.6rem;border-radius:50px;font-size:.85rem;font-weight:600;color:var(--text);cursor:pointer;transition:all .4s;display:inline-flex;align-items:center;gap:8px}
+        .region-tab:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px)}
+        .region-tab.active{background:var(--gradient);border-color:transparent;color:var(--white);box-shadow:0 8px 25px rgba(230,57,86,.35);transform:translateY(-2px)}
+        .region-tab span{font-size:1.1rem}
+        
+        /* Destinations */
+        .dest-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem}
+        .dest-card{background:var(--white);border-radius:28px;overflow:hidden;transition:all .5s cubic-bezier(.4,0,.2,1);box-shadow:var(--shadow);border:1px solid var(--border);position:relative}
+        .dest-card::before{content:'';position:absolute;inset:0;background:var(--gradient);opacity:0;z-index:1;transition:opacity .3s;pointer-events:none}
+        .dest-card:hover{transform:translateY(-12px);box-shadow:var(--shadow-xl);border-color:transparent}
+        .dest-card:hover::before{opacity:.03}
         .dest-card.hidden{display:none}
-        .dest-img{height:190px;position:relative;overflow:hidden}
-        .dest-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
-        .dest-card:hover .dest-img img{transform:scale(1.1)}
-        .dest-img::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(30,42,74,.4))}
-        .dest-flag{position:absolute;top:1rem;left:1rem;width:48px;height:48px;background:var(--white);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;box-shadow:0 4px 15px rgba(0,0,0,.1);z-index:1}
-        .dest-badge{position:absolute;top:1rem;right:1rem;background:var(--red);color:var(--white);padding:.3rem .7rem;border-radius:20px;font-size:.65rem;font-weight:600;text-transform:uppercase;z-index:1}
-        .dest-content{padding:1.5rem}
-        .dest-content h3{font-family:'Poppins',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:.5rem;color:var(--navy)}
-        .dest-content p{font-size:.85rem;color:var(--text-light);line-height:1.7;margin-bottom:1rem}
-        .dest-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
-        .dest-tag{background:var(--bg);padding:.4rem .8rem;border-radius:20px;font-size:.68rem;font-weight:600;color:var(--navy)}
-        .dest-link{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:600;color:var(--red);text-decoration:none;transition:all .3s}
-        .dest-link:hover{gap:12px;color:var(--red-dark)}
-        .services{background:var(--white);border-radius:40px;margin:0 20px;border:1px solid var(--border)}
-        .services-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
-        .service{background:var(--bg);padding:2rem 1.5rem;border-radius:24px;transition:all .4s;position:relative;overflow:hidden;border:1px solid transparent}
-        .service::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--red),var(--red-light));transform:scaleX(0);transition:transform .4s;border-radius:24px 24px 0 0}
+        .dest-img{height:200px;position:relative;overflow:hidden}
+        .dest-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.4,0,.2,1)}
+        .dest-card:hover .dest-img img{transform:scale(1.15)}
+        .dest-img::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(15,23,42,.6))}
+        .dest-flag{position:absolute;top:1.2rem;left:1.2rem;width:54px;height:54px;background:var(--white);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.9rem;box-shadow:var(--shadow-lg);z-index:2;transition:transform .3s}
+        .dest-card:hover .dest-flag{transform:scale(1.1) rotate(-5deg)}
+        .dest-badge{position:absolute;top:1.2rem;right:1.2rem;background:var(--gradient);color:var(--white);padding:.4rem .8rem;border-radius:20px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;z-index:2}
+        .dest-content{padding:1.8rem}
+        .dest-content h3{font-family:'Poppins',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:.6rem;color:var(--navy)}
+        .dest-content p{font-size:.9rem;color:var(--text-light);line-height:1.75;margin-bottom:1.2rem}
+        .dest-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.4rem}
+        .dest-tag{background:var(--bg);padding:.5rem 1rem;border-radius:25px;font-size:.75rem;font-weight:600;color:var(--navy);border:1px solid var(--border);transition:all .3s}
+        .dest-card:hover .dest-tag{background:var(--white);border-color:var(--red);color:var(--red)}
+        .dest-link{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600;color:var(--red);text-decoration:none;transition:all .3s;padding:.5rem 0}
+        .dest-link::after{content:'→';transition:transform .3s}
+        .dest-link:hover{gap:12px}
+        .dest-link:hover::after{transform:translateX(5px)}
+        
+        /* Services */
+        .services{background:var(--white);border-radius:50px;margin:0 20px;border:1px solid var(--border);position:relative;overflow:hidden}
+        .services::before{content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;background:var(--gradient);opacity:.03;border-radius:50%}
+        .services-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;position:relative;z-index:1}
+        .service{background:var(--bg);padding:2.2rem 1.8rem;border-radius:28px;transition:all .5s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;border:2px solid transparent}
+        .service::before{content:'';position:absolute;top:0;left:0;width:100%;height:5px;background:var(--gradient);transform:scaleX(0);transition:transform .4s;transform-origin:left}
         .service:hover::before{transform:scaleX(1)}
-        .service:hover{background:var(--white);box-shadow:var(--shadow-lg);transform:translateY(-6px);border-color:var(--border)}
-        .service-icon{width:60px;height:60px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin-bottom:1.4rem;transition:transform .3s}
-        .service:hover .service-icon{transform:scale(1.1)}
-        .service:nth-child(1) .service-icon{background:var(--mint)}
-        .service:nth-child(2) .service-icon{background:var(--peach)}
-        .service:nth-child(3) .service-icon{background:var(--lavender)}
-        .service:nth-child(4) .service-icon{background:var(--sky)}
-        .service:nth-child(5) .service-icon{background:var(--rose)}
-        .service:nth-child(6) .service-icon{background:var(--mint)}
-        .service:nth-child(7) .service-icon{background:var(--peach)}
-        .service:nth-child(8) .service-icon{background:var(--lavender)}
-        .service h3{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.5rem;color:var(--navy)}
-        .service p{font-size:.82rem;color:var(--text-light);line-height:1.65}
-        .process-grid{max-width:1050px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;position:relative}
-        .process-grid::before{content:'';position:absolute;top:50px;left:12%;right:12%;height:3px;background:linear-gradient(90deg,var(--red),var(--red-light),var(--red));border-radius:10px}
+        .service:hover{background:var(--white);box-shadow:var(--shadow-lg);transform:translateY(-10px);border-color:var(--border)}
+        .service-icon{width:70px;height:70px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:1.5rem;transition:all .4s;position:relative}
+        .service:hover .service-icon{transform:scale(1.1) rotate(-5deg)}
+        .service:nth-child(1) .service-icon{background:linear-gradient(135deg,var(--mint),#bbf7d0)}
+        .service:nth-child(2) .service-icon{background:linear-gradient(135deg,var(--peach),#fed7aa)}
+        .service:nth-child(3) .service-icon{background:linear-gradient(135deg,var(--lavender),#c7d2fe)}
+        .service:nth-child(4) .service-icon{background:linear-gradient(135deg,var(--sky),#bae6fd)}
+        .service:nth-child(5) .service-icon{background:linear-gradient(135deg,var(--rose),#fecdd3)}
+        .service:nth-child(6) .service-icon{background:linear-gradient(135deg,var(--mint),#bbf7d0)}
+        .service:nth-child(7) .service-icon{background:linear-gradient(135deg,var(--peach),#fed7aa)}
+        .service:nth-child(8) .service-icon{background:linear-gradient(135deg,var(--lavender),#c7d2fe)}
+        .service h3{font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.6rem;color:var(--navy)}
+        .service p{font-size:.88rem;color:var(--text-light);line-height:1.7}
+        
+        /* Process */
+        .process-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem;position:relative}
+        .process-grid::before{content:'';position:absolute;top:60px;left:15%;right:15%;height:4px;background:var(--gradient);border-radius:10px}
         .process-step{text-align:center;position:relative;z-index:1}
-        .step-icon{width:100px;height:100px;background:var(--white);border-radius:28px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;box-shadow:var(--shadow-lg);border:3px solid var(--red);transition:all .3s}
-        .step-icon:hover{transform:scale(1.08);box-shadow:0 20px 50px rgba(230,57,86,.2)}
-        .step-num{font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;color:var(--red)}
-        .process-step h3{font-family:'Poppins',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:.5rem;color:var(--navy)}
-        .process-step p{font-size:.82rem;color:var(--text-light);line-height:1.65}
-        .testimonials{background:var(--white);border-radius:40px;margin:0 20px;border:1px solid var(--border)}
-        .test-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-        .test-card{background:var(--bg);padding:2rem;border-radius:24px;transition:all .4s;border:1px solid transparent}
-        .test-card:hover{background:var(--white);box-shadow:var(--shadow-lg);transform:translateY(-6px);border-color:var(--border)}
-        .test-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
-        .test-avatar{width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,var(--navy),var(--navy-light));display:flex;align-items:center;justify-content:center;color:var(--white);font-family:'Poppins',sans-serif;font-weight:700;font-size:1rem}
-        .test-info h4{font-family:'Poppins',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy)}
-        .test-info span{font-size:.75rem;color:var(--text-light)}
-        .test-text{font-size:.9rem;color:var(--text);line-height:1.8;margin-bottom:1.2rem}
-        .test-rating{display:flex;gap:3px;color:var(--red);font-size:1rem}
-        .cta{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);border-radius:40px;margin:0 20px;position:relative;overflow:hidden}
-        .cta::before{content:'';position:absolute;width:400px;height:400px;background:var(--red);opacity:.08;border-radius:50%;top:-150px;right:-100px}
-        .cta::after{content:'';position:absolute;width:300px;height:300px;background:var(--red);opacity:.05;border-radius:50%;bottom:-100px;left:-80px}
-        .cta-container{max-width:1150px;margin:0 auto;display:grid;grid-template-columns:1fr 1.15fr;gap:4rem;align-items:center;padding:70px 50px;position:relative;z-index:1}
-        .cta-content h2{font-family:'Poppins',sans-serif;font-size:clamp(1.7rem,3vw,2.3rem);font-weight:700;color:var(--white);margin-bottom:1rem}
-        .cta-content>p{color:rgba(255,255,255,.75);line-height:1.85;margin-bottom:2rem;font-size:.95rem}
-        .cta-features{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
-        .cta-features li{display:flex;align-items:center;gap:12px;color:var(--white);font-size:.88rem}
-        .cta-features li::before{content:'✓';width:26px;height:26px;background:var(--red);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700}
-        .cta-form{background:var(--white);padding:2.5rem;border-radius:28px;box-shadow:0 30px 70px rgba(0,0,0,.25)}
-        .form-title{font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:.3rem;text-align:center;color:var(--navy)}
-        .form-subtitle{font-size:.82rem;color:var(--text-light);margin-bottom:1.5rem;text-align:center}
-        .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
-        .form-group{margin-bottom:.7rem}
+        .step-icon{width:120px;height:120px;background:var(--white);border-radius:35px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.8rem;box-shadow:var(--shadow-lg);border:4px solid transparent;background-image:linear-gradient(white,white),var(--gradient);background-origin:border-box;background-clip:padding-box,border-box;transition:all .4s}
+        .step-icon:hover{transform:scale(1.1) rotate(-5deg);box-shadow:var(--shadow-xl)}
+        .step-num{font-family:'Poppins',sans-serif;font-size:2.5rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .process-step h3{font-family:'Poppins',sans-serif;font-size:1.15rem;font-weight:700;margin-bottom:.6rem;color:var(--navy)}
+        .process-step p{font-size:.88rem;color:var(--text-light);line-height:1.7}
+        
+        /* Testimonials */
+        .testimonials{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);border-radius:50px;margin:0 20px;position:relative;overflow:hidden}
+        .testimonials::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:var(--red);opacity:.1;border-radius:50%}
+        .testimonials::after{content:'';position:absolute;bottom:-150px;left:-100px;width:500px;height:500px;background:var(--red);opacity:.05;border-radius:50%}
+        .testimonials .section-tag{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.1);color:var(--white)}
+        .testimonials .section-title{color:var(--white)}
+        .testimonials .section-desc{color:rgba(255,255,255,.7)}
+        .test-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;position:relative;z-index:1}
+        .test-card{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);padding:2.2rem;border-radius:28px;transition:all .5s;border:1px solid rgba(255,255,255,.1)}
+        .test-card:hover{background:rgba(255,255,255,.1);transform:translateY(-10px);border-color:rgba(255,255,255,.2)}
+        .test-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.4rem}
+        .test-avatar{width:60px;height:60px;border-radius:18px;background:var(--gradient);display:flex;align-items:center;justify-content:center;color:var(--white);font-family:'Poppins',sans-serif;font-weight:700;font-size:1.1rem}
+        .test-info h4{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;color:var(--white)}
+        .test-info span{font-size:.8rem;color:rgba(255,255,255,.6)}
+        .test-text{font-size:.95rem;color:rgba(255,255,255,.85);line-height:1.85;margin-bottom:1.4rem}
+        .test-rating{display:flex;gap:4px;font-size:1.1rem}
+        .test-rating span{color:#fbbf24}
+        
+        /* Stats Banner */
+        .stats-banner{background:var(--white);border-radius:30px;margin:-60px 40px 0;position:relative;z-index:10;padding:3rem;box-shadow:var(--shadow-xl);border:1px solid var(--border)}
+        .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;max-width:1000px;margin:0 auto}
+        .stat-item{text-align:center;padding:1rem;border-right:1px solid var(--border)}
+        .stat-item:last-child{border-right:none}
+        .stat-num{font-family:'Poppins',sans-serif;font-size:3rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+        .stat-label{font-size:.9rem;color:var(--text-light);margin-top:.5rem;font-weight:500}
+        
+        /* CTA */
+        .cta{background:var(--gradient);border-radius:50px;margin:0 20px;position:relative;overflow:hidden}
+        .cta::before{content:'';position:absolute;width:600px;height:600px;background:rgba(255,255,255,.1);border-radius:50%;top:-300px;right:-200px}
+        .cta::after{content:'';position:absolute;width:400px;height:400px;background:rgba(255,255,255,.05);border-radius:50%;bottom:-200px;left:-100px}
+        .cta-container{max-width:1150px;margin:0 auto;display:grid;grid-template-columns:1fr 1.15fr;gap:4rem;align-items:center;padding:80px 50px;position:relative;z-index:1}
+        .cta-content h2{font-family:'Poppins',sans-serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:800;color:var(--white);margin-bottom:1.2rem}
+        .cta-content>p{color:rgba(255,255,255,.85);line-height:1.9;margin-bottom:2.5rem;font-size:1rem}
+        .cta-features{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+        .cta-features li{display:flex;align-items:center;gap:14px;color:var(--white);font-size:.95rem;font-weight:500}
+        .cta-features li::before{content:'✓';width:30px;height:30px;background:rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700}
+        .cta-form{background:var(--white);padding:3rem;border-radius:32px;box-shadow:0 30px 80px rgba(0,0,0,.3)}
+        .form-title{font-family:'Poppins',sans-serif;font-size:1.6rem;font-weight:700;margin-bottom:.4rem;text-align:center;color:var(--navy)}
+        .form-subtitle{font-size:.9rem;color:var(--text-light);margin-bottom:2rem;text-align:center}
+        .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+        .form-group{margin-bottom:.5rem}
         .form-group.full{grid-column:span 2}
-        .form-group label{display:block;font-size:.72rem;font-weight:600;margin-bottom:.4rem;color:var(--navy);text-transform:uppercase;letter-spacing:.3px}
-        .form-group input,.form-group select,.form-group textarea{width:100%;padding:.9rem 1rem;border:2px solid var(--border);border-radius:14px;font-size:.88rem;font-family:inherit;transition:all .3s;background:var(--bg)}
+        .form-group label{display:block;font-size:.75rem;font-weight:600;margin-bottom:.5rem;color:var(--navy);text-transform:uppercase;letter-spacing:.5px}
+        .form-group input,.form-group select,.form-group textarea{width:100%;padding:1rem 1.2rem;border:2px solid var(--border);border-radius:16px;font-size:.9rem;font-family:inherit;transition:all .3s;background:var(--bg)}
         .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--red);background:var(--white);box-shadow:0 0 0 4px rgba(230,57,86,.1)}
-        .form-group textarea{resize:vertical;min-height:80px}
-        .form-submit{width:100%;background:var(--red);color:var(--white);padding:1rem;border:none;border-radius:14px;font-size:.92rem;font-weight:700;cursor:pointer;transition:all .3s;box-shadow:0 6px 20px rgba(230,57,86,.3)}
-        .form-submit:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 10px 30px rgba(230,57,86,.4)}
-        .form-note{text-align:center;margin-top:1rem;font-size:.72rem;color:var(--text-light)}
-        .footer{padding:80px 20px 30px}
+        .form-group textarea{resize:vertical;min-height:90px}
+        .form-submit{width:100%;background:var(--gradient);color:var(--white);padding:1.1rem;border:none;border-radius:16px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .4s;box-shadow:0 8px 25px rgba(230,57,86,.35);margin-top:.5rem}
+        .form-submit:hover{transform:translateY(-3px);box-shadow:0 15px 35px rgba(230,57,86,.45)}
+        .form-note{text-align:center;margin-top:1.2rem;font-size:.8rem;color:var(--text-light)}
+        
+        /* Footer */
+        .footer{padding:100px 20px 40px}
         .footer-container{max-width:1200px;margin:0 auto}
-        .footer-main{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid var(--border)}
-        .footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:1.2rem}
-        .footer-brand p{color:var(--text-light);line-height:1.85;margin-bottom:1.5rem;font-size:.88rem}
-        .social-links{display:flex;gap:.6rem}
-        .social-link{width:42px;height:42px;background:var(--white);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--navy);text-decoration:none;font-size:.85rem;font-weight:600;transition:all .3s;box-shadow:var(--shadow);border:1px solid var(--border)}
-        .social-link:hover{background:var(--red);color:var(--white);border-color:var(--red);transform:translateY(-3px)}
-        .footer-col h4{font-family:'Poppins',sans-serif;font-size:.82rem;font-weight:700;margin-bottom:1.2rem;color:var(--navy)}
+        .footer-main{display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr;gap:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border)}
+        .footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:1.5rem}
+        .footer-brand p{color:var(--text-light);line-height:1.9;margin-bottom:2rem;font-size:.95rem}
+        .social-links{display:flex;gap:.8rem}
+        .social-link{width:48px;height:48px;background:var(--bg);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--navy);text-decoration:none;font-size:.9rem;font-weight:600;transition:all .4s;border:1px solid var(--border)}
+        .social-link:hover{background:var(--gradient);color:var(--white);border-color:transparent;transform:translateY(-5px)}
+        .footer-col h4{font-family:'Poppins',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:1.5rem;color:var(--navy)}
         .footer-links{list-style:none}
-        .footer-links li{margin-bottom:.6rem}
-        .footer-links a{color:var(--text-light);text-decoration:none;font-size:.88rem;transition:all .3s}
-        .footer-links a:hover{color:var(--red);padding-left:5px}
-        .footer-bottom{padding-top:2rem;display:flex;justify-content:space-between;font-size:.78rem;color:var(--text-light)}
+        .footer-links li{margin-bottom:.8rem}
+        .footer-links a{color:var(--text-light);text-decoration:none;font-size:.95rem;transition:all .3s;display:inline-flex;align-items:center;gap:8px}
+        .footer-links a:hover{color:var(--red);transform:translateX(5px)}
+        .footer-bottom{padding-top:2.5rem;display:flex;justify-content:space-between;font-size:.85rem;color:var(--text-light)}
+        
+        /* Mobile Menu */
         .mobile-menu{position:fixed;inset:0;background:var(--white);z-index:2000;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:all .4s}
         .mobile-menu.active{opacity:1;visibility:visible}
-        .mobile-close{position:absolute;top:25px;right:25px;background:var(--bg);border:none;width:50px;height:50px;border-radius:14px;font-size:1.5rem;cursor:pointer;transition:all .3s}
-        .mobile-close:hover{background:var(--rose)}
+        .mobile-close{position:absolute;top:25px;right:25px;background:var(--bg);border:none;width:55px;height:55px;border-radius:16px;font-size:1.8rem;cursor:pointer;transition:all .3s}
+        .mobile-close:hover{background:var(--rose);color:var(--red)}
         .mobile-nav{list-style:none;text-align:center}
         .mobile-nav li{margin-bottom:2rem}
-        .mobile-nav a{font-family:'Poppins',sans-serif;font-size:1.6rem;font-weight:700;color:var(--navy);text-decoration:none;transition:color .3s}
-        .mobile-nav a:hover{color:var(--red)}
+        .mobile-nav a{font-family:'Poppins',sans-serif;font-size:1.8rem;font-weight:700;color:var(--navy);text-decoration:none;transition:all .3s}
+        .mobile-nav a:hover{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
         .mobile-cta{margin-top:2rem}
-        .mobile-cta .btn-main{padding:1rem 3rem}
-        @media(max-width:1100px){.nav-links,.nav-cta{display:none}.menu-btn{display:flex;align-items:center;justify-content:center}.hero-container{grid-template-columns:1fr;text-align:center}.hero-desc{margin-left:auto;margin-right:auto}.hero-stats{justify-content:center}.hero-btns{justify-content:center}.hero-visual{display:grid;grid-template-columns:1fr;height:auto;margin-top:3rem}.hero-cards{grid-template-columns:repeat(3,1fr);grid-template-rows:1fr;transform:none;height:280px}.hero-card:first-child{grid-row:auto}.hero-card{height:100%!important;grid-row:auto!important;grid-column:auto!important}.hero-float{display:none}.dest-grid{grid-template-columns:repeat(2,1fr)}.services-grid{grid-template-columns:repeat(2,1fr)}.test-grid{grid-template-columns:repeat(2,1fr)}.process-grid{grid-template-columns:repeat(2,1fr);gap:2rem}.process-grid::before{display:none}.cta-container{grid-template-columns:1fr;text-align:center}.cta-features{justify-content:center}.footer-main{grid-template-columns:repeat(2,1fr)}}
-        @media(max-width:700px){.header{top:12px;width:calc(100% - 24px);padding:.5rem 1rem;border-radius:20px}.logo-text-main{font-size:1rem}.logo-text-sub{font-size:.6rem}.section{padding:60px 16px}.hero{padding:110px 16px 50px}.hero h1{font-size:2rem}.hero-desc{font-size:.95rem}.hero-stats{flex-direction:column;gap:1rem;align-items:center}.hero-stat{width:100%;max-width:280px}.hero-btns{flex-direction:column;width:100%;max-width:320px;margin:0 auto}.btn-main,.btn-soft{width:100%;justify-content:center;padding:1rem 1.5rem}.hero-cards{grid-template-columns:1fr;height:auto;gap:.8rem}.hero-card{height:200px!important}.dest-grid,.services-grid,.test-grid{grid-template-columns:1fr}.process-grid{grid-template-columns:1fr;gap:1.5rem}.step-icon{width:80px;height:80px}.step-num{font-size:1.6rem}.footer-main{grid-template-columns:1fr;gap:2rem}.footer-bottom{flex-direction:column;gap:1rem;text-align:center}.cta{border-radius:28px;margin:0 12px}.cta-container{padding:50px 24px}.cta-features{grid-template-columns:1fr;text-align:left}.cta-form{padding:2rem 1.5rem;border-radius:24px}.form-grid{grid-template-columns:1fr}.form-group.full{grid-column:span 1}.services,.testimonials{margin:0 12px;border-radius:28px}.section-title{font-size:1.6rem}.section-desc{font-size:.9rem}.dest-content h3{font-size:1.1rem}.service{padding:1.5rem 1.2rem}.test-card{padding:1.5rem}.region-tabs{gap:.4rem}.region-tab{padding:.5rem 1rem;font-size:.75rem}.uni-marquee{padding:1.5rem 0}.uni-logo{height:35px;margin:0 1.5rem}}
+        
+        /* Responsive */
+        @media(max-width:1100px){
+            .nav-links,.nav-cta{display:none}
+            .menu-btn{display:flex;align-items:center;justify-content:center}
+            .hero-container{grid-template-columns:1fr;text-align:center}
+            .hero-desc{margin-left:auto;margin-right:auto}
+            .hero-stats{justify-content:center}
+            .hero-btns{justify-content:center}
+            .hero-visual{height:auto;margin-top:3rem}
+            .hero-cards{grid-template-columns:repeat(3,1fr);grid-template-rows:1fr;transform:none;height:280px}
+            .hero-card:first-child{grid-row:auto}
+            .hero-card{grid-row:auto!important;grid-column:auto!important}
+            .hero-float{display:none}
+            .dest-grid{grid-template-columns:repeat(2,1fr)}
+            .services-grid{grid-template-columns:repeat(2,1fr)}
+            .test-grid{grid-template-columns:repeat(2,1fr)}
+            .process-grid{grid-template-columns:repeat(2,1fr);gap:2rem}
+            .process-grid::before{display:none}
+            .cta-container{grid-template-columns:1fr;text-align:center}
+            .cta-features{justify-content:center}
+            .footer-main{grid-template-columns:repeat(2,1fr)}
+            .stats-grid{grid-template-columns:repeat(2,1fr)}
+            .stat-item{border-right:none;border-bottom:1px solid var(--border)}
+            .stat-item:nth-last-child(-n+2){border-bottom:none}
+        }
+        @media(max-width:700px){
+            .header{top:12px;width:calc(100% - 24px);padding:.5rem 1rem;border-radius:20px}
+            .section{padding:80px 16px}
+            .hero{padding:120px 16px 60px}
+            .hero h1{font-size:2.2rem}
+            .hero-stats{flex-direction:column;gap:1rem;align-items:center}
+            .hero-stat{width:100%;max-width:300px}
+            .hero-btns{flex-direction:column;width:100%;max-width:340px;margin:0 auto}
+            .btn-main,.btn-soft{width:100%;justify-content:center}
+            .hero-cards{grid-template-columns:1fr;height:auto;gap:1rem}
+            .hero-card{height:220px!important}
+            .dest-grid,.services-grid,.test-grid{grid-template-columns:1fr}
+            .process-grid{grid-template-columns:1fr}
+            .footer-main{grid-template-columns:1fr}
+            .footer-bottom{flex-direction:column;gap:1rem;text-align:center}
+            .cta{border-radius:30px;margin:0 12px}
+            .cta-container{padding:60px 24px}
+            .cta-features{grid-template-columns:1fr;text-align:left}
+            .cta-form{padding:2rem 1.5rem;border-radius:24px}
+            .form-grid{grid-template-columns:1fr}
+            .form-group.full{grid-column:span 1}
+            .services,.testimonials{margin:0 12px;border-radius:30px}
+            .region-tabs{gap:.5rem}
+            .region-tab{padding:.6rem 1.2rem;font-size:.8rem}
+            .stats-banner{margin:-40px 16px 0;padding:2rem;border-radius:24px}
+            .stats-grid{grid-template-columns:1fr 1fr;gap:1.5rem}
+            .stat-num{font-size:2.2rem}
+            .marquee{display:none}
+        }
     </style>
 </head>
 <body>
+    <div class="bg-pattern"></div>
+    
     <div class="mobile-menu" id="mobileMenu">
         <button class="mobile-close" onclick="toggleMenu()">×</button>
         <ul class="mobile-nav">
@@ -201,8 +318,9 @@
             <li><a href="#testimonials" onclick="toggleMenu()">Stories</a></li>
             <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
         </ul>
-        <div class="mobile-cta"><a href="#contact" class="btn-main" onclick="toggleMenu()">Get Started</a></div>
+        <div class="mobile-cta"><a href="#contact" class="btn-main" onclick="toggleMenu()"><span>Get Started</span></a></div>
     </div>
+
     <header class="header" id="header">
         <nav class="nav">
             <a href="#" class="logo">
@@ -213,71 +331,78 @@
                 <div class="logo-text"><span class="logo-text-main">STUDY</span><span class="logo-text-sub">REPUBLIC</span></div>
             </a>
             <ul class="nav-links">
-                <li><a href="#destinations">Destinations</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#process">Process</a></li>
-                <li><a href="#testimonials">Stories</a></li>
+                <li><a href="#destinations"><span>Destinations</span></a></li>
+                <li><a href="#services"><span>Services</span></a></li>
+                <li><a href="#process"><span>Process</span></a></li>
+                <li><a href="#testimonials"><span>Stories</span></a></li>
             </ul>
-            <button class="nav-cta" onclick="location.href='#contact'">Get Started</button>
+            <button class="nav-cta" onclick="location.href='#contact'"><span>Get Started</span></button>
             <button class="menu-btn" onclick="toggleMenu()">☰</button>
         </nav>
     </header>
+
     <section class="hero">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
         <div class="blob blob-3"></div>
         <div class="hero-container">
             <div class="hero-text">
-                <div class="hero-tag"><span class="hero-tag-dot"></span>Trusted by 15,000+ Students</div>
+                <div class="hero-tag"><span class="hero-tag-dot"></span>Trusted by 15,000+ Students Worldwide</div>
                 <h1>Your Path to <span>Global Education</span> Starts Here</h1>
-                <p class="hero-desc">We help ambitious students achieve their dreams of studying abroad with personalized guidance, expert counseling, and end-to-end support.</p>
+                <p class="hero-desc">We help ambitious students achieve their dreams of studying abroad with personalized guidance, expert counseling, and comprehensive end-to-end support.</p>
                 <div class="hero-stats">
-                    <div class="hero-stat"><div class="hero-stat-num">15K+</div><div class="hero-stat-label">Students</div></div>
-                    <div class="hero-stat"><div class="hero-stat-num">99%</div><div class="hero-stat-label">Visa Rate</div></div>
+                    <div class="hero-stat"><div class="hero-stat-num">15K+</div><div class="hero-stat-label">Students Placed</div></div>
+                    <div class="hero-stat"><div class="hero-stat-num">99%</div><div class="hero-stat-label">Visa Success</div></div>
                     <div class="hero-stat"><div class="hero-stat-num">500+</div><div class="hero-stat-label">Universities</div></div>
                 </div>
                 <div class="hero-btns">
-                    <a href="#contact" class="btn-main">Start Your Journey →</a>
+                    <a href="#contact" class="btn-main"><span>Start Your Journey →</span></a>
                     <a href="#destinations" class="btn-soft">Explore Countries</a>
                 </div>
             </div>
             <div class="hero-visual">
                 <div class="hero-cards">
-                    <div class="hero-card"><img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80" alt="Students"><div class="hero-card-content"><div class="hero-card-title">Global Network</div><div class="hero-card-sub">500+ Partner Universities</div></div></div>
-                    <div class="hero-card"><img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=600&q=80" alt="Graduation"><div class="hero-card-content"><div class="hero-card-title">Success Stories</div><div class="hero-card-sub">15,000+ Happy Students</div></div></div>
-                    <div class="hero-card"><img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=600&q=80" alt="Campus"><div class="hero-card-content"><div class="hero-card-title">Top Universities</div><div class="hero-card-sub">World Rankings</div></div></div>
+                    <div class="hero-card">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80" alt="Students">
+                        <div class="hero-card-content"><div class="hero-card-title">Global Network</div><div class="hero-card-sub">500+ Partner Universities</div></div>
+                    </div>
+                    <div class="hero-card">
+                        <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=600&q=80" alt="Graduation">
+                        <div class="hero-card-content"><div class="hero-card-title">Success Stories</div><div class="hero-card-sub">15,000+ Happy Students</div></div>
+                    </div>
+                    <div class="hero-card">
+                        <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=600&q=80" alt="Campus">
+                        <div class="hero-card-content"><div class="hero-card-title">Top Universities</div><div class="hero-card-sub">World Rankings</div></div>
+                    </div>
                 </div>
-                <div class="hero-float hero-float-1"><div class="hero-float-icon green">✓</div><div class="hero-float-text">Visa Approved<span>Just now</span></div></div>
+                <div class="hero-float hero-float-1"><div class="hero-float-icon green">✓</div><div class="hero-float-text">Visa Approved<span>Just now • Canada</span></div></div>
                 <div class="hero-float hero-float-2"><div class="hero-float-icon red">🎓</div><div class="hero-float-text">Oxford Admit<span>2 hours ago</span></div></div>
             </div>
         </div>
     </section>
-    <div class="uni-marquee">
-        <div class="uni-marquee-title">Our Partner Universities</div>
-        <div class="uni-marquee-track">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Harvard_University_shield.svg/150px-Harvard_University_shield.svg.png" alt="Harvard" class="uni-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/44/MIT_Seal.svg/150px-MIT_Seal.svg.png" alt="MIT" class="uni-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/University_of_Oxford.svg/150px-University_of_Oxford.svg.png" alt="Oxford" class="uni-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Coat_of_Arms_of_the_University_of_Cambridge.svg/150px-Coat_of_Arms_of_the_University_of_Cambridge.svg.png" alt="Cambridge" class="uni-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Stanford_University_seal_2003.svg/150px-Stanford_University_seal_2003.svg.png" alt="Stanford" class="uni-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Yale_University_Shield_1.svg/150px-Yale_University_Shield_1.svg.png" alt="Yale" class="uni-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/University_of_Toronto_coat_of_arms.svg/150px-University_of_Toronto_coat_of_arms.svg.png" alt="Toronto" class="uni-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/University_of_Melbourne_coat_of_arms.svg/150px-University_of_Melbourne_coat_of_arms.svg.png" alt="Melbourne" class="uni-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Harvard_University_shield.svg/150px-Harvard_University_shield.svg.png" alt="Harvard" class="uni-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/44/MIT_Seal.svg/150px-MIT_Seal.svg.png" alt="MIT" class="uni-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/University_of_Oxford.svg/150px-University_of_Oxford.svg.png" alt="Oxford" class="uni-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Coat_of_Arms_of_the_University_of_Cambridge.svg/150px-Coat_of_Arms_of_the_University_of_Cambridge.svg.png" alt="Cambridge" class="uni-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Stanford_University_seal_2003.svg/150px-Stanford_University_seal_2003.svg.png" alt="Stanford" class="uni-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Yale_University_Shield_1.svg/150px-Yale_University_Shield_1.svg.png" alt="Yale" class="uni-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/University_of_Toronto_coat_of_arms.svg/150px-University_of_Toronto_coat_of_arms.svg.png" alt="Toronto" class="uni-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/University_of_Melbourne_coat_of_arms.svg/150px-University_of_Melbourne_coat_of_arms.svg.png" alt="Melbourne" class="uni-logo">
+    
+    <div class="marquee">
+        <div class="marquee-content">
+            <div class="marquee-item"><span>★</span> 15,000+ Students Placed</div>
+            <div class="marquee-item"><span>★</span> 99% Visa Success Rate</div>
+            <div class="marquee-item"><span>★</span> 500+ Partner Universities</div>
+            <div class="marquee-item"><span>★</span> 50+ Countries</div>
+            <div class="marquee-item"><span>★</span> Free Consultation</div>
+            <div class="marquee-item"><span>★</span> Expert Counselors</div>
+            <div class="marquee-item"><span>★</span> 15,000+ Students Placed</div>
+            <div class="marquee-item"><span>★</span> 99% Visa Success Rate</div>
+            <div class="marquee-item"><span>★</span> 500+ Partner Universities</div>
+            <div class="marquee-item"><span>★</span> 50+ Countries</div>
+            <div class="marquee-item"><span>★</span> Free Consultation</div>
+            <div class="marquee-item"><span>★</span> Expert Counselors</div>
         </div>
     </div>
+
     <section class="section" id="destinations">
         <div class="section-header">
             <div class="section-tag">🌍 Study Destinations</div>
-            <h2 class="section-title">Choose Your Dream Country</h2>
-            <p class="section-desc">Explore amazing education opportunities in top study destinations around the world</p>
+            <h2 class="section-title">Choose Your <span>Dream Country</span></h2>
+            <p class="section-desc">Explore world-class education opportunities across 50+ countries with expert guidance at every step</p>
         </div>
         <div class="region-tabs">
             <button class="region-tab active" data-region="all"><span>🌐</span> All Countries</button>
@@ -289,88 +414,21 @@
             <button class="region-tab" data-region="africa"><span>🌍</span> Africa</button>
         </div>
         <div class="dest-grid">
-            <div class="dest-card" data-region="europe"><div class="dest-img"><img src="https://images.unsplash.com/photo-1538332576228-eb5b4c4de6f5?w=800&q=80" alt="Finland"><div class="dest-flag">🇫🇮</div><div class="dest-badge">Top Rated</div></div><div class="dest-content"><h3>Finland</h3><p>World's best education system with free tuition and innovative teaching methods.</p><div class="dest-tags"><span class="dest-tag">40+ Unis</span><span class="dest-tag">Free Tuition</span><span class="dest-tag">€0-18K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="americas"><div class="dest-img"><img src="https://images.unsplash.com/photo-1517935706615-2717063c2225?w=800&q=80" alt="Canada"><div class="dest-flag">🇨🇦</div><div class="dest-badge">Popular</div></div><div class="dest-content"><h3>Canada</h3><p>World-class education with immigration-friendly policies and work opportunities.</p><div class="dest-tags"><span class="dest-tag">100+ Unis</span><span class="dest-tag">3yr Work</span><span class="dest-tag">$15-30K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="europe"><div class="dest-img"><img src="https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?w=800&q=80" alt="UK"><div class="dest-flag">🇬🇧</div><div class="dest-badge">Popular</div></div><div class="dest-content"><h3>United Kingdom</h3><p>Home to Oxford, Cambridge, and world-renowned Russell Group universities.</p><div class="dest-tags"><span class="dest-tag">150+ Unis</span><span class="dest-tag">2yr Work</span><span class="dest-tag">£15-25K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="oceania"><div class="dest-img"><img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800&q=80" alt="Australia"><div class="dest-flag">🇦🇺</div><div class="dest-badge">Popular</div></div><div class="dest-content"><h3>Australia</h3><p>Excellent quality of life with top-ranked universities and great weather.</p><div class="dest-tags"><span class="dest-tag">43 Unis</span><span class="dest-tag">2-4yr Work</span><span class="dest-tag">A$25-40K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="americas"><div class="dest-img"><img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80" alt="USA"><div class="dest-flag">🇺🇸</div><div class="dest-badge">Top Rated</div></div><div class="dest-content"><h3>United States</h3><p>Ivy League schools and cutting-edge research in the world's largest economy.</p><div class="dest-tags"><span class="dest-tag">4000+ Unis</span><span class="dest-tag">OPT 1-3yr</span><span class="dest-tag">$30-60K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="europe"><div class="dest-img"><img src="https://images.unsplash.com/photo-1515488764276-beab7607c1e6?w=800&q=80" alt="Germany"><div class="dest-flag">🇩🇪</div></div><div class="dest-content"><h3>Germany</h3><p>Free or low-cost education with strong engineering and tech programs.</p><div class="dest-tags"><span class="dest-tag">400+ Unis</span><span class="dest-tag">18mo Job</span><span class="dest-tag">Free-€20K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="oceania"><div class="dest-img"><img src="https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=800&q=80" alt="New Zealand"><div class="dest-flag">🇳🇿</div></div><div class="dest-content"><h3>New Zealand</h3><p>Safe, beautiful country with affordable education and friendly people.</p><div class="dest-tags"><span class="dest-tag">8 Unis</span><span class="dest-tag">3yr Work</span><span class="dest-tag">NZ$25-35K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="asia"><div class="dest-img"><img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80" alt="Singapore"><div class="dest-flag">🇸🇬</div><div class="dest-badge">Top Rated</div></div><div class="dest-content"><h3>Singapore</h3><p>Asia's education powerhouse with globally ranked universities and tech hub.</p><div class="dest-tags"><span class="dest-tag">34 Unis</span><span class="dest-tag">Work Visa</span><span class="dest-tag">S$15-40K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="middle-east"><div class="dest-img"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80" alt="Dubai"><div class="dest-flag">🇦🇪</div><div class="dest-badge">Trending</div></div><div class="dest-content"><h3>Dubai (UAE)</h3><p>World-class campuses of international universities with excellent career prospects.</p><div class="dest-tags"><span class="dest-tag">60+ Unis</span><span class="dest-tag">Tax-Free</span><span class="dest-tag">$10-25K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="europe"><div class="dest-img"><img src="https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80" alt="Georgia"><div class="dest-flag">🇬🇪</div></div><div class="dest-content"><h3>Georgia</h3><p>Affordable medical and business programs with European recognition.</p><div class="dest-tags"><span class="dest-tag">75+ Unis</span><span class="dest-tag">No IELTS</span><span class="dest-tag">$3-8K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="middle-east"><div class="dest-img"><img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=800&q=80" alt="Turkey"><div class="dest-flag">🇹🇷</div></div><div class="dest-content"><h3>Turkey</h3><p>Bridge between Europe and Asia with affordable quality education.</p><div class="dest-tags"><span class="dest-tag">200+ Unis</span><span class="dest-tag">Scholarships</span><span class="dest-tag">$1-10K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="asia"><div class="dest-img"><img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800&q=80" alt="Malaysia"><div class="dest-flag">🇲🇾</div></div><div class="dest-content"><h3>Malaysia</h3><p>Quality education at affordable prices with diverse multicultural experience.</p><div class="dest-tags"><span class="dest-tag">100+ Unis</span><span class="dest-tag">Part-time Work</span><span class="dest-tag">$4-12K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="europe"><div class="dest-img"><img src="https://images.unsplash.com/photo-1513326738677-b964603b136d?w=800&q=80" alt="Russia"><div class="dest-flag">🇷🇺</div></div><div class="dest-content"><h3>Russia</h3><p>World-class STEM education with prestigious universities and scholarships.</p><div class="dest-tags"><span class="dest-tag">700+ Unis</span><span class="dest-tag">Scholarships</span><span class="dest-tag">$3-8K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="asia"><div class="dest-img"><img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=800&q=80" alt="Uzbekistan"><div class="dest-flag">🇺🇿</div></div><div class="dest-content"><h3>Uzbekistan</h3><p>Emerging education hub with affordable programs and rich cultural heritage.</p><div class="dest-tags"><span class="dest-tag">80+ Unis</span><span class="dest-tag">Affordable</span><span class="dest-tag">$2-5K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="africa"><div class="dest-img"><img src="https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=800&q=80" alt="Egypt"><div class="dest-flag">🇪🇬</div></div><div class="dest-content"><h3>Egypt</h3><p>Historic universities with strong medical and engineering programs at low cost.</p><div class="dest-tags"><span class="dest-tag">50+ Unis</span><span class="dest-tag">Arabic/English</span><span class="dest-tag">$2-6K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-        </div>
-    </section>
-    <section class="section services" id="services">
-        <div class="section-header">
-            <div class="section-tag">✨ Our Services</div>
-            <h2 class="section-title">How We Help You Succeed</h2>
-            <p class="section-desc">Complete support from start to finish for your study abroad journey</p>
-        </div>
-        <div class="services-grid">
-            <div class="service"><div class="service-icon">🎯</div><h3>Career Counseling</h3><p>Find the perfect course and university that matches your goals.</p></div>
-            <div class="service"><div class="service-icon">📝</div><h3>Application Help</h3><p>Complete assistance with applications and all documents.</p></div>
-            <div class="service"><div class="service-icon">✍️</div><h3>SOP Writing</h3><p>Compelling statements that make you stand out.</p></div>
-            <div class="service"><div class="service-icon">✈️</div><h3>Visa Support</h3><p>99% success rate with expert visa guidance.</p></div>
-            <div class="service"><div class="service-icon">💰</div><h3>Scholarships</h3><p>Access millions in financial aid opportunities.</p></div>
-            <div class="service"><div class="service-icon">📚</div><h3>Test Prep</h3><p>Coaching for IELTS, TOEFL, GRE, GMAT.</p></div>
-            <div class="service"><div class="service-icon">🏠</div><h3>Accommodation</h3><p>Help finding safe housing near campus.</p></div>
-            <div class="service"><div class="service-icon">🌟</div><h3>Pre-Departure</h3><p>Everything you need before you travel.</p></div>
-        </div>
-    </section>
-    <section class="section" id="process">
-        <div class="section-header">
-            <div class="section-tag">🚀 The Process</div>
-            <h2 class="section-title">4 Simple Steps to Success</h2>
-            <p class="section-desc">Our proven process has helped thousands achieve their dreams</p>
-        </div>
-        <div class="process-grid">
-            <div class="process-step"><div class="step-icon"><span class="step-num">1</span></div><h3>Free Consultation</h3><p>We assess your profile, goals, and preferences.</p></div>
-            <div class="process-step"><div class="step-icon"><span class="step-num">2</span></div><h3>University Selection</h3><p>We shortlist the best universities for you.</p></div>
-            <div class="process-step"><div class="step-icon"><span class="step-num">3</span></div><h3>Application</h3><p>We handle your complete application process.</p></div>
-            <div class="process-step"><div class="step-icon"><span class="step-num">4</span></div><h3>Visa & Travel</h3><p>We prepare you for visa and departure.</p></div>
-        </div>
-    </section>
-    <section class="section testimonials" id="testimonials">
-        <div class="section-header">
-            <div class="section-tag">💬 Success Stories</div>
-            <h2 class="section-title">What Students Say</h2>
-            <p class="section-desc">Real stories from students who achieved their dreams</p>
-        </div>
-        <div class="test-grid">
-            <div class="test-card"><div class="test-header"><div class="test-avatar">PR</div><div class="test-info"><h4>Priya Reddy</h4><span>Oxford University, UK</span></div></div><p class="test-text">"Study Republic helped me get into Oxford! Their guidance on my SOP and interview prep made all the difference."</p><div class="test-rating">★★★★★</div></div>
-            <div class="test-card"><div class="test-header"><div class="test-avatar">AK</div><div class="test-info"><h4>Arjun Kumar</h4><span>University of Toronto, Canada</span></div></div><p class="test-text">"Got a 75% scholarship thanks to their help! The team went above and beyond at every step."</p><div class="test-rating">★★★★★</div></div>
-            <div class="test-card"><div class="test-header"><div class="test-avatar">SM</div><div class="test-info"><h4>Sarah Mehta</h4><span>University of Melbourne, Australia</span></div></div><p class="test-text">"From visa to accommodation, everything was handled perfectly. My transition was completely smooth."</p><div class="test-rating">★★★★★</div></div>
-        </div>
-    </section>
-    <section class="section cta" id="contact">
-        <div class="cta-container">
-            <div class="cta-content">
-                <h2>Ready to Start Your Journey?</h2>
-                <p>Take the first step toward your dream university. Our experts are ready to guide you every step of the way.</p>
-                <ul class="cta-features">
-                    <li>Free consultation</li>
-                    <li>University matching</li>
-                    <li>Scholarship help</li>
-                    <li>Application support</li>
-                    <li>Visa guidance</li>
-                    <li>No hidden fees</li>
-                </ul>
-            </div>
-            <div class="cta-form">
-                <h3 class="form-title">Get Free Consultation</h3>
-                <p class="form-subtitle">We'll get back to you within 24 hours</p>
-                <form id="consultForm">
-                    <div class="form-grid">
-                        <div class="form-group"><label>First Name</label><input type="text" name="firstName" required placeholder="John"></div>
-                        <div class="form-group"><label>Last Name</label><input type="text" name="lastName" required placeholder="Doe"></div>
-                        <div class="form-group"><label>Email</label><input type="email" name="email" required placeholder="john@email.com"></div>
-                        <div class="form-group"><label>Phone</label><input type="tel" name="phone" required placeholder="+1 234 567 890"></div>
-                        <div class="form-group"><label>Country</label><select name="country" required><option value="">Select country</option><option>Finland</option><option>Canada</option><option>UK</option><option>Australia</option><option>USA</option><option>Germany</option><option>New Zealand</option><option>Singapore</option><option>Dubai (UAE)</option><option>Georgia</option><option>Turkey</option><option>Malaysia</option><option>Russia</option><option>Uzbekistan</option><option>Egypt</option></select></div>
-                        <div class="form-group"><label>Study Level</label><select name="level" required><option value="">Select level</option><option>Bachelor's</option><option>Master's</option><option>PhD</option><option>Diploma</option></select></div>
-                        <div class="form-
+            <div class="dest-card" data-region="americas"><div class="dest-img"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80" alt="Canada"><div class="dest-flag">🇨🇦</div><div class="dest-badge">Popular</div></div><div class="dest-content"><h3>Canada</h3><p>World-class education with immigration-friendly policies and excellent work opportunities post-graduation.</p><div class="dest-tags"><span class="dest-tag">100+ Unis</span><span class="dest-tag">3yr Work Permit</span><span class="dest-tag">$15-30K/yr</span></div><a href="#contact" class="dest-link">Learn More</a></div></div>
+            <div class="dest-card" data-region="americas"><div class="dest-img"><img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80" alt="USA"><div class="dest-flag">🇺🇸</div><div class="dest-badge">Top Rated</div></div><div class="dest-content"><h3>United States</h3><p>Ivy League schools and cutting-edge research opportunities in the world's largest economy.</p><div class="dest-tags"><span class="dest-tag">4000+ Unis</span><span class="dest-tag">OPT 1-3yr</span><span class="dest-tag">$30-60K/yr</span></div><a href="#contact" class="dest-link">Learn More</a></div></div>
+            <div class="dest-card" data-region="europe"><div class="dest-img"><img src="https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?w=800&q=80" alt="UK"><div class="dest-flag">🇬🇧</div><div class="dest-badge">Popular</div></div><div class="dest-content"><h3>United Kingdom</h3><p>Home to Oxford, Cambridge, and world-renowned Russell Group universities.</p><div class="dest-tags"><span class="dest-tag">150+ Unis</span><span class="dest-tag">2yr Work Visa</span><span class="dest-tag">£15-25K/yr</span></div><a href="#contact" class="dest-link">Learn More</a></div></div>
+            <div class="dest-card" data-region="europe"><div class="dest-img"><img src="https://images.unsplash.com/photo-1515488764276-beab7607c1e6?w=800&q=80" alt="Germany"><div class="dest-flag">🇩🇪</div></div><div class="dest-content"><h3>Germany</h3><p>Free or low-cost education with strong engineering and technology programs.</p><div class="dest-tags"><span class="dest-tag">400+ Unis</span><span class="dest-tag">18mo Job Seeker</span><span class="dest-tag">Free-€20K</span></div><a href="#contact" class="dest-link">Learn More</a></div></div>
+            <div class="dest-card" data-region="europe"><div class="dest-img"><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80" alt="France"><div class="dest-flag">🇫🇷</div></div><div class="dest-content"><h3>France</h3><p>Rich culture, affordable education, and globally renowned business schools.</p><div class="dest-tags"><span class="dest-tag">250+ Unis</span><span class="dest-tag">2yr Work Visa</span><span class="dest-tag">€200-15K</span></div><a href="#contact" class="dest-link">Learn More</a></div></div>
+            <div class="dest-card" data-region="europe"><div class="dest-img"><img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=800&q=80" alt="Italy"><div class="dest-flag">🇮🇹</div></div><div class="dest-content"><h3>Italy</h3><p>Historic universities with excellent art, design and fashion programs.</p><div class="dest-tags"><span class="dest-tag">90+ Unis</span><span class="dest-tag">1yr Work Visa</span><span class="dest-tag">€1-20K</span></div><a href="#contact" class="dest-link">Learn More</a></div></div>
+            <div class="dest-card" data-region="europe"><div class="dest-img"><img src="https://images.unsplash.com/photo-1513326738677-b964603b136d?w=800&q=80" alt="Russia"><div class="dest-flag">🇷🇺</div></div><div class="dest-content"><h3>Russia</h3><p>World-class STEM education with prestigious universities and generous scholarships.</p><div class="dest-tags"><span class="dest-tag">700+ Unis</span><span class="dest-tag">Scholarships</span><span class="dest-tag">$3-8K/yr</span></div><a href="#contact" class="dest-link">Learn More</a></div></div>
+            <div class="dest-card" data-region="europe"><div class="dest-img"><img src="https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80" alt="Georgia"><div class="dest-flag">🇬🇪</div></div><div class="dest-content"><h3>Georgia</h3><p>Affordable medical and business programs with European recognition.</p><div class="dest-tags"><span class="dest-tag">75+ Unis</span><span class="dest-tag">No IELTS</span><span class="dest-tag">$3-8K/yr</span></div><a href="#contact" class="dest-link">Learn More</a></div></div>
+            <div class="dest-card" data-region="oceania"><div class="dest-img"><img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800&q=80" alt="Australia"><div class="dest-flag">🇦🇺</div><div class="dest-badge">Popular</div></div><div class="dest-content"><h3>Australia</h3><p>Excellent quality of life with top-ranked universities and great weather year-round.</p><div class="dest-tags"><span class="dest-tag">43 Unis</span><span class="dest-tag">2-4yr Work</span><span class="dest-tag">A$25-40K</span></div><a href="#contact" class="dest-link">Learn More</a></div></div>
+            <div class="dest-card" data-region="oceania"><div class="dest-img"><img src="https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=800&q=80" alt="New Zealand"><div class="dest-flag">🇳🇿</div></div><div class="dest-content"><h3>New Zealand</h3><p>Safe, beautiful country with quality education and friendly people.</p><div class="dest-tags"><span class="dest-tag">8 Unis</span><span class="dest-tag">3yr Work</span><span class="dest-tag">NZ$25-35K</span></div><a href="#contact" class="dest-link">Learn More</a></div></div>
+            <div class="dest-card" data-region="asia"><div class="dest-img"><img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80" alt="Singapore"><div class="dest-flag">🇸🇬</div><div class="dest-badge">Top Rated</div></div><div class="dest-content"><h3>Singapore</h3><p>Asia's education powerhouse with globally ranked universities and tech hub.</p><div class="dest-tags"><span class="dest-tag">34 Unis</span><span class="dest-tag">Work Visa</span><span class="dest-tag">S$15-40K</span></div><a href="#contact" class="dest-link">Learn More</a></div></div>
+            <div class="dest-card" data-region="asia"><div class="dest-img"><img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800&q=80" alt="Malaysia"><div class="dest-flag">🇲🇾</div></div><div class="dest-content"><h3>Malaysia</h3><p>Quality education at affordable prices with diverse multicultural experience.</p><div class="dest-tags"><span class="dest-tag">100+ Unis</span><span class="dest-tag">Part-time Work</span><span class="dest-tag">$4-12K</span></div><a href="#contact" class="dest-link">Learn More</a></div></div>
+            <div class="dest-card" data-region="asia"><div class="dest-img"><img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=800&q=80" alt="Uzbekistan"><div class="dest-flag">🇺🇿</div></div><div class="dest-content"><h3>Uzbekistan</h3><p>Emerging education hub with affordable programs and rich cultural heritage.</p><div class="dest-tags"><span class="dest-tag">80+ Unis</span><span class="dest-tag">Affordable</span><span class="dest-tag">$2-5K</span></div><a href="#contact" class="dest-link">Learn More</a></div></div>
+            <div class="dest-card" data-region="asia"><div class="dest-img"><img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80" alt="Japan"><div class="dest-flag">🇯🇵</div></div><div class="dest-content"><h3>Japan</h3><p>Cutting-edge technology, rich culture, and world-class research universities.</p><div class="dest-tags"><span class="dest-tag">780+ Unis</span><span class="dest-tag">Part-time Work</span><span class="dest-tag">¥500K-1.5M</span></div><a href="#contact" class="dest-link">Learn More</a></div></div>
+            <div class="dest-card" data-region="asia"><div class="dest-img"><img src="https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800&q=80" alt="South Korea"><div class="dest-flag">🇰🇷</div></div><div class="dest-content"><h3>South Korea</h3><p>Innovative education system with global companies and K-culture hub.</p><div class="dest-tags"><span class="dest-tag">400+ Unis</span><span class="dest-tag">Part-time Work</span><span class="dest-tag">$4-15K</span></div><a href="#contact" class="dest-link">Learn More</a></div></div>
+            <div class="dest-card" data-region="asia"><div class="dest-img"><img src="https://images.unsplash.com/photo-1536599018102-9f803c140fc1?w=800&q=80" alt="China"><div class="dest-flag">🇨🇳</div></div><div class="dest-content"><h3>China</h3><p>Rapidly growing education sector with generous scholarships available.</p><div class="dest-tags"><span class="dest-tag">2900+ Unis</span><span class="dest-tag">Scholarships</span><span class="dest-tag">$2-10K</span></div><a href="#contact" class="dest-link">Learn More</a></div></div>
+            <div class="dest-card" data-region="middle-east"><div class="dest-img"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80" alt="Dubai"><div class="dest-flag">🇦🇪</div><div class="dest-badge">Trending</div></div><div class="dest-content"><h3>Dubai (UAE)</h3><p>World-class international university campuses with excellent career prospects.</p><div class="dest-tags"><span class="dest-tag">60+ Unis</span><span class="dest-tag">Tax-Free</span><span class="dest-tag">$10-25K</span></div><a href="#contact" class="dest-link">Learn More</a></div></div>
+            <div class="dest-card" data-region="middle-east"><div class="dest-img"><img src="https://images.unsplash.com/photo-1578895101408-1a36b834405b?w=800&q=80" alt="Qatar"><div class="dest-flag">🇶🇦</div
