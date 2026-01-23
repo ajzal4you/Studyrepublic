@@ -182,7 +182,7 @@
             .hero-card:first-child{grid-row:auto}
             .hero-card{height:100%!important}
             .hero-float{display:none}
-            .dest-grid{grid-template-columns:repeat(2,1fr)}
+            .dest-grid,.test-grid{grid-template-columns:repeat(2,1fr)}
             .services-grid{grid-template-columns:repeat(2,1fr)}
             .test-grid{grid-template-columns:repeat(2,1fr)}
             .process-grid{grid-template-columns:repeat(2,1fr);gap:2rem}
@@ -191,6 +191,22 @@
             .cta-features{justify-content:center}
             .footer-main{grid-template-columns:repeat(2,1fr)}
         }
+
+                /* Destinations */
+        .dest-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+        .dest-card{background:var(--white);border-radius:28px;overflow:hidden;transition:all .4s;box-shadow:var(--shadow)}
+        .dest-card:hover{transform:translateY(-10px);box-shadow:0 30px 60px rgba(0,0,0,.1)}
+        .dest-img{height:200px;position:relative;overflow:hidden}
+        .dest-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+        .dest-card:hover .dest-img img{transform:scale(1.1)}
+        .dest-flag{position:absolute;top:1rem;left:1rem;width:50px;height:50px;background:var(--white);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;box-shadow:0 4px 15px rgba(0,0,0,.1)}
+        .dest-content{padding:1.5rem}
+        .dest-content h3{font-size:1.3rem;font-weight:700;margin-bottom:.5rem}
+        .dest-content p{font-size:.9rem;color:var(--text-light);line-height:1.7;margin-bottom:1rem}
+        .dest-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+        .dest-tag{background:var(--bg);padding:.4rem .8rem;border-radius:20px;font-size:.7rem;font-weight:500;color:var(--text)}
+        .dest-link{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;font-weight:600;color:var(--dark);text-decoration:none;transition:gap .3s}
+        .dest-link:hover{gap:12px}
         @media(max-width:700px){
             .header{top:12px;width:calc(100% - 24px);padding:.5rem 1rem;border-radius:20px}
             .section{padding:60px 16px}
@@ -201,6 +217,7 @@
             .hero-btns{flex-direction:column;width:100%;max-width:320px;margin:0 auto}
             .btn-main,.btn-soft{width:100%;justify-content:center}
             .hero-cards{grid-template-columns:1fr;height:auto;gap:.8rem}
+            .dest-grid,.services-grid,.test-grid,.process-grid{grid-template-columns:1fr}
             .hero-card{height:200px!important}
             .dest-grid,.services-grid,.test-grid{grid-template-columns:1fr}
             .process-grid{grid-template-columns:1fr}
@@ -285,6 +302,16 @@
                 </div>
                 <div class="hero-float hero-float-1"><div class="hero-float-icon green">✓</div><div class="hero-float-text">Visa Approved<span>Just now</span></div></div>
                 <div class="hero-float hero-float-2"><div class="hero-float-icon red">🎓</div><div class="hero-float-text">Oxford Admit<span>2 hours ago</span></div></div>
+            </div>
+            <div class="dest-grid">
+            <div class="dest-card">
+                <div class="dest-img"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80" alt="Canada"><div class="dest-flag">🇨🇦</div></div>
+                <div class="dest-content">
+                    <h3>Canada</h3>
+                    <p>World-class education with immigration-friendly policies and work opportunities.</p>
+                    <div class="dest-tags"><span class="dest-tag">100+ Universities</span><span class="dest-tag">3yr Work Permit</span><span class="dest-tag">$15-30K</span></div>
+                    <a href="#contact" class="dest-link">Learn More →</a>
+                </div>
             </div>
         </div>
     </section>
