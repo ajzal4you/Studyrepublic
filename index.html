@@ -3,475 +3,619 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Republic - Global Education Consultants</title>
+    <title>Study Republic - Global Education</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         *{margin:0;padding:0;box-sizing:border-box}
-        :root{--bg:#f5f5f0;--white:#ffffff;--navy:#1e2a4a;--navy-light:#2d3a5c;--red:#e63956;--red-light:#ff4d6a;--red-dark:#d42e4a;--text:#4a4a4a;--text-light:#7a7a7a;--mint:#e8f5e9;--peach:#fff3e0;--lavender:#ede7f6;--sky:#e3f2fd;--rose:#fce4ec;--border:#e5e5e0;--shadow:0 20px 60px rgba(0,0,0,.06);--shadow-lg:0 30px 80px rgba(0,0,0,.1)}
+        :root{--bg:#f8fafc;--white:#fff;--navy:#0f172a;--red:#e63956;--red2:#ff4d6d;--text:#64748b;--mint:#d1fae5;--rose:#fce7f3;--lavender:#ede9fe;--sky:#e0f2fe;--green:#25D366;--gold:#f59e0b}
         html{scroll-behavior:smooth}
-        body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--navy);line-height:1.6;overflow-x:hidden}
-        .header{position:fixed;top:20px;left:50%;transform:translateX(-50%);width:calc(100% - 40px);max-width:1200px;z-index:1000;background:rgba(255,255,255,.97);backdrop-filter:blur(20px);border-radius:100px;padding:.6rem 1.5rem;box-shadow:0 4px 30px rgba(0,0,0,.08);transition:all .3s;border:1px solid rgba(255,255,255,.8)}
-        .header.scrolled{box-shadow:0 8px 40px rgba(0,0,0,.12)}
-        .nav{display:flex;justify-content:space-between;align-items:center}
-        .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-        .logo-icon{position:relative;width:42px;height:38px}
-        .logo-star{position:absolute;top:-2px;left:12px;width:22px;height:22px}
-        .logo-swoosh{position:absolute;bottom:5px;left:0;width:42px;height:16px}
-        .logo-text{display:flex;flex-direction:column;line-height:1}
-        .logo-text-main{font-family:'Poppins',sans-serif;font-size:1.15rem;font-weight:800;color:var(--navy);letter-spacing:-.5px}
-        .logo-text-sub{font-family:'Poppins',sans-serif;font-size:.7rem;font-weight:700;color:var(--navy);letter-spacing:2px;margin-top:-2px}
-        .nav-links{display:flex;gap:2rem;list-style:none}
-        .nav-links a{color:var(--text);text-decoration:none;font-size:.9rem;font-weight:500;padding:.5rem 1rem;border-radius:50px;transition:all .3s;position:relative}
-        .nav-links a::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--red);border-radius:2px;transition:width .3s}
-        .nav-links a:hover{color:var(--navy)}
-        .nav-links a:hover::after{width:20px}
-        .nav-cta{background:var(--red);color:var(--white);padding:.75rem 1.8rem;border:none;border-radius:50px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .3s;box-shadow:0 4px 15px rgba(230,57,86,.3)}
-        .nav-cta:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 6px 20px rgba(230,57,86,.4)}
-        .menu-btn{display:none;background:var(--bg);border:none;cursor:pointer;width:44px;height:44px;border-radius:12px;font-size:1.2rem;transition:all .3s}
-        .menu-btn:hover{background:var(--white)}
-        .hero{min-height:100vh;padding:130px 20px 80px;position:relative;overflow:hidden}
-        .blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5;pointer-events:none}
-        .hero .blob-1{width:450px;height:450px;background:var(--mint);top:5%;right:5%}
-        .hero .blob-2{width:350px;height:350px;background:var(--rose);bottom:15%;left:0}
-        .hero .blob-3{width:280px;height:280px;background:var(--lavender);top:45%;left:25%}
-        .hero-container{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
-        .hero-tag{display:inline-flex;align-items:center;gap:10px;background:var(--white);padding:.7rem 1.4rem;border-radius:50px;font-size:.8rem;font-weight:600;color:var(--navy);margin-bottom:1.5rem;box-shadow:var(--shadow);border:1px solid var(--border)}
-        .hero-tag-dot{width:10px;height:10px;background:var(--red);border-radius:50%;animation:pulse 2s infinite}
-        @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
-        .hero h1{font-family:'Poppins',sans-serif;font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:800;line-height:1.12;margin-bottom:1.5rem;color:var(--navy)}
-        .hero h1 span{background:linear-gradient(135deg,var(--rose) 0%,var(--sky) 100%);padding:2px 14px;border-radius:8px;display:inline-block}
-        .hero-desc{font-size:1.05rem;color:var(--text);line-height:1.85;margin-bottom:2rem;max-width:500px}
-        .hero-stats{display:flex;gap:1.2rem;margin-bottom:2rem}
-        .hero-stat{background:var(--white);padding:1.2rem 1.8rem;border-radius:20px;text-align:center;min-width:110px;box-shadow:var(--shadow);border-left:4px solid var(--red);transition:all .3s}
-        .hero-stat:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
-        .hero-stat-num{font-family:'Poppins',sans-serif;font-size:1.9rem;font-weight:700;color:var(--navy);line-height:1}
-        .hero-stat-label{font-size:.7rem;color:var(--text-light);margin-top:.4rem;text-transform:uppercase;letter-spacing:.5px;font-weight:500}
-        .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
-        .btn-main{background:var(--red);color:var(--white);padding:1rem 2.2rem;border-radius:50px;font-size:.9rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .3s;box-shadow:0 8px 25px rgba(230,57,86,.35)}
-        .btn-main:hover{background:var(--red-dark);transform:translateY(-3px)}
-        .btn-soft{background:var(--white);color:var(--navy);padding:1rem 2.2rem;border-radius:50px;font-size:.9rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .3s;box-shadow:var(--shadow);border:1px solid var(--border)}
-        .btn-soft:hover{background:var(--navy);color:var(--white);border-color:var(--navy)}
-        .hero-visual{position:relative;height:500px}
-        .hero-cards{display:grid;grid-template-columns:1.2fr 1fr;grid-template-rows:1fr 1fr;gap:1rem;height:100%;transform:rotate(-2deg)}
-        .hero-card{background:var(--white);border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);transition:all .4s;position:relative}
-        .hero-card:hover{transform:translateY(-10px) rotate(1deg)}
-        .hero-card img{width:100%;height:100%;object-fit:cover}
-        .hero-card-content{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(30,42,74,.95));padding:1.5rem}
-        .hero-card-title{font-family:'Poppins',sans-serif;font-weight:700;font-size:.95rem;color:var(--white);margin-bottom:.2rem}
-        .hero-card-sub{font-size:.75rem;color:rgba(255,255,255,.7)}
-        .hero-card:first-child{grid-row:1 / 3}
-        .hero-card:nth-child(2){grid-column:2;grid-row:1}
-        .hero-card:nth-child(3){grid-column:2;grid-row:2}
-        .hero-float{position:absolute;background:var(--white);padding:1rem 1.4rem;border-radius:18px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:12px;z-index:10;border:1px solid var(--border)}
-        .hero-float-1{top:20px;right:-15px;animation:float 4s ease-in-out infinite}
-        .hero-float-2{bottom:60px;left:-25px;animation:float 4s ease-in-out infinite 1s}
-        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-        .hero-float-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
-        .hero-float-icon.green{background:var(--mint);color:#2e7d32}
-        .hero-float-icon.red{background:var(--rose);color:var(--red)}
-        .hero-float-text{font-size:.85rem;font-weight:600;color:var(--navy)}
-        .hero-float-text span{display:block;font-size:.65rem;color:var(--text-light);font-weight:400;margin-top:1px}
-        .section{padding:100px 20px}
-        .section-header{text-align:center;margin-bottom:2rem}
-        .section-tag{display:inline-flex;align-items:center;gap:8px;background:var(--white);padding:.6rem 1.4rem;border-radius:50px;font-size:.75rem;font-weight:600;color:var(--red);margin-bottom:1.2rem;box-shadow:var(--shadow);border:1px solid var(--border)}
-        .section-title{font-family:'Poppins',sans-serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;margin-bottom:.8rem;color:var(--navy)}
-        .section-desc{font-size:1rem;color:var(--text-light);max-width:520px;margin:0 auto;line-height:1.8}
-        .region-tabs{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-bottom:3rem;max-width:900px;margin-left:auto;margin-right:auto}
-        .region-tab{background:var(--white);border:2px solid var(--border);padding:.7rem 1.5rem;border-radius:50px;font-size:.85rem;font-weight:600;color:var(--text);cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:8px}
-        .region-tab:hover{border-color:var(--red);color:var(--red)}
-        .region-tab.active{background:var(--red);border-color:var(--red);color:var(--white);box-shadow:0 4px 15px rgba(230,57,86,.3)}
-        .region-tab span{font-size:1rem}
-        .dest-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-        .dest-card{background:var(--white);border-radius:24px;overflow:hidden;transition:all .4s;box-shadow:var(--shadow);border:1px solid var(--border)}
-        .dest-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-lg);border-color:transparent}
-        .dest-card.hidden{display:none}
-        .dest-img{height:190px;position:relative;overflow:hidden}
-        .dest-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
-        .dest-card:hover .dest-img img{transform:scale(1.1)}
-        .dest-img::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(30,42,74,.4))}
-        .dest-flag{position:absolute;top:1rem;left:1rem;width:48px;height:48px;background:var(--white);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;box-shadow:0 4px 15px rgba(0,0,0,.1);z-index:1}
-        .dest-content{padding:1.5rem}
-        .dest-content h3{font-family:'Poppins',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:.5rem;color:var(--navy)}
-        .dest-content p{font-size:.85rem;color:var(--text-light);line-height:1.7;margin-bottom:1rem}
-        .dest-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
-        .dest-tag{background:var(--bg);padding:.4rem .8rem;border-radius:20px;font-size:.68rem;font-weight:600;color:var(--navy)}
-        .dest-link{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:600;color:var(--red);text-decoration:none;transition:all .3s}
-        .dest-link:hover{gap:12px;color:var(--red-dark)}
-        .services{background:var(--white);border-radius:40px;margin:0 20px;border:1px solid var(--border)}
-        .services-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
-        .service{background:var(--bg);padding:2rem 1.5rem;border-radius:24px;transition:all .4s;position:relative;overflow:hidden;border:1px solid transparent}
-        .service::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--red),var(--red-light));transform:scaleX(0);transition:transform .4s;border-radius:24px 24px 0 0}
-        .service:hover::before{transform:scaleX(1)}
-        .service:hover{background:var(--white);box-shadow:var(--shadow-lg);transform:translateY(-6px);border-color:var(--border)}
-        .service-icon{width:60px;height:60px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin-bottom:1.4rem;transition:transform .3s}
-        .service:hover .service-icon{transform:scale(1.1)}
-        .service:nth-child(1) .service-icon{background:var(--mint)}
-        .service:nth-child(2) .service-icon{background:var(--peach)}
-        .service:nth-child(3) .service-icon{background:var(--lavender)}
-        .service:nth-child(4) .service-icon{background:var(--sky)}
-        .service:nth-child(5) .service-icon{background:var(--rose)}
-        .service:nth-child(6) .service-icon{background:var(--mint)}
-        .service:nth-child(7) .service-icon{background:var(--peach)}
-        .service:nth-child(8) .service-icon{background:var(--lavender)}
-        .service h3{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.5rem;color:var(--navy)}
-        .service p{font-size:.82rem;color:var(--text-light);line-height:1.65}
-        .process-grid{max-width:1050px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;position:relative}
-        .process-grid::before{content:'';position:absolute;top:50px;left:12%;right:12%;height:3px;background:linear-gradient(90deg,var(--red),var(--red-light),var(--red));border-radius:10px}
-        .process-step{text-align:center;position:relative;z-index:1}
-        .step-icon{width:100px;height:100px;background:var(--white);border-radius:28px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;box-shadow:var(--shadow-lg);border:3px solid var(--red);transition:all .3s}
-        .step-icon:hover{transform:scale(1.08)}
-        .step-num{font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;color:var(--red)}
-        .process-step h3{font-family:'Poppins',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:.5rem;color:var(--navy)}
-        .process-step p{font-size:.82rem;color:var(--text-light);line-height:1.65}
-        .testimonials{background:var(--white);border-radius:40px;margin:0 20px;border:1px solid var(--border)}
-        .test-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-        .test-card{background:var(--bg);padding:2rem;border-radius:24px;transition:all .4s;border:1px solid transparent}
-        .test-card:hover{background:var(--white);box-shadow:var(--shadow-lg);transform:translateY(-6px);border-color:var(--border)}
-        .test-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
-        .test-avatar{width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,var(--navy),var(--navy-light));display:flex;align-items:center;justify-content:center;color:var(--white);font-family:'Poppins',sans-serif;font-weight:700;font-size:1rem}
-        .test-info h4{font-family:'Poppins',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy)}
-        .test-info span{font-size:.75rem;color:var(--text-light)}
-        .test-text{font-size:.9rem;color:var(--text);line-height:1.8;margin-bottom:1.2rem}
-        .test-rating{display:flex;gap:3px;color:var(--red);font-size:1rem}
-        .cta{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);border-radius:40px;margin:0 20px;position:relative;overflow:hidden}
-        .cta::before{content:'';position:absolute;width:400px;height:400px;background:var(--red);opacity:.08;border-radius:50%;top:-150px;right:-100px}
-        .cta::after{content:'';position:absolute;width:300px;height:300px;background:var(--red);opacity:.05;border-radius:50%;bottom:-100px;left:-80px}
-        .cta-container{max-width:1150px;margin:0 auto;display:grid;grid-template-columns:1fr 1.15fr;gap:4rem;align-items:center;padding:70px 50px;position:relative;z-index:1}
-        .cta-content h2{font-family:'Poppins',sans-serif;font-size:clamp(1.7rem,3vw,2.3rem);font-weight:700;color:var(--white);margin-bottom:1rem}
-        .cta-content>p{color:rgba(255,255,255,.75);line-height:1.85;margin-bottom:2rem;font-size:.95rem}
-        .cta-features{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
-        .cta-features li{display:flex;align-items:center;gap:12px;color:var(--white);font-size:.88rem}
-        .cta-features li::before{content:'✓';width:26px;height:26px;background:var(--red);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700}
-        .cta-form{background:var(--white);padding:2.5rem;border-radius:28px;box-shadow:0 30px 70px rgba(0,0,0,.25)}
-        .form-title{font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:.3rem;text-align:center;color:var(--navy)}
-        .form-subtitle{font-size:.82rem;color:var(--text-light);margin-bottom:1.5rem;text-align:center}
-        .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
-        .form-group{margin-bottom:.7rem}
-        .form-group.full{grid-column:span 2}
-        .form-group label{display:block;font-size:.72rem;font-weight:600;margin-bottom:.4rem;color:var(--navy);text-transform:uppercase;letter-spacing:.3px}
-        .form-group input,.form-group select,.form-group textarea{width:100%;padding:.9rem 1rem;border:2px solid var(--border);border-radius:14px;font-size:.88rem;font-family:inherit;transition:all .3s;background:var(--bg)}
-        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--red);background:var(--white)}
-        .form-group textarea{resize:vertical;min-height:80px}
-        .form-submit{width:100%;background:var(--red);color:var(--white);padding:1rem;border:none;border-radius:14px;font-size:.92rem;font-weight:700;cursor:pointer;transition:all .3s}
-        .form-submit:hover{background:var(--red-dark);transform:translateY(-2px)}
-        .form-note{text-align:center;margin-top:1rem;font-size:.72rem;color:var(--text-light)}
-        .footer{padding:80px 20px 30px}
-        .footer-container{max-width:1200px;margin:0 auto}
-        .footer-main{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid var(--border)}
-        .footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:1.2rem}
-        .footer-brand p{color:var(--text-light);line-height:1.85;margin-bottom:1.5rem;font-size:.88rem}
-        .social-links{display:flex;gap:.6rem}
-        .social-link{width:42px;height:42px;background:var(--white);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--navy);text-decoration:none;font-size:.85rem;font-weight:600;transition:all .3s;box-shadow:var(--shadow);border:1px solid var(--border)}
-        .social-link:hover{background:var(--red);color:var(--white);border-color:var(--red);transform:translateY(-3px)}
-        .footer-col h4{font-family:'Poppins',sans-serif;font-size:.82rem;font-weight:700;margin-bottom:1.2rem;color:var(--navy)}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--navy);overflow-x:hidden}
+
+        /* Preloader */
+        .preloader{position:fixed;inset:0;background:linear-gradient(135deg,var(--navy) 0%,#1e293b 100%);z-index:99999;display:flex;align-items:center;justify-content:center;transition:opacity .8s,visibility .8s}
+        .preloader.done{opacity:0;visibility:hidden;pointer-events:none}
+        .loader-content{text-align:center}
+        .loader-logo{font-size:4rem;font-weight:900;color:var(--white);margin-bottom:20px;display:flex;justify-content:center;gap:5px}
+        .loader-logo span{display:inline-block;animation:bounce 1.4s ease-in-out infinite}
+        .loader-logo span:nth-child(1){animation-delay:0s}
+        .loader-logo span:nth-child(2){animation-delay:.1s}
+        .loader-logo span:nth-child(3){animation-delay:.2s}
+        .loader-logo span:nth-child(4){animation-delay:.3s}
+        .loader-logo span:nth-child(5){animation-delay:.4s}
+        .loader-logo .dot{color:var(--red)}
+        @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+        .loader-sub{color:var(--red);font-size:1rem;letter-spacing:12px;text-transform:uppercase;margin-bottom:40px}
+        .loader-spinner{width:60px;height:60px;margin:0 auto;border:4px solid rgba(255,255,255,.1);border-top-color:var(--red);border-radius:50%;animation:spin 1s linear infinite}
+        @keyframes spin{to{transform:rotate(360deg)}}
+
+        /* Background */
+        .bg-grid{position:fixed;inset:0;z-index:-3;background-size:80px 80px;background-image:linear-gradient(rgba(0,0,0,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.03) 1px,transparent 1px)}
+        .bg-blobs{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+        .blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:.4;animation:blobFloat 25s ease-in-out infinite}
+        .blob-1{width:600px;height:600px;background:linear-gradient(135deg,#a5f3fc,#c4b5fd);top:-200px;right:-150px}
+        .blob-2{width:500px;height:500px;background:linear-gradient(135deg,#fecdd3,#fbcfe8);bottom:-150px;left:-150px;animation-delay:-10s}
+        .blob-3{width:400px;height:400px;background:linear-gradient(135deg,#bfdbfe,#ddd6fe);top:40%;left:30%;animation-delay:-5s}
+        @keyframes blobFloat{0%,100%{transform:translate(0,0) rotate(0deg) scale(1)}25%{transform:translate(50px,-50px) rotate(90deg) scale(1.1)}50%{transform:translate(-30px,30px) rotate(180deg) scale(.9)}75%{transform:translate(40px,20px) rotate(270deg) scale(1.05)}}
+
+        /* Main */
+        .main{opacity:0;transition:opacity 1s}
+        .main.show{opacity:1}
+
+        /* Header */
+        .header{position:fixed;top:20px;left:50%;transform:translateX(-50%);width:calc(100% - 60px);max-width:1400px;background:rgba(255,255,255,.85);backdrop-filter:blur(20px);border-radius:100px;padding:12px 20px 12px 30px;z-index:1000;display:flex;justify-content:space-between;align-items:center;box-shadow:0 10px 40px rgba(0,0,0,.08);border:1px solid rgba(255,255,255,.5);transition:all .4s}
+        .header.scrolled{background:rgba(255,255,255,.95);box-shadow:0 20px 60px rgba(0,0,0,.12)}
+        .logo{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:800;font-size:1.3rem;color:var(--navy)}
+        .logo-icon{width:48px;height:48px;background:linear-gradient(135deg,var(--red),var(--red2));border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:1.3rem;box-shadow:0 8px 20px rgba(230,57,86,.3);position:relative;overflow:hidden}
+        .logo-icon::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.3) 50%,transparent 60%);animation:logoShine 3s infinite}
+        @keyframes logoShine{0%{transform:translateX(-100%) rotate(45deg)}100%{transform:translateX(100%) rotate(45deg)}}
+        .logo span{color:var(--red)}
+        .nav{display:flex;align-items:center;gap:10px}
+        .nav-links{display:flex;gap:5px;list-style:none}
+        .nav-links a{color:var(--text);text-decoration:none;font-weight:500;font-size:.9rem;padding:12px 20px;border-radius:50px;transition:all .3s;position:relative;overflow:hidden}
+        .nav-links a::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--rose),var(--lavender));opacity:0;transition:opacity .3s}
+        .nav-links a:hover::before{opacity:1}
+        .nav-links a span{position:relative;z-index:1}
+        .nav-links a:hover{color:var(--red)}
+        .nav-btn{background:linear-gradient(135deg,var(--red),var(--red2));color:var(--white);border:none;padding:14px 32px;border-radius:50px;font-weight:600;font-size:.9rem;cursor:pointer;transition:all .4s;box-shadow:0 10px 30px rgba(230,57,86,.3);position:relative;overflow:hidden}
+        .nav-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--red2),#ff6b8a);opacity:0;transition:opacity .3s}
+        .nav-btn:hover::before{opacity:1}
+        .nav-btn span{position:relative;z-index:1}
+        .nav-btn:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(230,57,86,.4)}
+        .menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:10px}
+        .menu-toggle span{width:24px;height:2px;background:var(--navy);transition:all .3s}
+
+        /* Hero */
+        .hero{min-height:100vh;padding:160px 40px 120px;display:flex;align-items:center}
+        .hero-container{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%}
+        .hero-badge{display:inline-flex;align-items:center;gap:12px;background:var(--white);padding:12px 24px;border-radius:50px;font-size:.9rem;font-weight:600;margin-bottom:30px;box-shadow:0 15px 40px rgba(0,0,0,.08);animation:float 5s ease-in-out infinite;border:1px solid rgba(0,0,0,.05)}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+        .badge-dot{width:12px;height:12px;background:var(--green);border-radius:50%;animation:pulse 2s infinite;box-shadow:0 0 0 0 rgba(37,211,102,.5)}
+        @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.5)}50%{box-shadow:0 0 0 15px transparent}}
+        .hero-title{font-size:4rem;font-weight:900;line-height:1.1;margin-bottom:30px}
+        .hero-title .line{display:block;overflow:hidden}
+        .hero-title .line span{display:inline-block;transform:translateY(120%);animation:slideUp .8s cubic-bezier(.77,0,.175,1) forwards}
+        .hero-title .line:nth-child(1) span{animation-delay:.3s}
+        .hero-title .line:nth-child(2) span{animation-delay:.5s}
+        .hero-title .line:nth-child(3) span{animation-delay:.7s}
+        @keyframes slideUp{to{transform:translateY(0)}}
+        .hero-title .highlight{color:var(--red);position:relative}
+        .hero-title .highlight::after{content:'';position:absolute;bottom:8px;left:0;width:100%;height:12px;background:linear-gradient(90deg,var(--rose),var(--lavender));z-index:-1;transform:scaleX(0);transform-origin:left;animation:lineGrow 1s ease 1.2s forwards}
+        @keyframes lineGrow{to{transform:scaleX(1)}}
+        .hero-desc{font-size:1.15rem;color:var(--text);line-height:1.9;margin-bottom:40px;opacity:0;animation:fadeUp .8s ease 1s forwards}
+        @keyframes fadeUp{to{opacity:1;transform:translateY(0)}from{transform:translateY(30px)}}
+        .hero-stats{display:flex;gap:50px;margin-bottom:40px;opacity:0;animation:fadeUp .8s ease 1.2s forwards}
+        .hero-stat{text-align:left}
+        .stat-num{font-size:3rem;font-weight:900;background:linear-gradient(135deg,var(--navy),var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .stat-label{font-size:.85rem;color:var(--text);font-weight:500}
+        .hero-btns{display:flex;gap:18px;opacity:0;animation:fadeUp .8s ease 1.4s forwards}
+        .btn{padding:18px 40px;border-radius:60px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:12px;transition:all .4s;position:relative;overflow:hidden;font-size:1rem}
+        .btn-primary{background:linear-gradient(135deg,var(--red),var(--red2));color:var(--white);box-shadow:0 20px 40px rgba(230,57,86,.35)}
+        .btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--red2),#ff6b8a);opacity:0;transition:opacity .3s}
+        .btn-primary:hover::before{opacity:1}
+        .btn-primary span{position:relative;z-index:1}
+        .btn-primary:hover{transform:translateY(-5px);box-shadow:0 25px 50px rgba(230,57,86,.45)}
+        .btn-outline{border:2px solid var(--navy);color:var(--navy);background:transparent}
+        .btn-outline:hover{background:var(--navy);color:var(--white);transform:translateY(-5px);box-shadow:0 20px 40px rgba(15,23,42,.2)}
+        .btn-arrow{transition:transform .3s}
+        .btn:hover .btn-arrow{transform:translateX(5px)}
+
+        /* Hero Visual */
+        .hero-visual{position:relative;height:600px;opacity:0;animation:visualIn 1s ease 1s forwards}
+        @keyframes visualIn{to{opacity:1;transform:translateX(0) scale(1)}from{transform:translateX(60px) scale(.95)}}
+        .hero-images{position:relative;height:100%}
+        .hero-img{position:absolute;border-radius:28px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.15);transition:all .6s cubic-bezier(.34,1.56,.64,1)}
+        .hero-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+        .hero-img:hover{transform:scale(1.05) rotate(-2deg);z-index:10}
+        .hero-img:hover img{transform:scale(1.1)}
+        .hero-img-1{width:300px;height:400px;top:20px;left:20px;z-index:3}
+        .hero-img-2{width:260px;height:340px;top:80px;right:40px;z-index:2}
+        .hero-img-3{width:200px;height:260px;bottom:20px;left:50%;z-index:1}
+        .hero-float{position:absolute;background:var(--white);padding:16px 22px;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.12);display:flex;align-items:center;gap:14px;z-index:20;animation:floatBounce 6s ease-in-out infinite;border:1px solid rgba(0,0,0,.05)}
+        .hero-float-1{top:0;right:10px;animation-delay:-2s}
+        .hero-float-2{bottom:100px;left:40px}
+        .hero-float-3{top:50%;right:-20px;animation-delay:-4s}
+        @keyframes floatBounce{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-20px) rotate(2deg)}}
+        .float-icon{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+        .float-icon.green{background:linear-gradient(135deg,var(--mint),#a7f3d0)}
+        .float-icon.purple{background:linear-gradient(135deg,var(--lavender),#c4b5fd)}
+        .float-icon.blue{background:linear-gradient(135deg,var(--sky),#93c5fd)}
+        .float-text h5{font-size:.95rem;font-weight:700}
+        .float-text p{font-size:.75rem;color:var(--text)}
+
+        /* Marquee */
+        .marquee-section{padding:40px 0;background:var(--white);border-top:1px solid rgba(0,0,0,.05);border-bottom:1px solid rgba(0,0,0,.05);overflow:hidden}
+        .marquee{display:flex;animation:marquee 30s linear infinite}
+        .marquee-item{display:flex;align-items:center;gap:15px;padding:0 60px;white-space:nowrap}
+        .marquee-item img{height:40px;opacity:.5;filter:grayscale(1);transition:all .3s}
+        .marquee-item:hover img{opacity:1;filter:grayscale(0)}
+        .marquee-item span{font-size:1.1rem;font-weight:600;color:var(--text)}
+        @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+        /* Sections */
+        .section{padding:120px 40px}
+        .section-header{text-align:center;margin-bottom:80px}
+        .section-tag{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--rose),var(--lavender));padding:12px 28px;border-radius:50px;font-size:.85rem;font-weight:700;color:var(--red);margin-bottom:20px;box-shadow:0 10px 30px rgba(230,57,86,.1)}
+        .section-title{font-size:3.2rem;font-weight:900;margin-bottom:20px;line-height:1.2}
+        .section-title span{background:linear-gradient(135deg,var(--red),var(--red2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .section-desc{color:var(--text);max-width:600px;margin:0 auto;font-size:1.1rem;line-height:1.8}
+
+        /* Destinations */
+        .dest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:25px;max-width:1400px;margin:0 auto}
+        .dest-card{background:var(--white);border-radius:28px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.08);transition:all .6s cubic-bezier(.34,1.56,.64,1);position:relative;cursor:pointer}
+        .dest-card:hover{transform:translateY(-20px) scale(1.02);box-shadow:0 40px 80px rgba(0,0,0,.15)}
+        .dest-card::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(15,23,42,.9) 100%);z-index:2;transition:all .5s}
+        .dest-card:hover::before{background:linear-gradient(180deg,transparent 20%,rgba(230,57,86,.9) 100%)}
+        .dest-img{height:320px;overflow:hidden}
+        .dest-img img{width:100%;height:100%;object-fit:cover;transition:transform 1s}
+        .dest-card:hover img{transform:scale(1.2)}
+        .dest-content{position:absolute;bottom:0;left:0;right:0;padding:30px;z-index:3}
+        .dest-flag{width:60px;height:60px;background:var(--white);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;margin-bottom:15px;box-shadow:0 10px 30px rgba(0,0,0,.2);transform:translateY(20px);opacity:0;transition:all .5s;transition-delay:.1s}
+        .dest-card:hover .dest-flag{transform:translateY(0);opacity:1}
+        .dest-title{font-size:1.5rem;font-weight:800;color:var(--white);margin-bottom:10px}
+        .dest-info{font-size:.9rem;color:rgba(255,255,255,.85);margin-bottom:15px;transform:translateY(20px);opacity:0;transition:all .5s;transition-delay:.2s}
+        .dest-card:hover .dest-info{transform:translateY(0);opacity:1}
+        .dest-tags{display:flex;gap:10px;transform:translateY(20px);opacity:0;transition:all .5s;transition-delay:.3s}
+        .dest-card:hover .dest-tags{transform:translateY(0);opacity:1}
+        .dest-tag{background:rgba(255,255,255,.2);backdrop-filter:blur(10px);padding:8px 18px;border-radius:50px;font-size:.8rem;font-weight:600;color:var(--white);border:1px solid rgba(255,255,255,.2)}
+
+        /* Services */
+        .services-section{background:var(--white);border-radius:60px;margin:0 40px;position:relative;overflow:hidden}
+        .services-section::before{content:'';position:absolute;top:-200px;right:-200px;width:500px;height:500px;background:linear-gradient(135deg,var(--rose),transparent);border-radius:50%;opacity:.5}
+        .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:25px;max-width:1400px;margin:0 auto;position:relative;z-index:1}
+        .service-card{background:var(--bg);padding:40px 30px;border-radius:28px;text-align:center;transition:all .5s cubic-bezier(.34,1.56,.64,1);position:relative;overflow:hidden;border:1px solid transparent}
+        .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--red),var(--red2));transform:scaleX(0);transition:transform .5s}
+        .service-card:hover::before{transform:scaleX(1)}
+        .service-card:hover{background:var(--white);transform:translateY(-15px);box-shadow:0 30px 60px rgba(0,0,0,.1);border-color:rgba(230,57,86,.1)}
+        .service-icon{width:80px;height:80px;background:linear-gradient(135deg,var(--rose),var(--lavender));border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 25px;transition:all .5s}
+        .service-card:hover .service-icon{transform:scale(1.15) rotate(-10deg);background:linear-gradient(135deg,var(--red),var(--red2));box-shadow:0 15px 40px rgba(230,57,86,.3)}
+        .service-title{font-size:1.15rem;font-weight:700;margin-bottom:12px}
+        .service-desc{font-size:.9rem;color:var(--text);line-height:1.7}
+
+        /* Process */
+        .process-container{max-width:1200px;margin:0 auto;position:relative}
+        .process-line{position:absolute;top:60px;left:100px;right:100px;height:4px;background:linear-gradient(90deg,var(--red),var(--red2));border-radius:4px}
+        .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;position:relative}
+        .process-step{text-align:center}
+        .step-num{width:120px;height:120px;background:var(--white);border:4px solid var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 25px;font-size:2.5rem;font-weight:900;color:var(--red);box-shadow:0 20px 50px rgba(0,0,0,.1);transition:all .5s;position:relative;z-index:2}
+        .step-num::before{content:'';position:absolute;inset:-4px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--red2));z-index:-1;opacity:0;transition:opacity .5s}
+        .process-step:hover .step-num::before{opacity:1}
+        .process-step:hover .step-num{color:var(--white);border-color:transparent;transform:scale(1.1);box-shadow:0 25px 60px rgba(230,57,86,.3)}
+        .process-title{font-size:1.2rem;font-weight:700;margin-bottom:10px}
+        .process-desc{font-size:.9rem;color:var(--text);line-height:1.6}
+
+        /* Testimonials */
+        .test-section{background:linear-gradient(135deg,var(--navy) 0%,#1e293b 100%);border-radius:60px;margin:0 40px;position:relative;overflow:hidden}
+        .test-section .section-title,.test-section .section-desc{color:var(--white)}
+        .test-section .section-title span{color:var(--red)}
+        .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;max-width:1300px;margin:0 auto}
+        .test-card{background:rgba(255,255,255,.05);backdrop-filter:blur(20px);padding:40px;border-radius:28px;transition:all .5s;position:relative;border:1px solid rgba(255,255,255,.1)}
+        .test-card::before{content:'"';position:absolute;top:25px;right:35px;font-size:6rem;color:var(--red);opacity:.2;font-family:Georgia;line-height:1}
+        .test-card:hover{background:rgba(255,255,255,.1);transform:translateY(-12px);border-color:rgba(230,57,86,.3)}
+        .test-stars{color:var(--gold);margin-bottom:20px;font-size:1.2rem;letter-spacing:3px}
+        .test-text{font-size:1rem;color:rgba(255,255,255,.9);line-height:1.9;margin-bottom:25px;font-weight:400}
+        .test-author{display:flex;align-items:center;gap:15px}
+        .test-avatar{width:60px;height:60px;border-radius:50%;overflow:hidden;border:3px solid var(--red)}
+        .test-avatar img{width:100%;height:100%;object-fit:cover}
+        .test-info h5{font-size:1rem;font-weight:700;color:var(--white)}
+        .test-info p{font-size:.85rem;color:rgba(255,255,255,.6)}
+
+        /* CTA */
+        .cta-section{background:var(--white);border-radius:60px;margin:0 40px;padding:100px 60px;position:relative;overflow:hidden}
+        .cta-bg{position:absolute;inset:0;overflow:hidden}
+        .cta-blob{position:absolute;border-radius:50%;filter:blur(100px)}
+        .cta-blob-1{width:500px;height:500px;background:var(--rose);opacity:.4;top:-200px;right:-100px;animation:blobFloat 20s ease-in-out infinite}
+        .cta-blob-2{width:400px;height:400px;background:var(--lavender);opacity:.3;bottom:-150px;left:-100px;animation:blobFloat 25s ease-in-out infinite reverse}
+        .cta-container{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:center;position:relative;z-index:1}
+        .cta-content h2{font-size:3rem;font-weight:900;margin-bottom:20px;line-height:1.2}
+        .cta-content h2 span{color:var(--red)}
+        .cta-content p{color:var(--text);font-size:1.1rem;margin-bottom:30px;line-height:1.8}
+        .cta-features{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+        .cta-feature{display:flex;align-items:center;gap:12px;font-size:.95rem;font-weight:500}
+        .cta-feature::before{content:'✓';width:28px;height:28px;background:linear-gradient(135deg,var(--red),var(--red2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--white);flex-shrink:0}
+        .cta-form{background:var(--navy);padding:50px;border-radius:36px;box-shadow:0 40px 80px rgba(0,0,0,.15)}
+        .form-title{font-size:1.8rem;font-weight:800;color:var(--white);text-align:center;margin-bottom:8px}
+        .form-sub{font-size:.9rem;color:rgba(255,255,255,.6);text-align:center;margin-bottom:30px}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:15px}
+        .form-group{position:relative}
+        .form-group label{display:block;font-size:.8rem;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:8px}
+        .form-input{width:100%;padding:16px 20px;border:2px solid rgba(255,255,255,.1);border-radius:16px;font-size:.95rem;transition:all .3s;background:rgba(255,255,255,.05);color:var(--white);font-family:inherit}
+        .form-input::placeholder{color:rgba(255,255,255,.4)}
+        .form-input:focus{outline:none;border-color:var(--red);background:rgba(255,255,255,.1)}
+        .form-btn{width:100%;padding:18px;background:linear-gradient(135deg,var(--red),var(--red2));color:var(--white);border:none;border-radius:16px;font-size:1.05rem;font-weight:700;cursor:pointer;transition:all .4s;margin-top:10px;position:relative;overflow:hidden}
+        .form-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--red2),#ff6b8a);opacity:0;transition:opacity .3s}
+        .form-btn:hover::before{opacity:1}
+        .form-btn span{position:relative;z-index:1}
+        .form-btn:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(230,57,86,.4)}
+
+        /* Footer */
+        .footer{padding:100px 40px 40px}
+        .footer-grid{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;padding-bottom:50px;border-bottom:1px solid rgba(0,0,0,.08)}
+        .footer-brand p{color:var(--text);font-size:.95rem;margin:20px 0 25px;line-height:1.9}
+        .footer-social{display:flex;gap:12px}
+        .footer-social a{width:48px;height:48px;background:var(--white);border-radius:16px;display:flex;align-items:center;justify-content:center;color:var(--navy);text-decoration:none;box-shadow:0 8px 20px rgba(0,0,0,.06);transition:all .4s;font-weight:600}
+        .footer-social a:hover{background:linear-gradient(135deg,var(--red),var(--red2));color:var(--white);transform:translateY(-5px);box-shadow:0 15px 30px rgba(230,57,86,.3)}
+        .footer-col h4{font-size:1rem;font-weight:700;margin-bottom:25px;color:var(--navy)}
         .footer-links{list-style:none}
-        .footer-links li{margin-bottom:.6rem}
-        .footer-links a{color:var(--text-light);text-decoration:none;font-size:.88rem;transition:all .3s}
-        .footer-links a:hover{color:var(--red);padding-left:5px}
-        .footer-bottom{padding-top:2rem;display:flex;justify-content:space-between;font-size:.78rem;color:var(--text-light)}
-        .mobile-menu{position:fixed;inset:0;background:var(--white);z-index:2000;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:all .4s}
-        .mobile-menu.active{opacity:1;visibility:visible}
-        .mobile-close{position:absolute;top:25px;right:25px;background:var(--bg);border:none;width:50px;height:50px;border-radius:14px;font-size:1.5rem;cursor:pointer}
-        .mobile-nav{list-style:none;text-align:center}
-        .mobile-nav li{margin-bottom:2rem}
-        .mobile-nav a{font-family:'Poppins',sans-serif;font-size:1.6rem;font-weight:700;color:var(--navy);text-decoration:none}
-        .mobile-nav a:hover{color:var(--red)}
-        .mobile-cta{margin-top:2rem}
-        @media(max-width:1100px){
-            .nav-links,.nav-cta{display:none}
-            .menu-btn{display:flex;align-items:center;justify-content:center}
+        .footer-links li{margin-bottom:15px}
+        .footer-links a{color:var(--text);text-decoration:none;font-size:.95rem;transition:all .3s;display:inline-flex;align-items:center;gap:8px}
+        .footer-links a::before{content:'';width:0;height:2px;background:var(--red);transition:width .3s}
+        .footer-links a:hover{color:var(--red);padding-left:15px}
+        .footer-links a:hover::before{width:8px}
+        .footer-bottom{max-width:1300px;margin:0 auto;padding-top:30px;display:flex;justify-content:space-between;align-items:center;font-size:.9rem;color:var(--text)}
+        .footer-bottom-links{display:flex;gap:30px}
+        .footer-bottom-links a{color:var(--text);text-decoration:none;transition:color .3s}
+        .footer-bottom-links a:hover{color:var(--red)}
+
+        /* WhatsApp */
+        .whatsapp-btn{position:fixed;bottom:110px;left:30px;width:65px;height:65px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(37,211,102,.4);z-index:999;cursor:pointer;transition:all .4s;text-decoration:none}
+        .whatsapp-btn:hover{transform:scale(1.1) rotate(-10deg);box-shadow:0 15px 40px rgba(37,211,102,.5)}
+        .whatsapp-btn svg{width:35px;height:35px;fill:var(--white)}
+        .whatsapp-btn::before{content:'';position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--green);animation:whatsappRing 2s infinite}
+        @keyframes whatsappRing{0%{transform:scale(1);opacity:1}100%{transform:scale(1.4);opacity:0}}
+        .whatsapp-tooltip{position:absolute;left:80px;background:var(--white);padding:12px 20px;border-radius:14px;font-size:.9rem;font-weight:600;color:var(--navy);box-shadow:0 10px 30px rgba(0,0,0,.12);white-space:nowrap;opacity:0;transform:translateX(-15px);transition:all .4s;pointer-events:none}
+        .whatsapp-btn:hover .whatsapp-tooltip{opacity:1;transform:translateX(0)}
+
+        /* Chatbot */
+        .chatbot{position:fixed;bottom:30px;right:30px;z-index:999}
+        .chatbot-btn{width:65px;height:65px;background:linear-gradient(135deg,var(--red),var(--red2));border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(230,57,86,.4);cursor:pointer;transition:all .4s;position:relative}
+        .chatbot-btn:hover{transform:scale(1.1)}
+        .chatbot-btn svg{width:30px;height:30px;fill:var(--white);transition:transform .4s}
+        .chatbot.open .chatbot-btn svg{transform:rotate(135deg)}
+        .chatbot-btn::before{content:'';position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--red);animation:chatRing 2.5s infinite .5s}
+        @keyframes chatRing{0%{transform:scale(1);opacity:1}100%{transform:scale(1.4);opacity:0}}
+        .chatbot-window{position:absolute;bottom:85px;right:0;width:380px;background:var(--white);border-radius:28px;box-shadow:0 25px 70px rgba(0,0,0,.18);overflow:hidden;transform:scale(0) translateY(20px);transform-origin:bottom right;transition:all .5s cubic-bezier(.34,1.56,.64,1);opacity:0;pointer-events:none}
+        .chatbot.open .chatbot-window{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+        .chat-header{background:linear-gradient(135deg,var(--red),var(--red2));padding:25px;color:var(--white);display:flex;align-items:center;gap:15px}
+        .chat-avatar{width:55px;height:55px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+        .chat-header-info h4{font-size:1.1rem;font-weight:700}
+        .chat-header-info .status{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;opacity:.9}
+        .chat-header-info .status::before{content:'';width:10px;height:10px;background:#4ade80;border-radius:50%;animation:statusPulse 2s infinite}
+        @keyframes statusPulse{0%,100%{opacity:1}50%{opacity:.5}}
+        .chat-body{height:300px;padding:25px;overflow-y:auto;background:var(--bg)}
+        .chat-body::-webkit-scrollbar{width:6px}
+        .chat-body::-webkit-scrollbar-track{background:transparent}
+        .chat-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.1);border-radius:10px}
+        .chat-message{margin-bottom:18px;display:flex;gap:12px;animation:messageIn .4s ease}
+        @keyframes messageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        .chat-message.bot{flex-direction:row}
+        .chat-message.user{flex-direction:row-reverse}
+        .chat-bubble{max-width:80%;padding:15px 20px;border-radius:20px;font-size:.95rem;line-height:1.6}
+        .chat-message.bot .chat-bubble{background:var(--white);border-bottom-left-radius:8px;box-shadow:0 5px 15px rgba(0,0,0,.06)}
+        .chat-message.user .chat-bubble{background:linear-gradient(135deg,var(--red),var(--red2));color:var(--white);border-bottom-right-radius:8px;box-shadow:0 5px 15px rgba(230,57,86,.3)}
+        .chat-footer{padding:20px;background:var(--white);border-top:1px solid rgba(0,0,0,.06);display:flex;gap:12px}
+        .chat-input{flex:1;padding:15px 20px;border:2px solid rgba(0,0,0,.08);border-radius:50px;font-size:.95rem;outline:none;transition:all .3s;font-family:inherit}
+        .chat-input:focus{border-color:var(--red)}
+        .chat-send{width:50px;height:50px;background:linear-gradient(135deg,var(--red),var(--red2));border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s}
+        .chat-send:hover{transform:scale(1.1)}
+        .chat-send svg{width:22px;height:22px;fill:var(--white)}
+
+        /* Scroll Top */
+        .scroll-top{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);width:55px;height:55px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--white);cursor:pointer;opacity:0;visibility:hidden;transition:all .4s;z-index:99;box-shadow:0 10px 30px rgba(15,23,42,.3)}
+        .scroll-top.show{opacity:1;visibility:visible}
+        .scroll-top:hover{background:linear-gradient(135deg,var(--red),var(--red2));transform:translateX(-50%) translateY(-5px)}
+        .scroll-top svg{width:24px;height:24px;fill:currentColor}
+
+        /* Reveal */
+        .reveal{opacity:0;transform:translateY(60px);transition:all 1s cubic-bezier(.5,0,0,1)}
+        .reveal.active{opacity:1;transform:translateY(0)}
+        .reveal-left{opacity:0;transform:translateX(-60px);transition:all 1s cubic-bezier(.5,0,0,1)}
+        .reveal-left.active{opacity:1;transform:translateX(0)}
+        .reveal-right{opacity:0;transform:translateX(60px);transition:all 1s cubic-bezier(.5,0,0,1)}
+        .reveal-right.active{opacity:1;transform:translateX(0)}
+
+        /* Responsive */
+        @media(max-width:1200px){
             .hero-container{grid-template-columns:1fr;text-align:center}
-            .hero-desc{margin-left:auto;margin-right:auto}
+            .hero-visual{display:none}
             .hero-stats{justify-content:center}
             .hero-btns{justify-content:center}
-            .hero-visual{display:grid;grid-template-columns:1fr;height:auto;margin-top:3rem}
-            .hero-cards{grid-template-columns:repeat(3,1fr);transform:none;height:280px}
-            .hero-card:first-child{grid-row:auto}
-            .hero-card{height:100%!important}
-            .hero-float{display:none}
-            .dest-grid{grid-template-columns:repeat(2,1fr)}
-            .services-grid{grid-template-columns:repeat(2,1fr)}
-            .test-grid{grid-template-columns:repeat(2,1fr)}
-            .process-grid{grid-template-columns:repeat(2,1fr);gap:2rem}
-            .process-grid::before{display:none}
-            .cta-container{grid-template-columns:1fr;text-align:center}
-            .cta-features{justify-content:center}
-            .footer-main{grid-template-columns:repeat(2,1fr)}
+            .dest-grid,.services-grid{grid-template-columns:repeat(2,1fr)}
+            .process-line{display:none}
+            .process-grid{grid-template-columns:repeat(2,1fr)}
+            .test-grid{grid-template-columns:1fr 1fr}
+            .cta-container{grid-template-columns:1fr}
+            .cta-content{text-align:center}
+            .cta-features{max-width:400px;margin:0 auto}
+            .footer-grid{grid-template-columns:repeat(2,1fr)}
         }
-        @media(max-width:700px){
-            .header{top:12px;width:calc(100% - 24px);padding:.5rem 1rem;border-radius:20px}
-            .section{padding:60px 16px}
-            .hero{padding:110px 16px 50px}
-            .hero h1{font-size:2rem}
-            .hero-stats{flex-direction:column;gap:1rem;align-items:center}
-            .hero-stat{width:100%;max-width:280px}
-            .hero-btns{flex-direction:column;width:100%;max-width:320px;margin:0 auto}
-            .btn-main,.btn-soft{width:100%;justify-content:center}
-            .hero-cards{grid-template-columns:1fr;height:auto;gap:.8rem}
-            .hero-card{height:200px!important}
-            .dest-grid,.services-grid,.test-grid{grid-template-columns:1fr}
-            .process-grid{grid-template-columns:1fr}
-            .footer-main{grid-template-columns:1fr}
-            .footer-bottom{flex-direction:column;gap:1rem;text-align:center}
-            .cta{border-radius:28px;margin:0 12px}
-            .cta-container{padding:50px 24px}
-            .cta-features{grid-template-columns:1fr;text-align:left}
-            .cta-form{padding:2rem 1.5rem}
-            .form-grid{grid-template-columns:1fr}
-            .form-group.full{grid-column:span 1}
-            .services,.testimonials{margin:0 12px;border-radius:28px}
-            .region-tabs{gap:.4rem}
-            .region-tab{padding:.5rem 1rem;font-size:.75rem}
+        @media(max-width:768px){
+            .header{width:calc(100% - 30px);padding:10px 15px}
+            .nav-links,.nav-btn{display:none}
+            .menu-toggle{display:flex}
+            .hero{padding:130px 20px 80px}
+            .hero-title{font-size:2.5rem}
+            .hero-stats{flex-direction:column;gap:20px}
+            .section{padding:80px 20px}
+            .section-title{font-size:2.2rem}
+            .dest-grid,.services-grid,.process-grid,.test-grid{grid-template-columns:1fr}
+            .services-section,.test-section,.cta-section{margin:0 15px;border-radius:36px}
+            .cta-section{padding:60px 25px}
+            .cta-form{padding:35px 25px}
+            .form-row{grid-template-columns:1fr}
+            .footer{padding:60px 20px 30px}
+            .footer-grid{grid-template-columns:1fr;gap:40px;text-align:center}
+            .footer-social{justify-content:center}
+            .footer-bottom{flex-direction:column;gap:20px;text-align:center}
+            .chatbot-window{width:calc(100vw - 50px);right:-10px}
+            .whatsapp-btn{bottom:100px;left:20px;width:55px;height:55px}
+            .chatbot{bottom:25px;right:20px}
+            .chatbot-btn{width:55px;height:55px}
         }
     </style>
 </head>
 <body>
-    <div class="mobile-menu" id="mobileMenu">
-        <button class="mobile-close" onclick="toggleMenu()">×</button>
-        <ul class="mobile-nav">
-            <li><a href="#destinations" onclick="toggleMenu()">Destinations</a></li>
-            <li><a href="#services" onclick="toggleMenu()">Services</a></li>
-            <li><a href="#process" onclick="toggleMenu()">Process</a></li>
-            <li><a href="#testimonials" onclick="toggleMenu()">Stories</a></li>
-            <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-        </ul>
-        <div class="mobile-cta"><a href="#contact" class="btn-main" onclick="toggleMenu()">Get Started</a></div>
+    <div class="preloader" id="preloader">
+        <div class="loader-content">
+            <div class="loader-logo"><span>S</span><span>T</span><span>U</span><span>D</span><span>Y</span><span class="dot">.</span></div>
+            <div class="loader-sub">Republic</div>
+            <div class="loader-spinner"></div>
+        </div>
     </div>
 
-    <header class="header" id="header">
-        <nav class="nav">
-            <a href="#" class="logo">
-                <div class="logo-icon">
-                    <svg class="logo-star" viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9" fill="#e63956"/></svg>
-                    <svg class="logo-swoosh" viewBox="0 0 50 20"><path d="M0,18 Q25,0 50,10" stroke="#e63956" stroke-width="3" fill="none"/></svg>
-                </div>
-                <div class="logo-text"><span class="logo-text-main">STUDY</span><span class="logo-text-sub">REPUBLIC</span></div>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#destinations">Destinations</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#process">Process</a></li>
-                <li><a href="#testimonials">Stories</a></li>
-            </ul>
-            <button class="nav-cta" onclick="location.href='#contact'">Get Started</button>
-            <button class="menu-btn" onclick="toggleMenu()">☰</button>
-        </nav>
-    </header>
+    <div class="bg-grid"></div>
+    <div class="bg-blobs"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
 
-    <section class="hero">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-        <div class="hero-container">
-            <div class="hero-text">
-                <div class="hero-tag"><span class="hero-tag-dot"></span>Trusted by 15,000+ Students</div>
-                <h1>Your Path to <span>Global Education</span> Starts Here</h1>
-                <p class="hero-desc">We help ambitious students achieve their dreams of studying abroad with personalized guidance, expert counseling, and end-to-end support.</p>
-                <div class="hero-stats">
-                    <div class="hero-stat"><div class="hero-stat-num">15K+</div><div class="hero-stat-label">Students</div></div>
-                    <div class="hero-stat"><div class="hero-stat-num">99%</div><div class="hero-stat-label">Visa Rate</div></div>
-                    <div class="hero-stat"><div class="hero-stat-num">500+</div><div class="hero-stat-label">Universities</div></div>
-                </div>
-                <div class="hero-btns">
-                    <a href="#contact" class="btn-main">Start Your Journey →</a>
-                    <a href="#destinations" class="btn-soft">Explore Countries</a>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="hero-cards">
-                    <div class="hero-card">
-                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80" alt="Students">
-                        <div class="hero-card-content"><div class="hero-card-title">Global Network</div><div class="hero-card-sub">500+ Partner Universities</div></div>
-                    </div>
-                    <div class="hero-card">
-                        <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=600&q=80" alt="Graduation">
-                        <div class="hero-card-content"><div class="hero-card-title">Success Stories</div><div class="hero-card-sub">15,000+ Happy Students</div></div>
-                    </div>
-                    <div class="hero-card">
-                        <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=600&q=80" alt="Campus">
-                        <div class="hero-card-content"><div class="hero-card-title">Top Universities</div><div class="hero-card-sub">World Rankings</div></div>
-                    </div>
-                </div>
-                <div class="hero-float hero-float-1"><div class="hero-float-icon green">✓</div><div class="hero-float-text">Visa Approved<span>Just now</span></div></div>
-                <div class="hero-float hero-float-2"><div class="hero-float-icon red">🎓</div><div class="hero-float-text">Oxford Admit<span>2 hours ago</span></div></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="destinations">
-        <div class="section-header">
-            <div class="section-tag">🌍 Study Destinations</div>
-            <h2 class="section-title">Choose Your Dream Country</h2>
-            <p class="section-desc">Explore amazing education opportunities in top study destinations around the world</p>
-        </div>
-        <div class="region-tabs">
-            <button class="region-tab active" data-region="all"><span>🌐</span> All Countries</button>
-            <button class="region-tab" data-region="europe"><span>🏰</span> Europe</button>
-            <button class="region-tab" data-region="asia"><span>🏯</span> Asia</button>
-            <button class="region-tab" data-region="americas"><span>🗽</span> Americas</button>
-            <button class="region-tab" data-region="oceania"><span>🏝️</span> Oceania</button>
-            <button class="region-tab" data-region="middle-east"><span>🕌</span> Middle East</button>
-            <button class="region-tab" data-region="africa"><span>🌍</span> Africa</button>
-        </div>
-        <div class="dest-grid">
-            <!-- Americas -->
-            <div class="dest-card" data-region="americas"><div class="dest-img"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80" alt="Canada"><div class="dest-flag">🇨🇦</div></div><div class="dest-content"><h3>Canada</h3><p>World-class education with immigration-friendly policies and work opportunities.</p><div class="dest-tags"><span class="dest-tag">100+ Unis</span><span class="dest-tag">3yr Work</span><span class="dest-tag">$15-30K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="americas"><div class="dest-img"><img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80" alt="USA"><div class="dest-flag">🇺🇸</div></div><div class="dest-content"><h3>United States</h3><p>Ivy League schools and cutting-edge research in the world's largest economy.</p><div class="dest-tags"><span class="dest-tag">4000+ Unis</span><span class="dest-tag">OPT 1-3yr</span><span class="dest-tag">$30-60K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <!-- Europe -->
-            <div class="dest-card" data-region="europe"><div class="dest-img"><img src="https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?w=800&q=80" alt="UK"><div class="dest-flag">🇬🇧</div></div><div class="dest-content"><h3>United Kingdom</h3><p>Home to Oxford, Cambridge, and world-renowned Russell Group universities.</p><div class="dest-tags"><span class="dest-tag">150+ Unis</span><span class="dest-tag">2yr Work</span><span class="dest-tag">£15-25K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="europe"><div class="dest-img"><img src="https://images.unsplash.com/photo-1515488764276-beab7607c1e6?w=800&q=80" alt="Germany"><div class="dest-flag">🇩🇪</div></div><div class="dest-content"><h3>Germany</h3><p>Free or low-cost education with strong engineering and tech programs.</p><div class="dest-tags"><span class="dest-tag">400+ Unis</span><span class="dest-tag">18mo Job</span><span class="dest-tag">Free-€20K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="europe"><div class="dest-img"><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80" alt="France"><div class="dest-flag">🇫🇷</div></div><div class="dest-content"><h3>France</h3><p>Rich culture, affordable education, and renowned business schools.</p><div class="dest-tags"><span class="dest-tag">250+ Unis</span><span class="dest-tag">2yr Work</span><span class="dest-tag">€200-15K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="europe"><div class="dest-img"><img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=800&q=80" alt="Italy"><div class="dest-flag">🇮🇹</div></div><div class="dest-content"><h3>Italy</h3><p>Historic universities, art, design and fashion programs excellence.</p><div class="dest-tags"><span class="dest-tag">90+ Unis</span><span class="dest-tag">1yr Work</span><span class="dest-tag">€1-20K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="europe"><div class="dest-img"><img src="https://images.unsplash.com/photo-1513326738677-b964603b136d?w=800&q=80" alt="Russia"><div class="dest-flag">🇷🇺</div></div><div class="dest-content"><h3>Russia</h3><p>World-class STEM education with prestigious universities and scholarships.</p><div class="dest-tags"><span class="dest-tag">700+ Unis</span><span class="dest-tag">Scholarships</span><span class="dest-tag">$3-8K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="europe"><div class="dest-img"><img src="https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80" alt="Georgia"><div class="dest-flag">🇬🇪</div></div><div class="dest-content"><h3>Georgia</h3><p>Affordable medical and business programs with European recognition.</p><div class="dest-tags"><span class="dest-tag">75+ Unis</span><span class="dest-tag">No IELTS</span><span class="dest-tag">$3-8K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <!-- Oceania -->
-            <div class="dest-card" data-region="oceania"><div class="dest-img"><img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800&q=80" alt="Australia"><div class="dest-flag">🇦🇺</div></div><div class="dest-content"><h3>Australia</h3><p>Excellent quality of life with top-ranked universities and great weather.</p><div class="dest-tags"><span class="dest-tag">43 Unis</span><span class="dest-tag">2-4yr Work</span><span class="dest-tag">A$25-40K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="oceania"><div class="dest-img"><img src="https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=800&q=80" alt="New Zealand"><div class="dest-flag">🇳🇿</div></div><div class="dest-content"><h3>New Zealand</h3><p>Safe, beautiful country with affordable education and friendly people.</p><div class="dest-tags"><span class="dest-tag">8 Unis</span><span class="dest-tag">3yr Work</span><span class="dest-tag">NZ$25-35K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <!-- Asia -->
-            <div class="dest-card" data-region="asia"><div class="dest-img"><img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80" alt="Singapore"><div class="dest-flag">🇸🇬</div></div><div class="dest-content"><h3>Singapore</h3><p>Asia's education powerhouse with globally ranked universities and tech hub.</p><div class="dest-tags"><span class="dest-tag">34 Unis</span><span class="dest-tag">Work Visa</span><span class="dest-tag">S$15-40K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="asia"><div class="dest-img"><img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800&q=80" alt="Malaysia"><div class="dest-flag">🇲🇾</div></div><div class="dest-content"><h3>Malaysia</h3><p>Quality education at affordable prices with diverse multicultural experience.</p><div class="dest-tags"><span class="dest-tag">100+ Unis</span><span class="dest-tag">Part-time Work</span><span class="dest-tag">$4-12K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="asia"><div class="dest-img"><img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=800&q=80" alt="Uzbekistan"><div class="dest-flag">🇺🇿</div></div><div class="dest-content"><h3>Uzbekistan</h3><p>Emerging education hub with affordable programs and rich cultural heritage.</p><div class="dest-tags"><span class="dest-tag">80+ Unis</span><span class="dest-tag">Affordable</span><span class="dest-tag">$2-5K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="asia"><div class="dest-img"><img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80" alt="Japan"><div class="dest-flag">🇯🇵</div></div><div class="dest-content"><h3>Japan</h3><p>Cutting-edge technology, rich culture, and top research universities.</p><div class="dest-tags"><span class="dest-tag">780+ Unis</span><span class="dest-tag">Part-time Work</span><span class="dest-tag">¥500K-1.5M</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="asia"><div class="dest-img"><img src="https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800&q=80" alt="South Korea"><div class="dest-flag">🇰🇷</div></div><div class="dest-content"><h3>South Korea</h3><p>Innovative education system with global companies and K-culture hub.</p><div class="dest-tags"><span class="dest-tag">400+ Unis</span><span class="dest-tag">Part-time Work</span><span class="dest-tag">$4-15K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="asia"><div class="dest-img"><img src="https://images.unsplash.com/photo-1536599018102-9f803c140fc1?w=800&q=80" alt="China"><div class="dest-flag">🇨🇳</div></div><div class="dest-content"><h3>China</h3><p>Rapidly growing education sector with generous scholarships available.</p><div class="dest-tags"><span class="dest-tag">2900+ Unis</span><span class="dest-tag">Scholarships</span><span class="dest-tag">$2-10K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <!-- Middle East -->
-            <div class="dest-card" data-region="middle-east"><div class="dest-img"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80" alt="Dubai"><div class="dest-flag">🇦🇪</div></div><div class="dest-content"><h3>Dubai (UAE)</h3><p>World-class campuses of international universities with excellent career prospects.</p><div class="dest-tags"><span class="dest-tag">60+ Unis</span><span class="dest-tag">Tax-Free</span><span class="dest-tag">$10-25K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="middle-east"><div class="dest-img"><img src="https://images.unsplash.com/photo-1578895101408-1a36b834405b?w=800&q=80" alt="Qatar"><div class="dest-flag">🇶🇦</div></div><div class="dest-content"><h3>Qatar</h3><p>Education City hosts branches of world's top universities with full scholarships.</p><div class="dest-tags"><span class="dest-tag">15+ Unis</span><span class="dest-tag">Scholarships</span><span class="dest-tag">$15-50K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="middle-east"><div class="dest-img"><img src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&q=80" alt="Turkey"><div class="dest-flag">🇹🇷</div></div><div class="dest-content"><h3>Turkey</h3><p>Bridge between Europe and Asia with affordable quality education.</p><div class="dest-tags"><span class="dest-tag">200+ Unis</span><span class="dest-tag">Scholarships</span><span class="dest-tag">$1-10K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <!-- Africa -->
-            <div class="dest-card" data-region="africa"><div class="dest-img"><img src="https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=800&q=80" alt="Egypt"><div class="dest-flag">🇪🇬</div></div><div class="dest-content"><h3>Egypt</h3><p>Historic universities with strong medical and engineering programs at low cost.</p><div class="dest-tags"><span class="dest-tag">50+ Unis</span><span class="dest-tag">Arabic/English</span><span class="dest-tag">$2-6K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-            <div class="dest-card" data-region="africa"><div class="dest-img"><img src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=800&q=80" alt="South Africa"><div class="dest-flag">🇿🇦</div></div><div class="dest-content"><h3>South Africa</h3><p>Diverse culture with top African universities and English-taught programs.</p><div class="dest-tags"><span class="dest-tag">26 Unis</span><span class="dest-tag">Affordable</span><span class="dest-tag">$3-8K</span></div><a href="#contact" class="dest-link">Learn More →</a></div></div>
-        </div>
-    </section>
-
-    <section class="section services" id="services">
-        <div class="section-header">
-            <div class="section-tag">✨ Our Services</div>
-            <h2 class="section-title">How We Help You Succeed</h2>
-            <p class="section-desc">Complete support from start to finish for your study abroad journey</p>
-        </div>
-        <div class="services-grid">
-            <div class="service"><div class="service-icon">🎯</div><h3>Career Counseling</h3><p>Find the perfect course and university that matches your goals.</p></div>
-            <div class="service"><div class="service-icon">📝</div><h3>Application Help</h3><p>Complete assistance with applications and all documents.</p></div>
-            <div class="service"><div class="service-icon">✍️</div><h3>SOP Writing</h3><p>Compelling statements that make you stand out.</p></div>
-            <div class="service"><div class="service-icon">✈️</div><h3>Visa Support</h3><p>99% success rate with expert visa guidance.</p></div>
-            <div class="service"><div class="service-icon">💰</div><h3>Scholarships</h3><p>Access millions in financial aid opportunities.</p></div>
-            <div class="service"><div class="service-icon">📚</div><h3>Test Prep</h3><p>Coaching for IELTS, TOEFL, GRE, GMAT.</p></div>
-            <div class="service"><div class="service-icon">🏠</div><h3>Accommodation</h3><p>Help finding safe housing near campus.</p></div>
-            <div class="service"><div class="service-icon">🌟</div><h3>Pre-Departure</h3><p>Everything you need before you travel.</p></div>
-        </div>
-    </section>
-
-    <section class="section" id="process">
-        <div class="section-header">
-            <div class="section-tag">🚀 The Process</div>
-            <h2 class="section-title">4 Simple Steps to Success</h2>
-            <p class="section-desc">Our proven process has helped thousands achieve their dreams</p>
-        </div>
-        <div class="process-grid">
-            <div class="process-step"><div class="step-icon"><span class="step-num">1</span></div><h3>Free Consultation</h3><p>We assess your profile, goals, and preferences.</p></div>
-            <div class="process-step"><div class="step-icon"><span class="step-num">2</span></div><h3>University Selection</h3><p>We shortlist the best universities for you.</p></div>
-            <div class="process-step"><div class="step-icon"><span class="step-num">3</span></div><h3>Application</h3><p>We handle your complete application process.</p></div>
-            <div class="process-step"><div class="step-icon"><span class="step-num">4</span></div><h3>Visa & Travel</h3><p>We prepare you for visa and departure.</p></div>
-        </div>
-    </section>
-
-    <section class="section testimonials" id="testimonials">
-        <div class="section-header">
-            <div class="section-tag">💬 Success Stories</div>
-            <h2 class="section-title">What Students Say</h2>
-            <p class="section-desc">Real stories from students who achieved their dreams</p>
-        </div>
-        <div class="test-grid">
-            <div class="test-card"><div class="test-header"><div class="test-avatar">PR</div><div class="test-info"><h4>Priya Reddy</h4><span>Oxford University, UK</span></div></div><p class="test-text">"Study Republic helped me get into Oxford! Their guidance on my SOP and interview prep made all the difference."</p><div class="test-rating">★★★★★</div></div>
-            <div class="test-card"><div class="test-header"><div class="test-avatar">AK</div><div class="test-info"><h4>Arjun Kumar</h4><span>University of Toronto, Canada</span></div></div><p class="test-text">"Got a 75% scholarship thanks to their help! The team went above and beyond at every step."</p><div class="test-rating">★★★★★</div></div>
-            <div class="test-card"><div class="test-header"><div class="test-avatar">SM</div><div class="test-info"><h4>Sarah Mehta</h4><span>University of Melbourne, Australia</span></div></div><p class="test-text">"From visa to accommodation, everything was handled perfectly. My transition was completely smooth."</p><div class="test-rating">★★★★★</div></div>
-        </div>
-    </section>
-
-    <section class="section cta" id="contact">
-        <div class="cta-container">
-            <div class="cta-content">
-                <h2>Ready to Start Your Journey?</h2>
-                <p>Take the first step toward your dream university. Our experts are ready to guide you every step of the way.</p>
-                <ul class="cta-features">
-                    <li>Free consultation</li>
-                    <li>University matching</li>
-                    <li>Scholarship help</li>
-                    <li>Application support</li>
-                    <li>Visa guidance</li>
-                    <li>No hidden fees</li>
+    <div class="main" id="main">
+        <header class="header" id="header">
+            <a href="#" class="logo"><div class="logo-icon">★</div>STUDY<span>REPUBLIC</span></a>
+            <nav class="nav">
+                <ul class="nav-links">
+                    <li><a href="#destinations"><span>Destinations</span></a></li>
+                    <li><a href="#services"><span>Services</span></a></li>
+                    <li><a href="#process"><span>Process</span></a></li>
+                    <li><a href="#testimonials"><span>Stories</span></a></li>
                 </ul>
-            </div>
-            <div class="cta-form">
-                <h3 class="form-title">Get Free Consultation</h3>
-                <p class="form-subtitle">We'll get back to you within 24 hours</p>
-                <form id="consultForm">
-                    <div class="form-grid">
-                        <div class="form-group"><label>First Name</label><input type="text" name="firstName" required placeholder="John"></div>
-                        <div class="form-group"><label>Last Name</label><input type="text" name="lastName" required placeholder="Doe"></div>
-                        <div class="form-group"><label>Email</label><input type="email" name="email" required placeholder="john@email.com"></div>
-                        <div class="form-group"><label>Phone</label><input type="tel" name="phone" required placeholder="+1 234 567 890"></div>
-                        <div class="form-group"><label>Country</label><select name="country" required><option value="">Select country</option><option>Canada</option><option>USA</option><option>UK</option><option>Germany</option><option>France</option><option>Italy</option><option>Russia</option><option>Georgia</option><option>Australia</option><option>New Zealand</option><option>Singapore</option><option>Malaysia</option><option>Uzbekistan</option><option>Japan</option><option>South Korea</option><option>China</option><option>Dubai (UAE)</option><option>Qatar</option><option>Turkey</option><option>Egypt</option><option>South Africa</option></select></div>
-                        <div class="form-group"><label>Study Level</label><select name="level" required><option value="">Select level</option><option>Bachelor's</option><option>Master's</option><option>PhD</option><option>Diploma</option></select></div>
-                        <div class="form-group full"><label>Field of Study</label><input type="text" name="field" placeholder="e.g., Computer Science"></div>
-                        <div class="form-group full"><label>Message</label><textarea name="message" placeholder="Tell us about your goals..."></textarea></div>
-                    </div>
-                    <button type="submit" class="form-submit">Submit Application →</button>
-                    <p class="form-note">🔒 Your information is safe with us</p>
-                </form>
-            </div>
-        </div>
-    </section>
+                <button class="nav-btn" onclick="location.href='#contact'"><span>Get Started</span></button>
+                <div class="menu-toggle"><span></span><span></span><span></span></div>
+            </nav>
+        </header>
 
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-main">
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <div class="logo-icon"><svg class="logo-star" viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9" fill="#e63956"/></svg><svg class="logo-swoosh" viewBox="0 0 50 20"><path d="M0,18 Q25,0 50,10" stroke="#e63956" stroke-width="3" fill="none"/></svg></div>
-                        <div class="logo-text"><span class="logo-text-main">STUDY</span><span class="logo-text-sub">REPUBLIC</span></div>
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-badge"><span class="badge-dot"></span>Trusted by 15,000+ Students Worldwide</div>
+                    <h1 class="hero-title">
+                        <span class="line"><span>Your Path to</span></span>
+                        <span class="line"><span class="highlight">Global Education</span></span>
+                        <span class="line"><span>Starts Here</span></span>
+                    </h1>
+                    <p class="hero-desc">Transform your dreams into reality with personalized guidance, expert counseling, and comprehensive support throughout your international education journey.</p>
+                    <div class="hero-stats">
+                        <div class="hero-stat"><div class="stat-num">15K+</div><div class="stat-label">Students Guided</div></div>
+                        <div class="hero-stat"><div class="stat-num">99%</div><div class="stat-label">Visa Success</div></div>
+                        <div class="hero-stat"><div class="stat-num">500+</div><div class="stat-label">Partner Universities</div></div>
                     </div>
-                    <p>Your trusted partner for studying abroad. We've helped 15,000+ students reach top universities worldwide.</p>
-                    <div class="social-links"><a href="#" class="social-link">f</a><a href="#" class="social-link">in</a><a href="#" class="social-link">tw</a><a href="#" class="social-link">ig</a></div>
+                    <div class="hero-btns">
+                        <a href="#contact" class="btn btn-primary"><span>Start Your Journey</span><span class="btn-arrow">→</span></a>
+                        <a href="#destinations" class="btn btn-outline">Explore Destinations</a>
+                    </div>
                 </div>
-                <div class="footer-col"><h4>Quick Links</h4><ul class="footer-links"><li><a href="#destinations">Destinations</a></li><li><a href="#services">Services</a></li><li><a href="#process">Process</a></li><li><a href="#testimonials">Stories</a></li><li><a href="#contact">Contact</a></li></ul></div>
-                <div class="footer-col"><h4>Top Countries</h4><ul class="footer-links"><li><a href="#">Canada</a></li><li><a href="#">United Kingdom</a></li><li><a href="#">Australia</a></li><li><a href="#">Singapore</a></li><li><a href="#">Dubai</a></li></ul></div>
-                <div class="footer-col"><h4>Contact</h4><ul class="footer-links"><li><a href="#">+44 20 1234 5678</a></li><li><a href="#">info@studyrepublic.com</a></li><li><a href="#">123 Education Street</a></li><li><a href="#">London, UK</a></li></ul></div>
+                <div class="hero-visual">
+                    <div class="hero-images">
+                        <div class="hero-img hero-img-1"><img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500" alt="Students"></div>
+                        <div class="hero-img hero-img-2"><img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=500" alt="Graduation"></div>
+                        <div class="hero-img hero-img-3"><img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=500" alt="Campus"></div>
+                    </div>
+                    <div class="hero-float hero-float-1"><div class="float-icon green">✓</div><div class="float-text"><h5>Visa Approved</h5><p>Just now • Canada</p></div></div>
+                    <div class="hero-float hero-float-2"><div class="float-icon purple">🎓</div><div class="float-text"><h5>Oxford Admit</h5><p>2 hours ago</p></div></div>
+                    <div class="hero-float hero-float-3"><div class="float-icon blue">💰</div><div class="float-text"><h5>$50K Scholarship</h5><p>Yesterday</p></div></div>
+                </div>
             </div>
-            <div class="footer-bottom"><p>© 2026 Study Republic. All rights reserved.</p><p>Privacy Policy · Terms</p></div>
+        </section>
+
+        <section class="section" id="destinations">
+            <div class="section-header reveal">
+                <div class="section-tag">🌍 Popular Destinations</div>
+                <h2 class="section-title">Choose Your <span>Dream Country</span></h2>
+                <p class="section-desc">Explore world-class education opportunities across the globe with our expert guidance</p>
+            </div>
+            <div class="dest-grid">
+                <div class="dest-card reveal"><div class="dest-img"><img src="https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?w=600" alt="UK"></div><div class="dest-content"><div class="dest-flag">🇬🇧</div><h3 class="dest-title">United Kingdom</h3><p class="dest-info">Oxford, Cambridge & Russell Group universities await you.</p><div class="dest-tags"><span class="dest-tag">150+ Unis</span><span class="dest-tag">2yr PSW</span></div></div></div>
+                <div class="dest-card reveal"><div class="dest-img"><img src="https://images.unsplash.com/photo-1517935706615-2717063c2225?w=600" alt="Canada"></div><div class="dest-content"><div class="dest-flag">🇨🇦</div><h3 class="dest-title">Canada</h3><p class="dest-info">Immigration-friendly with amazing career opportunities.</p><div class="dest-tags"><span class="dest-tag">100+ Unis</span><span class="dest-tag">3yr PGWP</span></div></div></div>
+                <div class="dest-card reveal"><div class="dest-img"><img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=600" alt="Australia"></div><div class="dest-content"><div class="dest-flag">🇦🇺</div><h3 class="dest-title">Australia</h3><p class="dest-info">Top universities with excellent quality of life.</p><div class="dest-tags"><span class="dest-tag">43 Unis</span><span class="dest-tag">4yr Visa</span></div></div></div>
+                <div class="dest-card reveal"><div class="dest-img"><img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600" alt="USA"></div><div class="dest-content"><div class="dest-flag">🇺🇸</div><h3 class="dest-title">United States</h3><p class="dest-info">Ivy League & cutting-edge research institutions.</p><div class="dest-tags"><span class="dest-tag">4000+ Unis</span><span class="dest-tag">OPT</span></div></div></div>
+            </div>
+        </section>
+
+        <section class="section services-section" id="services">
+            <div class="section-header reveal">
+                <div class="section-tag">✨ Our Services</div>
+                <h2 class="section-title">How We Help You <span>Succeed</span></h2>
+                <p class="section-desc">Complete end-to-end support for your international education journey</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal"><div class="service-icon">🎯</div><h3 class="service-title">Career Counseling</h3><p class="service-desc">Find your perfect course and university match based on your goals.</p></div>
+                <div class="service-card reveal"><div class="service-icon">📝</div><h3 class="service-title">Application Support</h3><p class="service-desc">End-to-end application assistance with expert guidance.</p></div>
+                <div class="service-card reveal"><div class="service-icon">✈️</div><h3 class="service-title">Visa Guidance</h3><p class="service-desc">99% success rate visa preparation and interview coaching.</p></div>
+                <div class="service-card reveal"><div class="service-icon">💰</div><h3 class="service-title">Scholarships</h3><p class="service-desc">Access exclusive financial aid and scholarship opportunities.</p></div>
+                <div class="service-card reveal"><div class="service-icon">📚</div><h3 class="service-title">Test Preparation</h3><p class="service-desc">IELTS, TOEFL, GRE, GMAT coaching by experts.</p></div>
+                <div class="service-card reveal"><div class="service-icon">✍️</div><h3 class="service-title">SOP Writing</h3><p class="service-desc">Compelling personal statements that stand out.</p></div>
+                <div class="service-card reveal"><div class="service-icon">🏠</div><h3 class="service-title">Accommodation</h3><p class="service-desc">Safe and affordable housing options near campus.</p></div>
+                <div class="service-card reveal"><div class="service-icon">🌟</div><h3 class="service-title">Pre-Departure</h3><p class="service-desc">Complete travel and cultural preparation support.</p></div>
+            </div>
+        </section>
+
+        <section class="section" id="process">
+            <div class="section-header reveal">
+                <div class="section-tag">🚀 Our Process</div>
+                <h2 class="section-title">4 Simple Steps to <span>Your Dream</span></h2>
+                <p class="section-desc">Our proven methodology has helped thousands reach their dream universities</p>
+            </div>
+            <div class="process-container">
+                <div class="process-line"></div>
+                <div class="process-grid">
+                    <div class="process-step reveal"><div class="step-num">01</div><h3 class="process-title">Free Consultation</h3><p class="process-desc">We assess your profile, goals, and budget</p></div>
+                    <div class="process-step reveal"><div class="step-num">02</div><h3 class="process-title">University Selection</h3><p class="process-desc">Shortlist the best matching universities</p></div>
+                    <div class="process-step reveal"><div class="step-num">03</div><h3 class="process-title">Application Process</h3><p class="process-desc">Handle the complete application journey</p></div>
+                    <div class="process-step reveal"><div class="step-num">04</div><h3 class="process-title">Visa & Departure</h3><p class="process-desc">Prepare you for your new adventure</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section test-section" id="testimonials">
+            <div class="section-header reveal">
+                <div class="section-tag">💬 Success Stories</div>
+                <h2 class="section-title">What Our <span>Students Say</span></h2>
+                <p class="section-desc">Real stories from students who achieved their dreams with us</p>
+            </div>
+            <div class="test-grid">
+                <div class="test-card reveal"><div class="test-stars">★★★★★</div><p class="test-text">"Study Republic helped me get into Oxford! Their SOP guidance and mock interviews made all the difference. Forever grateful!"</p><div class="test-author"><div class="test-avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100" alt="Priya"></div><div class="test-info"><h5>Priya Reddy</h5><p>Oxford University, UK</p></div></div></div>
+                <div class="test-card reveal"><div class="test-stars">★★★★★</div><p class="test-text">"Got a 75% scholarship thanks to their expertise! The team went above and beyond to find the perfect program for me."</p><div class="test-author"><div class="test-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" alt="Arjun"></div><div class="test-info"><h5>Arjun Kumar</h5><p>University of Toronto</p></div></div></div>
+                <div class="test-card reveal"><div class="test-stars">★★★★★</div><p class="test-text">"From visa to accommodation, everything was handled perfectly. My transition to Melbourne was completely smooth!"</p><div class="test-author"><div class="test-avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100" alt="Sarah"></div><div class="test-info"><h5>Sarah Mehta</h5><p>Melbourne University</p></div></div></div>
+            </div>
+        </section>
+
+        <section class="section cta-section" id="contact">
+            <div class="cta-bg"><div class="cta-blob cta-blob-1"></div><div class="cta-blob cta-blob-2"></div></div>
+            <div class="cta-container">
+                <div class="cta-content reveal-left">
+                    <h2>Ready to Start Your <span>Journey?</span></h2>
+                    <p>Take the first step toward your dream university. Our experts are ready to guide you through every stage of your international education journey.</p>
+                    <div class="cta-features">
+                        <div class="cta-feature">Free Consultation</div>
+                        <div class="cta-feature">University Matching</div>
+                        <div class="cta-feature">Scholarship Guidance</div>
+                        <div class="cta-feature">Visa Support</div>
+                        <div class="cta-feature">24/7 Assistance</div>
+                        <div class="cta-feature">Post-Arrival Help</div>
+                    </div>
+                </div>
+                <div class="cta-form reveal-right">
+                    <h3 class="form-title">Get Free Consultation</h3>
+                    <p class="form-sub">We respond within 24 hours</p>
+                    <form id="contactForm">
+                        <div class="form-row"><div class="form-group"><label>First Name</label><input type="text" class="form-input" placeholder="John" required></div><div class="form-group"><label>Last Name</label><input type="text" class="form-input" placeholder="Doe" required></div></div>
+                        <div class="form-row"><div class="form-group"><label>Email Address</label><input type="email" class="form-input" placeholder="john@email.com" required></div><div class="form-group"><label>Phone Number</label><input type="tel" class="form-input" placeholder="+1 234 567 8900" required></div></div>
+                        <div class="form-row"><div class="form-group"><label>Preferred Country</label><select class="form-input" required><option value="">Select Country</option><option>United Kingdom</option><option>Canada</option><option>Australia</option><option>United States</option><option>Germany</option></select></div><div class="form-group"><label>Study Level</label><select class="form-input" required><option value="">Select Level</option><option>Bachelor's</option><option>Master's</option><option>PhD</option><option>Diploma</option></select></div></div>
+                        <button type="submit" class="form-btn"><span>Get Free Consultation →</span></button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-grid">
+                <div class="footer-brand"><a href="#" class="logo"><div class="logo-icon">★</div>STUDY<span>REPUBLIC</span></a><p>Helping students achieve their dreams of studying abroad since 2010. Over 15,000 students guided to top universities worldwide.</p><div class="footer-social"><a href="#">f</a><a href="#">in</a><a href="#">ig</a><a href="#">yt</a></div></div>
+                <div class="footer-col"><h4>Destinations</h4><ul class="footer-links"><li><a href="#">United Kingdom</a></li><li><a href="#">Canada</a></li><li><a href="#">Australia</a></li><li><a href="#">United States</a></li><li><a href="#">Germany</a></li></ul></div>
+                <div class="footer-col"><h4>Services</h4><ul class="footer-links"><li><a href="#">Career Counseling</a></li><li><a href="#">Visa Guidance</a></li><li><a href="#">Test Preparation</a></li><li><a href="#">Scholarships</a></li></ul></div>
+                <div class="footer-col"><h4>Contact Us</h4><ul class="footer-links"><li><a href="mailto:info@studyrepublic.com">info@studyrepublic.com</a></li><li><a href="tel:+15551234567">+1 555-123-4567</a></li><li><a href="#">123 Education Street, NY</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>© 2024 Study Republic. All rights reserved.</p><div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie Policy</a></div></div>
+        </footer>
+
+        <a href="https://wa.me/1234567890" class="whatsapp-btn" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span class="whatsapp-tooltip">Chat with us!</span>
+        </a>
+
+        <div class="chatbot" id="chatbot">
+            <div class="chatbot-window">
+                <div class="chat-header"><div class="chat-avatar">🤖</div><div class="chat-header-info"><h4>Study Assistant</h4><p class="status">Online now</p></div></div>
+                <div class="chat-body" id="chatBody">
+                    <div class="chat-message bot"><div class="chat-bubble">Hi! 👋 I'm your Study Republic assistant. How can I help you today?</div></div>
+                    <div class="chat-message bot"><div class="chat-bubble">Ask me about destinations, services, scholarships, or anything else!</div></div>
+                </div>
+                <div class="chat-footer"><input type="text" class="chat-input" id="chatInput" placeholder="Type your message..."><button class="chat-send" id="chatSend"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button></div>
+            </div>
+            <div class="chatbot-btn" id="chatbotBtn"><svg viewBox="0 0 24 24"><path d="M12 3c5.5 0 10 3.58 10 8s-4.5 8-10 8c-1.24 0-2.43-.18-3.53-.5C5.55 21 2 21 2 21c2.33-2.33 2.7-3.9 2.75-4.5C3.05 15.07 2 13.13 2 11c0-4.42 4.5-8 10-8z"/></svg></div>
         </div>
-    </footer>
+
+        <div class="scroll-top" id="scrollTop"><svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg></div>
+    </div>
 
     <script>
-        function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('active')}
-        window.addEventListener('scroll',()=>{document.getElementById('header').classList.toggle('scrolled',window.scrollY>50)});
-        document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t){t.scrollIntoView({behavior:'smooth'});document.getElementById('mobileMenu').classList.remove('active')}}));
-        document.getElementById('consultForm').addEventListener('submit',function(e){e.preventDefault();const d=Object.fromEntries(new FormData(this));alert('Thank you '+d.firstName+'! We will contact you within 24 hours.');this.reset()});
-        
-        // Region filter tabs
-        const tabs=document.querySelectorAll('.region-tab');
-        const cards=document.querySelectorAll('.dest-card');
-        tabs.forEach(tab=>{
-            tab.addEventListener('click',()=>{
-                tabs.forEach(t=>t.classList.remove('active'));
-                tab.classList.add('active');
-                const region=tab.dataset.region;
-                cards.forEach(card=>{
-                    if(region==='all'||card.dataset.region===region){
-                        card.classList.remove('hidden');
-                        card.style.opacity='0';
-                        card.style.transform='translateY(30px)';
-                        setTimeout(()=>{card.style.opacity='1';card.style.transform='translateY(0)';},50);
-                    }else{
-                        card.classList.add('hidden');
-                    }
-                });
-            });
+        // Preloader
+        setTimeout(() => {
+            document.getElementById('preloader').classList.add('done');
+            document.getElementById('main').classList.add('show');
+        }, 2500);
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            document.getElementById('header').classList.toggle('scrolled', scrollY > 50);
+            document.getElementById('scrollTop').classList.toggle('show', scrollY > 500);
         });
-        
-        const obs=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting){el.target.style.opacity='1';el.target.style.transform='translateY(0)'}}),{threshold:.1});
-        document.querySelectorAll('.dest-card,.service,.test-card,.process-step').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(30px)';el.style.transition='all .6s cubic-bezier(.4,0,.2,1)';obs.observe(el)});
+
+        // Scroll to top
+        document.getElementById('scrollTop').onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.onclick = e => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) target.scrollIntoView({behavior: 'smooth'});
+            };
+        });
+
+        // Reveal on scroll animation
+        const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+        const revealOnScroll = () => {
+            reveals.forEach((el, i) => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 80) {
+                    setTimeout(() => el.classList.add('active'), i * 50);
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        setTimeout(revealOnScroll, 2600);
+
+        // Form submission
+        document.getElementById('contactForm').onsubmit = function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('.form-btn span');
+            btn.textContent = 'Sending...';
+            setTimeout(() => {
+                btn.textContent = '✓ Sent Successfully!';
+                setTimeout(() => {
+                    btn.textContent = 'Get Free Consultation →';
+                    this.reset();
+                }, 3000);
+            }, 1500);
+        };
+
+        // Chatbot
+        const chatbot = document.getElementById('chatbot');
+        document.getElementById('chatbotBtn').onclick = () => chatbot.classList.toggle('open');
+
+        const responses = {
+            'hi': 'Hello! How can I help you today? 😊',
+            'hello': 'Hi there! What would you like to know about studying abroad?',
+            'destinations': 'We help students study in UK, Canada, Australia, USA, Germany and more! Which country interests you?',
+            'services': 'We provide career counseling, application support, visa guidance, scholarships help, test prep, SOP writing, and more!',
+            'visa': 'We have a 99% visa success rate! Our experts guide you through the entire visa process.',
+            'scholarship': 'We help students access exclusive scholarships. Many students receive 50-100% funding!',
+            'cost': 'Costs vary by country and program. Book a free consultation for a personalized breakdown!',
+            'default': 'Thanks for your message! For detailed info, please book a free consultation or call us at +1 555-123-4567.'
+        };
+
+        function addMessage(text, isUser) {
+            const msg = document.createElement('div');
+            msg.className = `chat-message ${isUser ? 'user' : 'bot'}`;
+            msg.innerHTML = `<div class="chat-bubble">${text}</div>`;
+            document.getElementById('chatBody').appendChild(msg);
+            document.getElementById('chatBody').scrollTop = document.getElementById('chatBody').scrollHeight;
+        }
+
+        function getResponse(msg) {
+            msg = msg.toLowerCase();
+            for (let key in responses) {
+                if (msg.includes(key)) return responses[key];
+            }
+            return responses.default;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const msg = input.value.trim();
+            if (!msg) return;
+            addMessage(msg, true);
+            input.value = '';
+            setTimeout(() => addMessage(getResponse(msg), false), 800);
+        }
+
+        document.getElementById('chatSend').onclick = sendMessage;
+        document.getElementById('chatInput').onkeypress = e => { if (e.key === 'Enter') sendMessage(); };
     </script>
 </body>
 </html>
